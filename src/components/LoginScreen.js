@@ -5,11 +5,7 @@ import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
-const LoginScreen = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-
+const LoginScreen = ({ onLogin, isLoading }) => {
   return (
     <div className="login-container">
       <div className="login-header">
@@ -20,7 +16,7 @@ const LoginScreen = () => {
       <Form
         name="login"
         layout="vertical"
-        onFinish={onFinish}
+        onFinish={onLogin}
         autoComplete="off"
         className="login-form"
       >
@@ -45,7 +41,13 @@ const LoginScreen = () => {
         </div>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-button" block>
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            className="login-button" 
+            block 
+            loading={isLoading}
+          >
             Acessar
           </Button>
         </Form.Item>

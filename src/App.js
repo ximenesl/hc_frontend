@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ConfigProvider } from 'antd';
 import SplashScreen from './components/SplashScreen';
-import LoginScreen from './components/LoginScreen';
+import LoginContainer from './containers/LoginContainer';
 import './App.css';
 
 const theme = {
   token: {
-    colorPrimary: '#F59120', // Senac Orange
+    colorPrimary: '#F59120',
     borderRadius: 16,
     colorTextPlaceholder: 'rgba(255, 255, 255, 0.6)',
     colorBgContainer: 'transparent',
@@ -44,7 +44,7 @@ function App() {
   return (
     <ConfigProvider theme={theme}>
       <div className="app-container">
-        {showSplash ? <SplashScreen /> : <LoginScreen />}
+        {showSplash ? <SplashScreen /> : <LoginContainer />}
       </div>
     </ConfigProvider>
   );

@@ -1,8 +1,8 @@
-# Senac HC - Gestão de Horas Complementares
+# SENAC HC - Gestão de Horas Complementares
 
 Este é um PWA (Progressive Web App) desenvolvido para facilitar a gestão de horas complementares dos alunos do Senac. O projeto foca em uma interface intuitiva, moderna e rápida, seguindo a identidade visual da instituição.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 Para este projeto, escolhemos as seguintes bibliotecas e ferramentas:
 
@@ -16,8 +16,6 @@ Para este projeto, escolhemos as seguintes bibliotecas e ferramentas:
 ### [React Router Dom](https://reactrouter.com/)
 *   **Por que?** Essencial para a navegação entre as diferentes telas do aplicativo (Splash, Login, Dashboard) sem que a página precise ser recarregada.
 
-### PWA (Progressive Web App)
-*   **Por que?** Permite que o site seja "instalado" no celular do aluno como se fosse um aplicativo nativo, funcionando offline e ocupando pouco espaço.
 
 ---
 
