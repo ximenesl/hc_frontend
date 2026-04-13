@@ -1,0 +1,133 @@
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--senac-blue);
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.login-logo {
+  width: 180px;
+  margin-bottom: 30px;
+}
+
+.login-container .login-title {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.login-form {
+  width: 100%;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.login-container .form-label {
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.login-container .login-input {
+  height: 50px;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.login-container .login-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.login-container .ant-input-affix-wrapper {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 4px 11px;
+}
+
+.login-container .ant-input-affix-wrapper input {
+  background: transparent;
+  color: #ffffff;
+}
+
+.login-container .ant-input-password-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -10px;
+  margin-bottom: 40px;
+}
+
+.forgot-password-link {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Specific selector to override Ant Design default styles */
+.login-container .ant-btn.login-button {
+  height: 55px;
+  background-color: var(--senac-orange);
+  border: none;
+  box-shadow: none;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+.login-container .ant-btn.login-button:hover {
+  background-color: #e68112;
+  color: #ffffff;
+}
+
+/* Ant Design Overrides using container nesting */
+.login-container .ant-form-item-label > label {
+  color: white;
+}
+
+.login-container .ant-form-item:last-child {
+  margin-bottom: 0;
+}
