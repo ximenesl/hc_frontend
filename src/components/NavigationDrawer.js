@@ -57,7 +57,7 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item">
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/validation')}>
           <FileSearchOutlined className="drawer-icon" />
           <Text className="drawer-text">Validar Certificados</Text>
         </div>

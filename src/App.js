@@ -5,6 +5,7 @@ import SplashScreen from './components/SplashScreen';
 import LoginContainer from './containers/LoginContainer';
 import RegisterContainer from './containers/RegisterContainer';
 import HomeContainer from './containers/HomeContainer';
+import ValidationContainer from './containers/ValidationContainer';
 import './App.css';
 
 const theme = {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/login" element={<LoginContainer />} />
             <Route path="/register" element={<RegisterContainer />} />
             <Route path="/home" element={<HomeContainer />} />
+            <Route path="/validation" element={<ValidationContainer />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

@@ -26,7 +26,8 @@
 }
 
 .nav-item.active {
-  color: #ffffff;
+  color: var(--senac-orange);
+  font-weight: bold;
 }
 
 .nav-item .anticon {
