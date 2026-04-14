@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Typography } from 'antd';
 import logo from '../assets/imgs/logo-senac.png';
-import './LoginScreen.css'; // Reutilizando a base de estilos
+import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
