@@ -105,7 +105,6 @@
   cursor: pointer;
 }
 
-/* Specific selector to override Ant Design default styles */
 .login-container .ant-btn.login-button {
   height: 55px;
   background-color: var(--senac-orange);
@@ -123,8 +122,7 @@
   color: #ffffff;
 }
 
-/* Ant Design Overrides using container nesting */
-.login-container .ant-form-item-label > label {
+.login-container .ant-form-item-label>label {
   color: white;
 }
 

@@ -5,7 +5,7 @@ import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
-const LoginScreen = ({ onLogin, isLoading }) => {
+const LoginScreen = ({ onLogin, onShowRegister, isLoading }) => {
   return (
     <div className="login-container">
       <div className="login-header">
@@ -51,6 +51,16 @@ const LoginScreen = ({ onLogin, isLoading }) => {
             Acessar
           </Button>
         </Form.Item>
+
+        <div className="register-link" style={{ textAlign: 'center', marginTop: '10px' }}>
+          <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Não tem uma conta? </Text>
+          <Text 
+            onClick={onShowRegister}
+            style={{ color: '#ffffff', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}
+          >
+            Crie sua conta
+          </Text>
+        </div>
       </Form>
     </div>
   );
