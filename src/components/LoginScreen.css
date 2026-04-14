@@ -126,6 +126,27 @@
   color: white;
 }
 
+/* Links de Rodapé (Cadastro/Login) */
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-footer-text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-footer-link {
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-footer-link:hover {
+  color: var(--senac-orange);
+}
+
 .login-container .ant-form-item:last-child {
   margin-bottom: 0;
 }

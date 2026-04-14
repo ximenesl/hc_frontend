@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import SplashScreen from './components/SplashScreen';
 import LoginContainer from './containers/LoginContainer';
+import RegisterContainer from './containers/RegisterContainer';
+import HomeContainer from './containers/HomeContainer';
 import './App.css';
 
 const theme = {
@@ -12,6 +15,7 @@ const theme = {
     colorBgContainer: 'transparent',
     colorBorder: 'rgba(255, 255, 255, 0.8)',
     colorText: '#ffffff',
+    fontFamily: 'Outfit, sans-serif',
   },
   components: {
     Input: {
@@ -32,19 +36,18 @@ const theme = {
 };
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <ConfigProvider theme={theme}>
       <div className="app-container">
-        {showSplash ? <SplashScreen /> : <LoginContainer />}
+        <Router>
+          <Routes>
+            <Route path="/" element={<SplashScreen />} />
+            <Route path="/login" element={<LoginContainer />} />
+            <Route path="/register" element={<RegisterContainer />} />
+            <Route path="/home" element={<HomeContainer />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Router>
       </div>
     </ConfigProvider>
   );

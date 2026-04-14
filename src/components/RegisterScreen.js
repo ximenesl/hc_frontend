@@ -59,11 +59,11 @@ const RegisterScreen = ({ onRegister, onBackToLogin, isLoading }) => {
           </Button>
         </Form.Item>
 
-        <div className="register-footer" style={{ textAlign: 'center', marginTop: '20px' }}>
-          <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Já tem uma conta? </Text>
+        <div className="auth-footer">
+          <Text className="auth-footer-text">Já tem uma conta? </Text>
           <Text 
             onClick={onBackToLogin}
-            style={{ color: '#ffffff', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}
+            className="auth-footer-link"
           >
             Entrar
           </Text>

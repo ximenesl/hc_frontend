@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import RegisterScreen from '../components/RegisterScreen';
 
-const RegisterContainer = ({ onBackToLogin }) => {
+const RegisterContainer = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = async (values) => {
     setLoading(true);
     try {
       console.log('Dados de Cadastro:', values);
-      
-      // Simulação de chamada de API para Cadastro
+
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       message.success('Conta criada com sucesso! Faça seu login.');
-      onBackToLogin(); // Volta para a tela de login
+      navigate('/login');
     } catch (error) {
       message.error('Erro ao criar conta. Verifique os dados e tente novamente.');
     } finally {
@@ -23,9 +24,9 @@ const RegisterContainer = ({ onBackToLogin }) => {
   };
 
   return (
-    <RegisterScreen 
+    <RegisterScreen
       onRegister={handleRegister}
-      onBackToLogin={onBackToLogin}
+      onBackToLogin={() => navigate('/login')}
       isLoading={loading}
     />
   );

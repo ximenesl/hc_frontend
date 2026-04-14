@@ -54,7 +54,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--senac-blue);
   color: var(--white);
-  overflow: hidden; /* Prevent scrolling during splash transition */
 }
 
 

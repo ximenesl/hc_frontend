@@ -1,0 +1,34 @@
+.main-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background-color: var(--senac-blue);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  z-index: 1000;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-item span {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.nav-item.active {
+  color: #ffffff;
+}
+
+.nav-item .anticon {
+  font-size: 24px;
+}

@@ -1,0 +1,129 @@
+.home-layout {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.home-content {
+  padding: 20px 16px 100px 16px;
+  overflow-y: auto;
+}
+
+.content-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.full-width-space {
+  width: 100%;
+}
+
+.stats-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  background-color: #ededed;
+}
+
+.stats-card .ant-card-body {
+  padding: 16px 20px;
+}
+
+.stats-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-label {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+}
+
+.stats-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.stats-value.pending {
+  color: #ff4d4f;
+}
+
+.chart-placeholder {
+  height: 250px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.submissions-section {
+  margin-top: 24px;
+}
+
+.home-layout .section-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.submission-item-card {
+  margin-bottom: 12px;
+  border-radius: 16px;
+  border: none;
+  box-shadow: none;
+  background-color: #ededed;
+}
+
+.submission-item-card .ant-card-body {
+  padding: 12px 16px;
+}
+
+.submission-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.submission-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submission-main .submission-title {
+  font-size: 16px;
+  color: #000;
+}
+
+.submission-main .submission-user {
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+}
+
+.status-badge .ant-badge-count {
+  background: #f59120;
+  border-radius: 10px;
+  padding: 0 16px;
+  height: 26px;
+  line-height: 26px;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+}
+
+.status-badge.deferido .ant-badge-count {
+  background: #00a82d;
+}
+
+.status-badge.indeferido .ant-badge-count {
+  background: #ff0000;
+}
+
+.submission-date {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}

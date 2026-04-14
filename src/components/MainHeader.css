@@ -1,0 +1,29 @@
+.main-header {
+  background-color: var(--senac-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-menu-icon {
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 16px;
+  z-index: 101;
+}
+
+.header-logo {
+  height: auto;
+  width: 150px;
+  max-width: 80%;
+  flex-shrink: 0;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
