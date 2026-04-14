@@ -30,6 +30,12 @@
   --senac-blue: #004587;
   --senac-orange: #F59120;
   --white: #ffffff;
+  
+  /* Z-Index System */
+  --z-normal: 1;
+  --z-sticky: 100;
+  --z-fixed: 200;
+  --z-modal: 1000;
 }
 
 * {

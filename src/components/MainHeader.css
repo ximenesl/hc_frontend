@@ -7,7 +7,7 @@
   height: 64px;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--z-sticky);
 }
 
 .header-menu-icon {
@@ -16,7 +16,7 @@
   cursor: pointer;
   position: absolute;
   left: 16px;
-  z-index: 101;
+  z-index: calc(var(--z-sticky) + 1);
 }
 
 .header-logo {
