@@ -1,0 +1,93 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Drawer, Avatar, Typography } from 'antd';
+import { 
+  UserOutlined,
+  HomeOutlined,
+  FileSearchOutlined,
+  TeamOutlined,
+  SettingOutlined,
+  MessageOutlined,
+  LogoutOutlined
+} from '@ant-design/icons';
+import './NavigationDrawer.css';
+
+const { Title, Text } = Typography;
+
+const NavigationDrawer = ({ visible, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    onClose();
+    navigate(path);
+  };
+
+  return (
+    <Drawer
+      placement="left"
+      closable={false}
+      onClose={onClose}
+      open={visible}
+      width={320}
+      styles={{
+        body: {
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column'
+        }
+      }}
+    >
+      <div className="drawer-profile">
+        <Avatar
+          size={64}
+          icon={<UserOutlined />}
+          className="profile-avatar"
+        />
+        <div className="profile-info">
+          <Title level={4} className="profile-name">Ana Maria</Title>
+          <Text className="profile-role">Coordenador</Text>
+          <Text className="profile-email">ana@email.com</Text>
+        </div>
+      </div>
+
+      <div className="drawer-menu">
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/home')}>
+          <HomeOutlined className="drawer-icon" />
+          <Text className="drawer-text">Home</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        <div className="drawer-menu-item">
+          <FileSearchOutlined className="drawer-icon" />
+          <Text className="drawer-text">Validar Certificados</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        <div className="drawer-menu-item">
+          <TeamOutlined className="drawer-icon" />
+          <Text className="drawer-text">Gestão de Alunos</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        <div className="drawer-menu-item">
+          <SettingOutlined className="drawer-icon" />
+          <Text className="drawer-text">Regras de Validação</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        <div className="drawer-menu-item">
+          <MessageOutlined className="drawer-icon" />
+          <Text className="drawer-text">Ajuda/Suporte</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/login')}>
+          <LogoutOutlined className="drawer-icon" />
+          <Text className="drawer-text">Sair</Text>
+        </div>
+      </div>
+    </Drawer>
+  );
+};
+
+export default NavigationDrawer;

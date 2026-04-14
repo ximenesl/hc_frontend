@@ -29,7 +29,6 @@
 :root {
   --senac-blue: #004587;
   --senac-orange: #F59120;
-  --white: #ffffff;
   
   /* Z-Index System */
   --z-normal: 1;
@@ -59,7 +58,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--senac-blue);
-  color: var(--white);
+  color: #ffffff;
 }
 
 

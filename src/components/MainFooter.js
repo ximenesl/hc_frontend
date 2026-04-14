@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import { 
   HomeFilled, 
-  CheckCircleFilled, 
+  FileSearchOutlined, 
   TeamOutlined 
 } from '@ant-design/icons';
 import './MainFooter.css';
@@ -17,7 +17,7 @@ const MainFooter = ({ activeKey = 'home' }) => {
         <span>Home</span>
       </div>
       <div className={`nav-item ${activeKey === 'validation' ? 'active' : ''}`}>
-        <CheckCircleFilled />
+        <FileSearchOutlined />
         <span>Validação</span>
       </div>
       <div className={`nav-item ${activeKey === 'students' ? 'active' : ''}`}>
