@@ -31,7 +31,7 @@ const MainFooter = ({ activeKey = 'home' }) => {
       </div>
       <div
         className={`nav-item ${activeKey === 'students' ? 'active' : ''}`}
-      // onClick={() => navigate('/students')}
+        onClick={() => navigate('/students')}
       >
         <TeamOutlined />
         <span>Alunos</span>

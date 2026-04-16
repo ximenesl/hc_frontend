@@ -1,0 +1,156 @@
+/* Layout principal da tela de estudantes */
+.students-layout {
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Área de conteúdo rolável */
+.students-content {
+  padding: 24px 16px 100px 16px;
+  overflow-y: auto;
+}
+
+/* Limite de largura para o conteúdo */
+.students-inner-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Campo de busca - Sobrescrevendo o tema usando maior especificidade (sem !important) */
+span.ant-input-affix-wrapper.students-search-input {
+  border-radius: 4px;
+  border: 1px solid #a0a0a0;
+  background-color: #ffffff;
+  padding: 8px 12px;
+  margin-bottom: 24px;
+}
+
+span.ant-input-affix-wrapper.students-search-input input.ant-input {
+  color: #333333;
+  background-color: #ffffff;
+}
+
+span.ant-input-affix-wrapper.students-search-input input.ant-input::placeholder {
+  color: #999999;
+}
+
+.search-icon {
+  color: #999999;
+  font-size: 20px;
+}
+
+/* Seção de filtros e pílulas */
+.students-filter-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.filter-title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.filter-subtitle {
+  color: #666666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.filter-pills-container {
+  display: flex;
+  gap: 16px;
+}
+
+.filter-pill {
+  width: 120px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #d9d9d9;
+}
+
+/* Lista de estudantes */
+.students-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cartões individuais */
+.student-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+
+.student-card .ant-card-body {
+  padding: 16px;
+}
+
+.student-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.student-name {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.student-matricula {
+  color: #666666;
+  font-size: 13px;
+}
+
+.student-arrow {
+  color: #004A8F;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Row contendo a barra de progresso */
+.student-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Contêiner da barra (usando flex para evitar position absolute) */
+.student-progress-bar {
+  display: flex;
+  height: 18px;
+  flex: 1;
+}
+
+/* Parte preenchida (azul escuro) */
+.progress-fill {
+  background-color: #004A8F;
+}
+
+/* Parte restante (laranja) */
+.progress-remaining {
+  background-color: #F59120;
+}
+
+/* Texto de horas à direita da barra */
+.student-progress-text {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 700;
+  min-width: 70px;
+  text-align: right;
+}
