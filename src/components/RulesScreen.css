@@ -1,0 +1,97 @@
+.rules-layout {
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.rules-content {
+  flex: 1;
+  padding: 16px 16px 80px 16px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.rules-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Tabs */
+.rules-tabs-container {
+  display: flex;
+  background-color: #004a8f; 
+  border-radius: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.rules-tab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.rules-tab:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.rules-tab.active {
+  /* No special active style needed as per reference, standard blue is fine */
+}
+
+/* Cards List */
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rules-card {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rules-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  padding-right: 16px;
+}
+
+.rules-title {
+  color: #004a8f;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.rules-limit {
+  color: #333333;
+  font-size: 13px;
+}
+
+.rules-btn {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  color: #333333;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  height: auto;
+}
+
+.rules-btn:hover, .rules-btn:focus {
+  background-color: #d0d0d0;
+  color: #333333;
+}
