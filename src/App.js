@@ -7,6 +7,7 @@ import RegisterContainer from './containers/RegisterContainer';
 import HomeContainer from './containers/HomeContainer';
 import ValidationContainer from './containers/ValidationContainer';
 import StudentsContainer from './containers/StudentsContainer';
+import CoursesContainer from './containers/CoursesContainer';
 import './App.css';
 
 const theme = {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/home" element={<HomeContainer />} />
             <Route path="/validation" element={<ValidationContainer />} />
             <Route path="/students" element={<StudentsContainer />} />
+            <Route path="/courses" element={<CoursesContainer />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

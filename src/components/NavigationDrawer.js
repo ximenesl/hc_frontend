@@ -8,7 +8,8 @@ import {
   TeamOutlined,
   SettingOutlined,
   MessageOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  BookOutlined
 } from '@ant-design/icons';
 import './NavigationDrawer.css';
 
@@ -63,9 +64,16 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item">
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/students')}>
           <TeamOutlined className="drawer-icon" />
           <Text className="drawer-text">Gestão de Alunos</Text>
+        </div>
+        <div className="drawer-divider" />
+
+        {/* Apenas Superadmin terá acesso a esta aba */}
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/courses')}>
+          <BookOutlined className="drawer-icon" />
+          <Text className="drawer-text">Gestão de Cursos</Text>
         </div>
         <div className="drawer-divider" />
 

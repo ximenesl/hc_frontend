@@ -1,0 +1,147 @@
+/* Layout e Contêiners */
+.courses-layout {
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.courses-content {
+  padding: 24px 16px 100px 16px;
+  overflow-y: auto;
+}
+
+.courses-inner-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cartões */
+.course-card {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+
+.course-card .ant-card-body {
+  padding: 20px;
+}
+
+/* Título */
+h5.ant-typography.course-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #000;
+  font-weight: 700;
+}
+
+/* Informações do Coordenador */
+.course-info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.course-icon {
+  color: #666666;
+  font-size: 16px;
+}
+
+.course-text {
+  color: #333333;
+  font-size: 13px;
+}
+
+/* Divisória */
+.course-divider {
+  margin: 16px 0;
+  border-color: #dfdfdf;
+}
+
+/* Estatísticas */
+.course-stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.course-stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+}
+
+.course-stat-icon {
+  color: #004A8F;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.course-stat-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.course-stat-value {
+  color: #000000;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.course-stat-label {
+  color: #666666;
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* Botões de Ação */
+.course-actions {
+  display: flex;
+  gap: 12px;
+}
+
+button.ant-btn.edit-button {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #004A8F;
+  color: #004A8F;
+  border-radius: 6px;
+  font-weight: 600;
+  height: 40px;
+}
+
+button.ant-btn.delete-button {
+  width: 44px;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #ff4d4f;
+  color: #ff4d4f;
+  border-radius: 6px;
+}
+
+button.ant-btn.delete-button .anticon {
+  font-size: 18px;
+}
+
+/* Ajuste do botão flutuante */
+.ant-float-btn.add-float-button {
+  bottom: 80px; 
+  right: 24px;
+  width: 56px;
+  height: 56px;
+}
+
+.ant-float-btn.add-float-button .ant-float-btn-body {
+  background-color: #F59120;
+}
+
+.ant-float-btn.add-float-button .ant-float-btn-icon {
+  font-size: 24px;
+  color: #ffffff;
+}
