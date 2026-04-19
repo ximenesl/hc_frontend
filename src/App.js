@@ -11,6 +11,9 @@ import CoursesContainer from './containers/CoursesContainer';
 import RulesContainer from './containers/RulesContainer';
 import CourseFormContainer from './containers/CourseFormContainer';
 import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
+import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
+import CodeVerificationContainer from './containers/CodeVerificationContainer';
+import ResetPasswordContainer from './containers/ResetPasswordContainer';
 import './App.css';
 
 const theme = {
@@ -49,6 +52,9 @@ function App() {
           <Routes>
             <Route path="/" element={<SplashScreen />} />
             <Route path="/login" element={<LoginContainer />} />
+            <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
+            <Route path="/verify-code" element={<CodeVerificationContainer />} />
+            <Route path="/reset-password" element={<ResetPasswordContainer />} />
             <Route path="/register" element={<RegisterContainer />} />
             <Route path="/home" element={<HomeContainer />} />
             <Route path="/validation" element={<ValidationContainer />} />

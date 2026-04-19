@@ -10,7 +10,6 @@ const CourseFormContainer = () => {
   const isEdit = location.pathname.includes('/edit');
 
   const handleSave = () => {
-    console.log(isEdit ? `Editando curso ${id}` : 'Criando novo curso');
     navigate('/courses');
   };
 

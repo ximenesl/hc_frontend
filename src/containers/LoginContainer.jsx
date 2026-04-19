@@ -10,7 +10,6 @@ const LoginContainer = () => {
   const handleLogin = async (values) => {
     setLoading(true);
     try {
-      console.log('Login:', values);
       await new Promise(resolve => setTimeout(resolve, 1500));
       message.success('Bem-vindo ao HC Senac!');
       navigate('/home');
@@ -25,6 +24,7 @@ const LoginContainer = () => {
     <LoginScreen 
       onLogin={handleLogin} 
       onShowRegister={() => navigate('/register')}
+      onForgotPassword={() => navigate('/forgot-password')}
       isLoading={loading} 
     />
   );

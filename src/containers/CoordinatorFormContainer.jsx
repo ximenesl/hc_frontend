@@ -6,7 +6,6 @@ const CoordinatorFormContainer = () => {
   const navigate = useNavigate();
 
   const handleSave = () => {
-    console.log('Criando novo coordenador');
     navigate('/courses');
   };
 

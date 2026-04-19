@@ -10,8 +10,6 @@ const RegisterContainer = () => {
   const handleRegister = async (values) => {
     setLoading(true);
     try {
-      console.log('Dados de Cadastro:', values);
-
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       message.success('Conta criada com sucesso! Faça seu login.');

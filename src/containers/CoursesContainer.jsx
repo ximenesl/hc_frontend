@@ -36,7 +36,6 @@ const CoursesContainer = () => {
   };
 
   const confirmDelete = () => {
-    console.log(`Deletando curso ${courseToDelete}`);
     setIsDeleteModalVisible(false);
     setCourseToDelete(null);
   };

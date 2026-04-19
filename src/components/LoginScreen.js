@@ -5,7 +5,7 @@ import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
-const LoginScreen = ({ onLogin, onShowRegister, isLoading }) => {
+const LoginScreen = ({ onLogin, onShowRegister, onForgotPassword, isLoading }) => {
   return (
     <div className="login-container">
       <div className="login-header">
@@ -37,7 +37,7 @@ const LoginScreen = ({ onLogin, onShowRegister, isLoading }) => {
         </Form.Item>
 
         <div className="forgot-password">
-          <Text className="forgot-password-link">Esqueceu a senha?</Text>
+          <Text className="forgot-password-link" onClick={onForgotPassword}>Esqueceu a senha?</Text>
         </div>
 
         <Form.Item>
