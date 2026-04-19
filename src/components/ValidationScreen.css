@@ -28,7 +28,7 @@
 }
 
 .rules-header {
-  background-color: #f59120;
+  background-color: var(--senac-orange);
   padding: 8px 16px;
 }
 

@@ -20,7 +20,7 @@
 /* Tabs */
 .rules-tabs-container {
   display: flex;
-  background-color: #004a8f; 
+  background-color: var(--senac-blue);
   border-radius: 8px;
   margin-bottom: 24px;
   overflow: hidden;
@@ -42,10 +42,9 @@
 }
 
 .rules-tab.active {
-  /* No special active style needed as per reference, standard blue is fine */
+  background-color: var(--senac-orange);
 }
 
-/* Cards List */
 .rules-list {
   display: flex;
   flex-direction: column;
@@ -70,7 +69,7 @@
 }
 
 .rules-title {
-  color: #004a8f;
+  color: var(--senac-blue);
   font-weight: 600;
   font-size: 15px;
 }
@@ -91,7 +90,8 @@
   height: auto;
 }
 
-.rules-btn:hover, .rules-btn:focus {
+.rules-btn:hover,
+.rules-btn:focus {
   background-color: #d0d0d0;
   color: #333333;
 }

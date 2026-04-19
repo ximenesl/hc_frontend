@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Drawer, Avatar, Typography } from 'antd';
-import { 
+import {
   UserOutlined,
   HomeOutlined,
   FileSearchOutlined,
@@ -70,14 +70,13 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        {/* Apenas Superadmin terá acesso a esta aba */}
         <div className="drawer-menu-item" onClick={() => handleNavigation('/courses')}>
           <BookOutlined className="drawer-icon" />
           <Text className="drawer-text">Gestão de Cursos</Text>
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item">
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/rules')}>
           <SettingOutlined className="drawer-icon" />
           <Text className="drawer-text">Regras de Validação</Text>
         </div>

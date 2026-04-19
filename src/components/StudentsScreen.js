@@ -16,7 +16,6 @@ const StudentsScreen = ({ students, onSearch }) => {
       <Content className="students-content">
         <div className="students-inner-content">
 
-          {/* Campo de pesquisa de alunos */}
           <Input
             className="students-search-input"
             prefix={<span />}
@@ -25,7 +24,6 @@ const StudentsScreen = ({ students, onSearch }) => {
             onChange={(e) => onSearch(e.target.value)}
           />
 
-          {/* Seção dos botões de filtro */}
           <div className="students-filter-section">
             <Text className="filter-title">Filtrar por:</Text>
             <Text className="filter-subtitle">Status</Text>
@@ -35,7 +33,6 @@ const StudentsScreen = ({ students, onSearch }) => {
             </div>
           </div>
 
-          {/* Lista de cartões dos alunos */}
           <List
             className="students-list"
             dataSource={students}
@@ -51,7 +48,6 @@ const StudentsScreen = ({ students, onSearch }) => {
                     <RightOutlined className="student-arrow" />
                   </div>
 
-                  {/* Linha que contém a barra de progresso */}
                   <div className="student-progress-row">
                     <Progress
                       percent={progressPercent}
@@ -69,7 +65,6 @@ const StudentsScreen = ({ students, onSearch }) => {
         </div>
       </Content>
 
-      {/* Componente de rodapé com a aba de estudantes ativa */}
       <MainFooter activeKey="students" />
     </Layout>
   );

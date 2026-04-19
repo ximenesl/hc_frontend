@@ -73,13 +73,11 @@ span.ant-input-affix-wrapper.students-search-input input.ant-input::placeholder 
   background-color: #d9d9d9;
 }
 
-/* Lista de estudantes */
 .students-list {
   display: flex;
   flex-direction: column;
 }
 
-/* Cartões individuais */
 .student-card {
   margin-bottom: 16px;
   border-radius: 8px;
@@ -117,36 +115,31 @@ span.ant-input-affix-wrapper.students-search-input input.ant-input::placeholder 
 }
 
 .student-arrow {
-  color: #004A8F;
+  color: var(--senac-blue);
   font-size: 18px;
   font-weight: bold;
 }
 
-/* Row contendo a barra de progresso */
 .student-progress-row {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Contêiner da barra (usando flex para evitar position absolute) */
 .student-progress-bar {
   display: flex;
   height: 18px;
   flex: 1;
 }
 
-/* Parte preenchida (azul escuro) */
 .progress-fill {
-  background-color: #004A8F;
+  background-color: var(--senac-blue);
 }
 
-/* Parte restante (laranja) */
 .progress-remaining {
-  background-color: #F59120;
+  background-color: var(--senac-orange);
 }
 
-/* Texto de horas à direita da barra */
 .student-progress-text {
   color: #000000;
   font-size: 14px;

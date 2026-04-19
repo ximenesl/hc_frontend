@@ -76,7 +76,7 @@ h5.ant-typography.course-title {
 }
 
 .course-stat-icon {
-  color: #004A8F;
+  color: var(--senac-blue);
   font-size: 20px;
   margin-top: 2px;
 }
@@ -109,8 +109,8 @@ h5.ant-typography.course-title {
 button.ant-btn.edit-button {
   flex: 1;
   background-color: #ffffff;
-  border: 1px solid #004A8F;
-  color: #004A8F;
+  border: 1px solid var(--senac-blue);
+  color: var(--senac-blue);
   border-radius: 6px;
   font-weight: 600;
   height: 40px;
@@ -129,16 +129,15 @@ button.ant-btn.delete-button .anticon {
   font-size: 18px;
 }
 
-/* Ajuste do botão flutuante */
 .ant-float-btn.add-float-button {
-  bottom: 110px; 
+  bottom: 110px;
   right: 24px;
   width: 56px;
   height: 56px;
 }
 
 .ant-float-btn.add-float-button .ant-float-btn-body {
-  background-color: #F59120;
+  background-color: var(--senac-orange);
 }
 
 .ant-float-btn.add-float-button .ant-float-btn-icon {

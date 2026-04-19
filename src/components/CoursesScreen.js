@@ -74,15 +74,12 @@ const CoursesScreen = ({ courses, onEdit, onDelete, onAdd }) => {
         </div>
       </Content>
 
-      {/* Botão flutuante */}
       <FloatButton
         className="add-float-button"
         icon={<PlusOutlined />}
         type="primary"
         onClick={onAdd}
       />
-
-      {/* Rodapé padrão */}
       <MainFooter />
     </Layout>
   );

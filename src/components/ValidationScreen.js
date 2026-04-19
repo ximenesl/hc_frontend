@@ -15,10 +15,8 @@ const ValidationScreen = () => {
 
       <Content className="validation-content">
         <div className="content-inner">
-          {/* Espaço para Imagem do Certificado */}
           <div className="certificate-placeholder" />
 
-          {/* Seção Regras de Validação */}
           <div className="rules-section">
             <div className="rules-header">
               <Text className="rules-title">Regras de Validação</Text>
@@ -28,7 +26,6 @@ const ValidationScreen = () => {
             </div>
           </div>
 
-          {/* Linhas de Informação */}
           <div className="info-row">
             <Text strong>Nome do Aluno</Text>
             <Text strong>João da Silva</Text>
@@ -44,7 +41,6 @@ const ValidationScreen = () => {
             <Text strong>15 horas</Text>
           </div>
 
-          {/* Campos do Formulário */}
           <div className="form-section">
             <div className="form-group">
               <Text strong className="form-label">Horas validadas*</Text>
@@ -53,15 +49,14 @@ const ValidationScreen = () => {
 
             <div className="form-group">
               <Text strong className="form-label">Justificativa</Text>
-              <TextArea 
-                placeholder="Digite a justificativa" 
-                rows={4} 
+              <TextArea
+                placeholder="Digite a justificativa"
+                rows={4}
                 className="custom-textarea"
               />
             </div>
           </div>
 
-          {/* Botões de Ação */}
           <div className="action-buttons">
             <Button type="primary" className="btn-approve">
               Aprovar
