@@ -9,6 +9,8 @@ import ValidationContainer from './containers/ValidationContainer';
 import StudentsContainer from './containers/StudentsContainer';
 import CoursesContainer from './containers/CoursesContainer';
 import RulesContainer from './containers/RulesContainer';
+import CourseFormContainer from './containers/CourseFormContainer';
+import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
 import './App.css';
 
 const theme = {
@@ -52,6 +54,9 @@ function App() {
             <Route path="/validation" element={<ValidationContainer />} />
             <Route path="/students" element={<StudentsContainer />} />
             <Route path="/courses" element={<CoursesContainer />} />
+            <Route path="/courses/new" element={<CourseFormContainer />} />
+            <Route path="/courses/edit/:id" element={<CourseFormContainer />} />
+            <Route path="/coordinators/new" element={<CoordinatorFormContainer />} />
             <Route path="/rules" element={<RulesContainer />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CoursesScreen from '../components/CoursesScreen';
 
 const CoursesContainer = () => {
+  const navigate = useNavigate();
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [courseToDelete, setCourseToDelete] = useState(null);
@@ -25,7 +27,7 @@ const CoursesContainer = () => {
   ];
 
   const handleEdit = (id) => {
-    console.log(`Edit course ${id}`);
+    navigate(`/courses/edit/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -34,7 +36,7 @@ const CoursesContainer = () => {
   };
 
   const confirmDelete = () => {
-    console.log(`Delete course ${courseToDelete}`);
+    console.log(`Deletando curso ${courseToDelete}`);
     setIsDeleteModalVisible(false);
     setCourseToDelete(null);
   };
@@ -54,8 +56,8 @@ const CoursesContainer = () => {
       onCloseAddModal={() => setIsAddModalVisible(false)}
       onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
       onConfirmDelete={confirmDelete}
-      onAddCoordinator={() => { console.log('Novo Coordenador'); setIsAddModalVisible(false); }}
-      onAddCourse={() => { console.log('Novo Curso'); setIsAddModalVisible(false); }}
+      onAddCoordinator={() => { setIsAddModalVisible(false); navigate('/coordinators/new'); }}
+      onAddCourse={() => { setIsAddModalVisible(false); navigate('/courses/new'); }}
     />
   );
 };
