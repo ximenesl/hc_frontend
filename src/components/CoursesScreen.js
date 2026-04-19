@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Card, Button, Divider, FloatButton } from 'antd';
+import { Layout, Typography, Card, Button, Divider, FloatButton, Modal } from 'antd';
 import {
   UserOutlined,
   MailOutlined,
@@ -7,7 +7,10 @@ import {
   CalendarOutlined,
   EditOutlined,
   DeleteOutlined,
-  PlusOutlined
+  PlusOutlined,
+  RightOutlined,
+  WarningFilled,
+  ReadOutlined
 } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -16,7 +19,19 @@ import './CoursesScreen.css';
 const { Content } = Layout;
 const { Text, Title } = Typography;
 
-const CoursesScreen = ({ courses, onEdit, onDelete, onAdd }) => {
+const CoursesScreen = ({ 
+  courses, 
+  onEdit, 
+  onDelete, 
+  onAdd,
+  isAddModalVisible,
+  isDeleteModalVisible,
+  onCloseAddModal,
+  onCloseDeleteModal,
+  onConfirmDelete,
+  onAddCoordinator,
+  onAddCourse
+}) => {
   return (
     <Layout className="courses-layout">
       <MainHeader />
@@ -81,6 +96,68 @@ const CoursesScreen = ({ courses, onEdit, onDelete, onAdd }) => {
         onClick={onAdd}
       />
       <MainFooter />
+
+      {/* Modal de Adicionar (Usando Modal do antd customizado para ficar embaixo) */}
+      <Modal
+        open={isAddModalVisible}
+        onCancel={onCloseAddModal}
+        footer={null}
+        title="Adicionar"
+        className="custom-bottom-modal"
+        closeIcon={<span style={{color: '#fff'}}>X</span>}
+      >
+        <div className="add-drawer-content">
+          <div className="add-option-btn" onClick={onAddCoordinator}>
+            <UserOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title">Novo Coordenador</Text>
+              <Text className="add-option-desc">Cadastre um novo coordenador</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+
+          <div className="add-option-btn" onClick={onAddCourse}>
+            <ReadOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title">Novo Curso</Text>
+              <Text className="add-option-desc">Cadastre um novo curso</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+        </div>
+      </Modal>
+
+      {/* Modal de Excluir */}
+      <Modal
+        open={isDeleteModalVisible}
+        onCancel={onCloseDeleteModal}
+        footer={null}
+        centered
+        className="custom-delete-modal"
+        closeIcon={<span style={{color: '#fff'}}>X</span>}
+      >
+        <div className="delete-drawer-content">
+          <WarningFilled className="delete-warning-icon" />
+          <Title level={4} className="delete-warning-title">
+            Tem certeza que deseja<br />excluir o curso?
+          </Title>
+
+          <Button 
+            type="primary" 
+            className="delete-confirm-btn"
+            onClick={onConfirmDelete}
+          >
+            Excluir
+          </Button>
+          <Button 
+            className="delete-cancel-btn"
+            onClick={onCloseDeleteModal}
+          >
+            Cancelar
+          </Button>
+        </div>
+      </Modal>
+
     </Layout>
   );
 };

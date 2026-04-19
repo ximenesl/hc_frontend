@@ -144,3 +144,131 @@ button.ant-btn.delete-button .anticon {
   font-size: 24px;
   color: #ffffff;
 }
+
+
+.custom-bottom-drawer .ant-drawer-content {
+  background-color: var(--senac-blue);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.custom-bottom-drawer .ant-drawer-header {
+  background-color: transparent;
+  border-bottom: none;
+  padding: 24px 24px 8px;
+}
+
+.custom-bottom-drawer .ant-drawer-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.custom-bottom-drawer .ant-drawer-close {
+  color: #ffffff;
+}
+
+.add-drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 0 16px 0;
+}
+
+.add-option-btn {
+  background-color: var(--senac-orange);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.add-option-btn:hover {
+  opacity: 0.9;
+}
+
+.add-option-icon {
+  font-size: 28px;
+  color: #ffffff;
+  margin-right: 16px;
+}
+
+.add-option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-option-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.add-option-desc {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.add-option-arrow {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.delete-drawer .ant-drawer-header {
+  padding: 16px 24px 0;
+}
+
+.delete-drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 16px 0;
+}
+
+.delete-warning-icon {
+  font-size: 48px;
+  color: var(--senac-orange);
+  margin-bottom: 16px;
+}
+
+h4.ant-typography.delete-warning-title {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+button.ant-btn.delete-confirm-btn {
+  width: 100%;
+  background-color: var(--senac-orange);
+  border: none;
+  border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+button.ant-btn.delete-cancel-btn {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+button.ant-btn.delete-cancel-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
