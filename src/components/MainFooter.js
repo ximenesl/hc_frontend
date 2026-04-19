@@ -27,7 +27,7 @@ const MainFooter = ({ activeKey = 'home' }) => {
         onClick={() => navigate('/validation')}
       >
         <FileSearchOutlined />
-        <span>Validação</span>
+        <span>Certificados</span>
       </div>
       <div
         className={`nav-item ${activeKey === 'students' ? 'active' : ''}`}
