@@ -66,3 +66,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (min-width: 1024px) {
+  .rules-content,
+  .students-content,
+  .courses-content,
+  .home-content,
+  .validation-content,
+  .course-form-content,
+  .coordinator-form-content {
+    padding-bottom: 24px;
+  }
+}
+
+/* Fix Ant Design Select Dropdown text color */
+.ant-select-dropdown {
+  color: #333;
+}
+.ant-select-item {
+  color: #333;
+}
+.ant-select-item-option-content {
+  color: #333;
+}
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  color: #333;
+}

@@ -1,9 +1,11 @@
 .login-container {
-  height: 100vh;
-  width: 100vw;
-  padding: 40px 24px;
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px 24px 10vh 24px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: var(--senac-blue);
   animation: fadeIn 0.8s ease-out;
 }
@@ -22,12 +24,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .login-logo {
-  width: 180px;
-  margin-bottom: 30px;
+  width: 160px;
+  margin-bottom: 16px;
 }
 
 .login-container .login-title {
@@ -40,6 +44,7 @@
 
 .login-form {
   width: 100%;
+  max-width: 400px;
   animation: slideUp 0.8s ease-out forwards;
 }
 
@@ -95,8 +100,8 @@
 .forgot-password {
   display: flex;
   justify-content: flex-end;
-  margin-top: -10px;
-  margin-bottom: 40px;
+  margin-top: -8px;
+  margin-bottom: 24px;
 }
 
 .forgot-password-link {
@@ -106,14 +111,14 @@
 }
 
 .login-container .ant-btn.login-button {
-  height: 55px;
+  height: 50px;
   background-color: var(--senac-orange);
   border: none;
   box-shadow: none;
   border-radius: 20px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 8px;
   color: #ffffff;
 }
 
@@ -128,7 +133,7 @@
 
 .auth-footer {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .auth-footer-text {

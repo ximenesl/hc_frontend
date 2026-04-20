@@ -6,6 +6,7 @@ const CoursesContainer = () => {
   const navigate = useNavigate();
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [courseToDelete, setCourseToDelete] = useState(null);
   const courses = [
     {

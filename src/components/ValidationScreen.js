@@ -6,7 +6,7 @@ import axios from 'axios';
 import './ValidationScreen.css';
 
 const { Content } = Layout;
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { TextArea } = Input;
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
@@ -14,6 +14,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 const ValidationScreen = () => {
   const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [currentIndex, setCurrentIndex] = useState(0);
   const [horasValidadas, setHorasValidadas] = useState('');
   const [justificativa, setJustificativa] = useState('');

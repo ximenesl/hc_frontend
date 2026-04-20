@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StudentsScreen from '../components/StudentsScreen';
 
 const StudentsContainer = () => {
+  // eslint-disable-next-line no-unused-vars
   const [searchText, setSearchText] = useState('');
 
   // Dados mockados baseados no print fornecido

@@ -19,10 +19,50 @@
 
 .rules-tabs-container {
   display: flex;
-  background-color: var(--senac-blue);
   border-radius: 8px;
   margin-bottom: 24px;
   overflow: hidden;
+}
+
+.custom-segmented {
+  width: 100%;
+}
+
+.custom-segmented.ant-segmented {
+  background-color: var(--senac-blue);
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.custom-segmented .ant-segmented-group {
+  width: 100%;
+}
+
+.custom-segmented .ant-segmented-item {
+  color: #fff;
+  border-radius: 0;
+}
+
+.custom-segmented .ant-segmented-item-label {
+  padding: 14px 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.custom-segmented .ant-segmented-item-selected {
+  background-color: var(--senac-orange);
+  color: #fff;
+}
+
+.custom-segmented .ant-segmented-item:hover:not(.ant-segmented-item-selected) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.custom-segmented .ant-segmented-thumb {
+  background-color: var(--senac-orange);
+  border-radius: 0;
 }
 
 .rules-tab {

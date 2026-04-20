@@ -4,6 +4,7 @@ import CourseFormScreen from '../components/CourseFormScreen';
 
 const CourseFormContainer = () => {
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
   const location = useLocation();
 

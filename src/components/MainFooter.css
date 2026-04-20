@@ -33,3 +33,9 @@
 .nav-item .anticon {
   font-size: 24px;
 }
+
+@media (min-width: 1024px) {
+  .main-footer {
+    display: none;
+  }
+}
