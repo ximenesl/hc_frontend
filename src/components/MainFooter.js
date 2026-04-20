@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import {
   HomeFilled,
   FileSearchOutlined,
-  TeamOutlined
+  TeamOutlined,
+  ProfileOutlined
 } from '@ant-design/icons';
 import './MainFooter.css';
 
@@ -35,6 +36,13 @@ const MainFooter = ({ activeKey = 'home' }) => {
       >
         <TeamOutlined />
         <span>Alunos</span>
+      </div>
+      <div
+        className={`nav-item ${activeKey === 'rules' ? 'active' : ''}`}
+        onClick={() => navigate('/rules')}
+      >
+        <ProfileOutlined />
+        <span>Regras</span>
       </div>
     </Footer>
   );

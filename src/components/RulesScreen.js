@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Button } from 'antd';
+import { Layout, Typography, Button, Segmented } from 'antd';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './RulesScreen.css';
@@ -15,15 +15,13 @@ const RulesScreen = ({ tabs, activeTab, onTabChange, rules }) => {
       <Content className="rules-content">
         <div className="rules-inner">
           <div className="rules-tabs-container">
-            {tabs.map(tab => (
-              <div 
-                key={tab} 
-                className={`rules-tab ${activeTab === tab ? 'active' : ''}`}
-                onClick={() => onTabChange(tab)}
-              >
-                {tab}
-              </div>
-            ))}
+            <Segmented 
+              block 
+              options={tabs} 
+              value={activeTab} 
+              onChange={onTabChange} 
+              className="custom-segmented"
+            />
           </div>
 
           <div className="rules-list">
