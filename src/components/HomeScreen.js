@@ -14,7 +14,6 @@ const HomeScreen = ({ stats, recentSubmissions }) => {
 
       <Content className="home-content">
         <div className="content-inner">
-          {/* Cards de Estatísticas */}
           <Space direction="vertical" size={16} className="full-width-space">
             <Card className="stats-card">
               <div className="stats-inner">
@@ -31,10 +30,8 @@ const HomeScreen = ({ stats, recentSubmissions }) => {
             </Card>
           </Space>
 
-          {/* Imagem Cinza */}
           <div className="chart-placeholder" />
 
-          {/* Lista de Submissões Recentes */}
           <div className="submissions-section">
             <Title level={4} className="section-title">Submissões recentes</Title>
 

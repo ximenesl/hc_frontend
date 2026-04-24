@@ -2,7 +2,6 @@ import React from 'react';
 import HomeScreen from '../components/HomeScreen';
 
 const HomeContainer = () => {
-  // Dados mockados (simulando virem de uma API futuramente)
   const stats = {
     totalAlunos: 250,
     pendencias: 18

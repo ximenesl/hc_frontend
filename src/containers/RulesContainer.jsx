@@ -37,7 +37,6 @@ const RulesContainer = () => {
     let horas = '';
     let unidade = rule.aproveitamento;
     
-    // Regex para separar números (com ou sem 'h' logo depois) do restante do texto
     const match = rule.aproveitamento.match(/^(\d+)\s*h?\s*(.*)$/i);
     if (match) {
       horas = match[1];

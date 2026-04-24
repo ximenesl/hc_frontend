@@ -76,7 +76,6 @@ const StudentDashboardScreen = ({
     return e?.fileList;
   };
 
-  // Filtra modalidades baseado na categoria selecionada
   const availableModalities = studentRules.filter(r => r.type === selectedCategoria);
 
   return (

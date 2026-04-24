@@ -26,9 +26,6 @@ const ValidationScreen = () => {
   const fetchCertificates = async () => {
     try {
       setLoading(true);
-      // Aqui idealmente buscaria apenas pendentes, ou filtra no front
-      // Para demonstração, buscando todos e filtrando os PENDENTES. Ajuste o header de auth conforme sua app
-      // Ex: headers: { Authorization: `Bearer ${token}` }
       const response = await axios.get(`${API_BASE_URL}/api/certificates`);
       const pending = response.data.filter(c => c.status === 'PENDENTE');
       setCertificates(pending);
@@ -43,7 +40,6 @@ const ValidationScreen = () => {
   const handleValidation = async (status) => {
     if (!currentCert) return;
     
-    // Validate that if approved, hours are entered
     if (status === 'APROVADO' && !horasValidadas) {
       message.warning('Por favor, insira as horas validadas para aprovar.');
       return;
@@ -56,7 +52,6 @@ const ValidationScreen = () => {
         horasValidadas: horasValidadas ? parseInt(horasValidadas, 10) : 0
       });
       message.success(`Certificado ${status.toLowerCase()} com sucesso!`);
-      // Avança para o próximo removendo o atual
       const newCertificates = [...certificates];
       newCertificates.splice(currentIndex, 1);
       setCertificates(newCertificates);
