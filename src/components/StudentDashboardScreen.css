@@ -1,0 +1,80 @@
+.student-dashboard-layout {
+  height: 100vh;
+  background-color: var(--senac-blue, #004A8F);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-dashboard-content {
+  flex: 1;
+  padding: 16px 16px 80px 16px;
+  overflow-y: auto;
+  background-color: var(--senac-blue, #004A8F);
+}
+
+.student-dashboard-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.progress-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-cert-btn {
+  margin-top: 24px;
+  width: 100%;
+  background-color: var(--senac-orange, #F59120);
+  border-color: var(--senac-orange, #F59120);
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.custom-collapse {
+  background-color: transparent;
+  border: none;
+}
+
+.custom-collapse > .ant-collapse-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: none;
+  overflow: hidden;
+}
+
+.custom-collapse > .ant-collapse-item > .ant-collapse-header {
+  padding: 16px;
+  align-items: center;
+}
+
+.custom-collapse .ant-collapse-content {
+  border-top: 1px solid #f0f0f0;
+}
+
+.custom-collapse .ant-collapse-content-box {
+  padding: 16px;
+  background-color: #fafafa;
+}
+
+.rule-progress-item {
+  margin-bottom: 16px;
+}
+
+.rule-progress-item:last-child {
+  margin-bottom: 0;
+}

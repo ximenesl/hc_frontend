@@ -16,6 +16,7 @@ import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
 import CodeVerificationContainer from './containers/CodeVerificationContainer';
 import ResetPasswordContainer from './containers/ResetPasswordContainer';
 import StudentFormContainer from './containers/StudentFormContainer';
+import StudentDashboardContainer from './containers/StudentDashboardContainer';
 import './App.css';
 
 const theme = {
@@ -59,6 +60,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPasswordContainer />} />
 
             <Route path="/home" element={<HomeContainer />} />
+            <Route path="/student-dashboard" element={<StudentDashboardContainer />} />
             <Route path="/validation" element={<ValidationContainer />} />
             <Route path="/students" element={<StudentsContainer />} />
             <Route path="/students/new" element={<StudentFormContainer />} />
