@@ -8,6 +8,7 @@ import HomeContainer from './containers/HomeContainer';
 import ValidationContainer from './containers/ValidationContainer';
 import StudentsContainer from './containers/StudentsContainer';
 import CoursesContainer from './containers/CoursesContainer';
+import RulesCourseSelectionContainer from './containers/RulesCourseSelectionContainer';
 import RulesContainer from './containers/RulesContainer';
 import CourseFormContainer from './containers/CourseFormContainer';
 import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
@@ -65,7 +66,8 @@ function App() {
             <Route path="/courses/new" element={<CourseFormContainer />} />
             <Route path="/courses/edit/:id" element={<CourseFormContainer />} />
             <Route path="/coordinators/new" element={<CoordinatorFormContainer />} />
-            <Route path="/rules" element={<RulesContainer />} />
+            <Route path="/rules" element={<RulesCourseSelectionContainer />} />
+            <Route path="/rules/:courseId" element={<RulesContainer />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

@@ -84,6 +84,22 @@
   background-color: var(--senac-orange);
 }
 
+.rules-course-select {
+  margin-bottom: 24px;
+}
+
+.rules-add-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.add-rule-btn {
+  background-color: var(--senac-orange);
+  border-color: var(--senac-orange);
+  font-weight: 600;
+}
+
 .rules-list {
   display: flex;
   flex-direction: column;
@@ -95,16 +111,33 @@
   border-radius: 8px;
   padding: 16px;
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rules-card-header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 8px;
+}
+
+.rules-group {
+  font-weight: 700;
+  color: var(--senac-orange);
+  font-size: 14px;
+}
+
+.rules-card-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .rules-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  flex: 1;
-  padding-right: 16px;
+  gap: 8px;
 }
 
 .rules-title {
@@ -113,24 +146,9 @@
   font-size: 15px;
 }
 
-.rules-limit {
-  color: #333333;
+.rules-detail-row {
+  display: flex;
+  gap: 8px;
   font-size: 13px;
-}
-
-.rules-btn {
-  background-color: #e0e0e0;
-  border: none;
-  border-radius: 6px;
-  color: #333333;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  height: auto;
-}
-
-.rules-btn:hover,
-.rules-btn:focus {
-  background-color: #d0d0d0;
-  color: #333333;
+  color: #333;
 }
