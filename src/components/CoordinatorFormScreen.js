@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Input, Select, Button } from 'antd';
+import { Layout, Typography, Input, Select, Button, ConfigProvider } from 'antd';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './CourseFormScreen.css'; /* Reusing the same layout css */
@@ -7,6 +7,16 @@ import './CourseFormScreen.css'; /* Reusing the same layout css */
 const { Content } = Layout;
 const { Text } = Typography;
 const { Option } = Select;
+
+const selectTheme = {
+  token: {
+    colorText: '#000000',
+    colorTextPlaceholder: '#bfbfbf',
+    colorBgContainer: '#ffffff',
+    colorBorder: '#d9d9d9',
+    colorIcon: '#000000'
+  }
+};
 
 const CoordinatorFormScreen = ({ onSave, onCancel }) => {
   return (
@@ -28,13 +38,15 @@ const CoordinatorFormScreen = ({ onSave, onCancel }) => {
 
           <div className="form-group">
             <Text strong className="form-label">Vínculo com Curso</Text>
-            <Select 
-              placeholder="Selecione o curso a ser vinculado" 
-              className="custom-select"
-            >
-              <Option value="curso1">Análise e Desenvolvimento de Sistemas</Option>
-              <Option value="curso2">Jogos Digitais</Option>
-            </Select>
+            <ConfigProvider theme={selectTheme}>
+              <Select 
+                placeholder="Selecione o curso a ser vinculado" 
+                className="custom-select"
+              >
+                <Option value="curso1">Análise e Desenvolvimento de Sistemas</Option>
+                <Option value="curso2">Jogos Digitais</Option>
+              </Select>
+            </ConfigProvider>
           </div>
 
           <div className="form-actions-bottom">

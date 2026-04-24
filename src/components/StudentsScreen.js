@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Input, Typography, List, Card, Progress } from 'antd';
+import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider } from 'antd';
 import { SearchOutlined, RightOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -7,8 +7,28 @@ import './StudentsScreen.css';
 
 const { Content } = Layout;
 const { Text } = Typography;
+const { Option } = Select;
 
-const StudentsScreen = ({ students, onSearch }) => {
+const selectTheme = {
+  token: {
+    colorText: '#000000',
+    colorTextPlaceholder: '#bfbfbf',
+    colorBgContainer: '#ffffff',
+    colorBorder: '#d9d9d9',
+    colorIcon: '#000000'
+  }
+};
+
+const StudentsScreen = ({ 
+  students, 
+  onSearch, 
+  courses, 
+  availableClasses, 
+  selectedCourse, 
+  selectedClass, 
+  onCourseChange, 
+  onClassChange 
+}) => {
   return (
     <Layout className="students-layout">
       <MainHeader />
@@ -20,17 +40,35 @@ const StudentsScreen = ({ students, onSearch }) => {
             className="students-search-input"
             prefix={<span />}
             suffix={<SearchOutlined className="search-icon" />}
-            placeholder="Busque por nome ou matrícula"
+            placeholder="Busque por nome, matrícula ou turma"
             onChange={(e) => onSearch(e.target.value)}
           />
 
           <div className="students-filter-section">
             <Text className="filter-title">Filtrar por:</Text>
-            <Text className="filter-subtitle">Status</Text>
-            <div className="filter-pills-container">
-              <div className="filter-pill"></div>
-              <div className="filter-pill"></div>
-            </div>
+            <ConfigProvider theme={selectTheme}>
+              <div style={{ display: 'flex', gap: '10px', marginTop: '8px', flexWrap: 'wrap' }}>
+                <Select 
+                  placeholder="Selecione o Curso"
+                  value={selectedCourse}
+                  onChange={onCourseChange}
+                  style={{ flex: 1, minWidth: 150 }}
+                  allowClear
+                >
+                  {courses.map(c => <Option key={c.id} value={c.id}>{c.name}</Option>)}
+                </Select>
+                <Select 
+                  placeholder="Selecione a Turma"
+                  value={selectedClass}
+                  onChange={onClassChange}
+                  style={{ flex: 1, minWidth: 150 }}
+                  disabled={!selectedCourse}
+                  allowClear
+                >
+                  {availableClasses.map(cls => <Option key={cls} value={cls}>{cls}</Option>)}
+                </Select>
+              </div>
+            </ConfigProvider>
           </div>
 
           <List
@@ -44,6 +82,7 @@ const StudentsScreen = ({ students, onSearch }) => {
                     <div className="student-info">
                       <Text className="student-name">{student.nome}</Text>
                       <Text className="student-matricula">Matrícula: {student.matricula}</Text>
+                      <Text className="student-matricula">Turma: {student.codigoTurma}</Text>
                     </div>
                     <RightOutlined className="student-arrow" />
                   </div>

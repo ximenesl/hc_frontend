@@ -29,8 +29,7 @@
 :root {
   --senac-blue: #004587;
   --senac-orange: #F59120;
-  
-  /* Z-Index System */
+
   --z-normal: 1;
   --z-sticky: 100;
   --z-fixed: 200;
@@ -43,7 +42,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background-color: var(--senac-blue);
   margin: 0;
@@ -68,6 +68,7 @@ code {
 }
 
 @media (min-width: 1024px) {
+
   .rules-content,
   .students-content,
   .courses-content,
@@ -80,16 +81,18 @@ code {
   }
 }
 
-/* Fix Ant Design Select Dropdown text color */
 .ant-select-dropdown {
   color: #333;
 }
+
 .ant-select-item {
   color: #333;
 }
+
 .ant-select-item-option-content {
   color: #333;
 }
+
 .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   color: #333;
 }

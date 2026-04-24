@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Input, Select, Button } from 'antd';
+import { Layout, Typography, Input, Select, Button, ConfigProvider } from 'antd';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './CourseFormScreen.css';
@@ -7,6 +7,16 @@ import './CourseFormScreen.css';
 const { Content } = Layout;
 const { Text } = Typography;
 const { Option } = Select;
+
+const selectTheme = {
+  token: {
+    colorText: '#000000',
+    colorTextPlaceholder: '#bfbfbf',
+    colorBgContainer: '#ffffff',
+    colorBorder: '#d9d9d9',
+    colorIcon: '#000000'
+  }
+};
 
 const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
   return (
@@ -36,27 +46,30 @@ const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
 
           <div className="form-group">
             <Text strong className="form-label">Categoria do Curso</Text>
-            <Select 
-              placeholder="Selecione a categoria do curso" 
-              className="custom-select"
-            >
-              <Option value="graduacao">Graduação</Option>
-              <Option value="pos">Pós-Graduação</Option>
-              <Option value="extensao">Extensão</Option>
-            </Select>
+            <ConfigProvider theme={selectTheme}>
+              <Select 
+                placeholder="Selecione a categoria do curso" 
+                className="custom-select"
+              >
+                <Option value="graduacao">Graduação</Option>
+                <Option value="pos">Pós-Graduação</Option>
+                <Option value="extensao">Extensão</Option>
+              </Select>
+            </ConfigProvider>
           </div>
 
           {isEdit && (
             <div className="form-group">
               <Text strong className="form-label">Coordenador</Text>
-              <Select 
-                placeholder="Selecione o coordenador" 
-                className="custom-select"
-                defaultValue="joao"
-              >
-                <Option value="joao">João Silva</Option>
-                <Option value="maria">Maria Santos</Option>
-              </Select>
+              <ConfigProvider theme={selectTheme}>
+                <Select 
+                  placeholder="Selecione o coordenador" 
+                  className="custom-select"
+                >
+                  <Option value="joao">João Silva</Option>
+                  <Option value="maria">Maria Santos</Option>
+                </Select>
+              </ConfigProvider>
             </div>
           )}
 

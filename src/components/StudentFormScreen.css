@@ -54,6 +54,18 @@
   color: #bfbfbf;
 }
 
+.student-form-inner .student-custom-select .ant-select-selector {
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  height: 44px;
+  align-items: center;
+}
+
+.student-form-inner .student-custom-select .ant-select-selection-item,
+.student-form-inner .student-custom-select .ant-select-selection-placeholder {
+  color: #000000;
+}
+
 .student-form-actions-bottom {
   margin-top: auto;
   padding-top: 40px;
