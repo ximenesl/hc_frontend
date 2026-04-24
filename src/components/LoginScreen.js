@@ -52,15 +52,6 @@ const LoginScreen = ({ onLogin, onShowRegister, onForgotPassword, isLoading }) =
           </Button>
         </Form.Item>
 
-        <div className="auth-footer">
-          <Text className="auth-footer-text">Não tem uma conta? </Text>
-          <Text 
-            onClick={onShowRegister}
-            className="auth-footer-link"
-          >
-            Crie sua conta
-          </Text>
-        </div>
       </Form>
     </div>
   );

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ConfigProvider } from 'antd';
 import SplashScreen from './components/SplashScreen';
 import LoginContainer from './containers/LoginContainer';
-import RegisterContainer from './containers/RegisterContainer';
+
 import HomeContainer from './containers/HomeContainer';
 import ValidationContainer from './containers/ValidationContainer';
 import StudentsContainer from './containers/StudentsContainer';
@@ -14,6 +14,7 @@ import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
 import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
 import CodeVerificationContainer from './containers/CodeVerificationContainer';
 import ResetPasswordContainer from './containers/ResetPasswordContainer';
+import StudentFormContainer from './containers/StudentFormContainer';
 import './App.css';
 
 const theme = {
@@ -55,10 +56,11 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
             <Route path="/verify-code" element={<CodeVerificationContainer />} />
             <Route path="/reset-password" element={<ResetPasswordContainer />} />
-            <Route path="/register" element={<RegisterContainer />} />
+
             <Route path="/home" element={<HomeContainer />} />
             <Route path="/validation" element={<ValidationContainer />} />
             <Route path="/students" element={<StudentsContainer />} />
+            <Route path="/students/new" element={<StudentFormContainer />} />
             <Route path="/courses" element={<CoursesContainer />} />
             <Route path="/courses/new" element={<CourseFormContainer />} />
             <Route path="/courses/edit/:id" element={<CourseFormContainer />} />

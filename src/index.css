@@ -74,7 +74,8 @@ code {
   .home-content,
   .validation-content,
   .course-form-content,
-  .coordinator-form-content {
+  .coordinator-form-content,
+  .student-form-content {
     padding-bottom: 24px;
   }
 }

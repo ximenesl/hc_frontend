@@ -30,7 +30,8 @@ const CoursesScreen = ({
   onCloseDeleteModal,
   onConfirmDelete,
   onAddCoordinator,
-  onAddCourse
+  onAddCourse,
+  onAddStudent
 }) => {
   return (
     <Layout className="courses-layout">
@@ -121,6 +122,15 @@ const CoursesScreen = ({
             <div className="add-option-text">
               <Text className="add-option-title">Novo Curso</Text>
               <Text className="add-option-desc">Cadastre um novo curso</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+
+          <div className="add-option-btn" onClick={onAddStudent}>
+            <TeamOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title">Novo Aluno</Text>
+              <Text className="add-option-desc">Cadastre um novo aluno</Text>
             </div>
             <RightOutlined className="add-option-arrow" />
           </div>

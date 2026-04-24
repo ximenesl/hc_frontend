@@ -58,6 +58,7 @@ const CoursesContainer = () => {
       onConfirmDelete={confirmDelete}
       onAddCoordinator={() => { setIsAddModalVisible(false); navigate('/coordinators/new'); }}
       onAddCourse={() => { setIsAddModalVisible(false); navigate('/courses/new'); }}
+      onAddStudent={() => { setIsAddModalVisible(false); navigate('/students/new'); }}
     />
   );
 };
