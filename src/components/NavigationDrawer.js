@@ -23,6 +23,9 @@ const NavigationDrawer = ({ visible, onClose }) => {
     navigate(path);
   };
 
+  const userName = localStorage.getItem('userName') || 'Usuário';
+  const userRole = localStorage.getItem('userRole') || 'Visitante';
+
   return (
     <Drawer
       placement="left"
@@ -45,9 +48,8 @@ const NavigationDrawer = ({ visible, onClose }) => {
           className="profile-avatar"
         />
         <div className="profile-info">
-          <Title level={4} className="profile-name">Ana Maria</Title>
-          <Text className="profile-role">Coordenador</Text>
-          <Text className="profile-email">ana@email.com</Text>
+          <Title level={4} className="profile-name">{userName}</Title>
+          <Text className="profile-role">{userRole}</Text>
         </div>
       </div>
 
@@ -88,7 +90,10 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item" onClick={() => handleNavigation('/login')}>
+        <div className="drawer-menu-item" onClick={() => {
+          localStorage.clear();
+          handleNavigation('/login');
+        }}>
           <LogoutOutlined className="drawer-icon" />
           <Text className="drawer-text">Sair</Text>
         </div>
