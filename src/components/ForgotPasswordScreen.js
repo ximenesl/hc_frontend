@@ -5,7 +5,7 @@ import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
-const ForgotPasswordScreen = ({ onSubmit, onBackToLogin }) => {
+const ForgotPasswordScreen = ({ onSubmit, onBackToLogin, isLoading }) => {
   return (
     <div className="login-container">
       <div className="login-header">
@@ -41,6 +41,7 @@ const ForgotPasswordScreen = ({ onSubmit, onBackToLogin }) => {
             htmlType="submit" 
             className="login-button" 
             block 
+            loading={isLoading}
           >
             Avançar
           </Button>

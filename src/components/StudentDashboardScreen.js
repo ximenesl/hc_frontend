@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Progress, Collapse, Button, Modal, Form, Select, Input, Upload, ConfigProvider, message } from 'antd';
+import { Layout, Typography, Progress, Collapse, Button, Modal, Form, Select, Upload, ConfigProvider, message } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';

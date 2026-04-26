@@ -38,6 +38,7 @@ const ForgotPasswordContainer = () => {
     <ForgotPasswordScreen
       onSubmit={handleSubmit}
       onBackToLogin={handleBackToLogin}
+      isLoading={loading}
     />
   );
 };

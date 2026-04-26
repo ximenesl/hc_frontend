@@ -5,7 +5,7 @@ import './LoginScreen.css';
 
 const { Title, Text } = Typography;
 
-const CodeVerificationScreen = ({ onSubmit, onBackToLogin }) => {
+const CodeVerificationScreen = ({ onSubmit, onBackToLogin, isLoading }) => {
   return (
     <div className="login-container">
       <div className="login-header">
@@ -38,6 +38,7 @@ const CodeVerificationScreen = ({ onSubmit, onBackToLogin }) => {
             htmlType="submit" 
             className="login-button" 
             block 
+            loading={isLoading}
           >
             Avançar
           </Button>

@@ -48,6 +48,7 @@ const CodeVerificationContainer = () => {
     <CodeVerificationScreen
       onSubmit={handleSubmit}
       onBackToLogin={handleBackToLogin}
+      isLoading={loading}
     />
   );
 };

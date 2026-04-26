@@ -6,7 +6,7 @@ import MainFooter from './MainFooter';
 import './RulesScreen.css';
 
 const { Content } = Layout;
-const { Text, Title } = Typography;
+const { Text } = Typography;
 const { Option } = Select;
 
 const modalTheme = {
