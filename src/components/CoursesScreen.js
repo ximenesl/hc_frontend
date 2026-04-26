@@ -33,6 +33,8 @@ const CoursesScreen = ({
   onAddCourse,
   onAddStudent
 }) => {
+  const userRole = localStorage.getItem('userRole');
+
   return (
     <Layout className="courses-layout">
       <MainHeader />
@@ -71,20 +73,22 @@ const CoursesScreen = ({
                 </div>
               </div>
 
-              <div className="course-actions">
-                <Button
-                  className="edit-button"
-                  icon={<EditOutlined />}
-                  onClick={() => onEdit(course.id)}
-                >
-                  Editar
-                </Button>
-                <Button
-                  className="delete-button"
-                  icon={<DeleteOutlined />}
-                  onClick={() => onDelete(course.id)}
-                />
-              </div>
+              {userRole === 'ADMIN' && (
+                <div className="course-actions">
+                  <Button
+                    className="edit-button"
+                    icon={<EditOutlined />}
+                    onClick={() => onEdit(course.id)}
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    className="delete-button"
+                    icon={<DeleteOutlined />}
+                    onClick={() => onDelete(course.id)}
+                  />
+                </div>
+              )}
             </Card>
           ))}
         </div>
@@ -108,23 +112,27 @@ const CoursesScreen = ({
         closeIcon={<span style={{color: '#fff'}}>X</span>}
       >
         <div className="add-drawer-content">
-          <div className="add-option-btn" onClick={onAddCoordinator}>
-            <UserOutlined className="add-option-icon" />
-            <div className="add-option-text">
-              <Text className="add-option-title">Novo Coordenador</Text>
-              <Text className="add-option-desc">Cadastre um novo coordenador</Text>
-            </div>
-            <RightOutlined className="add-option-arrow" />
-          </div>
+          {userRole === 'ADMIN' && (
+            <>
+              <div className="add-option-btn" onClick={onAddCoordinator}>
+                <UserOutlined className="add-option-icon" />
+                <div className="add-option-text">
+                  <Text className="add-option-title">Novo Coordenador</Text>
+                  <Text className="add-option-desc">Cadastre um novo coordenador</Text>
+                </div>
+                <RightOutlined className="add-option-arrow" />
+              </div>
 
-          <div className="add-option-btn" onClick={onAddCourse}>
-            <ReadOutlined className="add-option-icon" />
-            <div className="add-option-text">
-              <Text className="add-option-title">Novo Curso</Text>
-              <Text className="add-option-desc">Cadastre um novo curso</Text>
-            </div>
-            <RightOutlined className="add-option-arrow" />
-          </div>
+              <div className="add-option-btn" onClick={onAddCourse}>
+                <ReadOutlined className="add-option-icon" />
+                <div className="add-option-text">
+                  <Text className="add-option-title">Novo Curso</Text>
+                  <Text className="add-option-desc">Cadastre um novo curso</Text>
+                </div>
+                <RightOutlined className="add-option-arrow" />
+              </div>
+            </>
+          )}
 
           <div className="add-option-btn" onClick={onAddStudent}>
             <TeamOutlined className="add-option-icon" />

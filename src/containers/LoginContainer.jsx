@@ -24,7 +24,12 @@ const LoginContainer = () => {
       localStorage.setItem('userRole', role);
       
       message.success(`Bem-vindo, ${nome}!`);
-      navigate('/home');
+      
+      if (role === 'ALUNO') {
+        navigate('/student-dashboard');
+      } else {
+        navigate('/home');
+      }
     } catch (error) {
       if (error.response && error.response.status === 401) {
         message.error('Usuário ou senha inválidos.');

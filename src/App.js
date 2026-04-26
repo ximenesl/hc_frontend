@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import SplashScreen from './components/SplashScreen';
+import ProtectedRoute from './components/ProtectedRoute';
 import LoginContainer from './containers/LoginContainer';
 
 import HomeContainer from './containers/HomeContainer';
@@ -59,17 +60,18 @@ function App() {
             <Route path="/verify-code" element={<CodeVerificationContainer />} />
             <Route path="/reset-password" element={<ResetPasswordContainer />} />
 
-            <Route path="/home" element={<HomeContainer />} />
-            <Route path="/student-dashboard" element={<StudentDashboardContainer />} />
-            <Route path="/validation" element={<ValidationContainer />} />
-            <Route path="/students" element={<StudentsContainer />} />
-            <Route path="/students/new" element={<StudentFormContainer />} />
-            <Route path="/courses" element={<CoursesContainer />} />
-            <Route path="/courses/new" element={<CourseFormContainer />} />
-            <Route path="/courses/edit/:id" element={<CourseFormContainer />} />
-            <Route path="/coordinators/new" element={<CoordinatorFormContainer />} />
-            <Route path="/rules" element={<RulesCourseSelectionContainer />} />
-            <Route path="/rules/:courseId" element={<RulesContainer />} />
+            <Route path="/home" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><HomeContainer /></ProtectedRoute>} />
+            <Route path="/student-dashboard" element={<ProtectedRoute allowedRoles={['ALUNO']}><StudentDashboardContainer /></ProtectedRoute>} />
+            <Route path="/validation" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><ValidationContainer /></ProtectedRoute>} />
+            <Route path="/students" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentsContainer /></ProtectedRoute>} />
+            <Route path="/students/new" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />
+            <Route path="/courses" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><CoursesContainer /></ProtectedRoute>} />
+            <Route path="/courses/new" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />
+            <Route path="/courses/edit/:id" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />
+            <Route path="/coordinators/new" element={<ProtectedRoute allowedRoles={['ADMIN']}><CoordinatorFormContainer /></ProtectedRoute>} />
+            <Route path="/rules" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><RulesCourseSelectionContainer /></ProtectedRoute>} />
+            <Route path="/rules/:courseId" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><RulesContainer /></ProtectedRoute>} />
+            
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
