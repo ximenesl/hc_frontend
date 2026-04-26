@@ -53,6 +53,7 @@ const ResetPasswordContainer = () => {
     <ResetPasswordScreen
       onSubmit={handleSubmit}
       onBackToLogin={handleBackToLogin}
+      isLoading={loading}
     />
   );
 };

@@ -9,10 +9,7 @@ const RulesContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingRule, setEditingRule] = useState(null);
 
-  const courses = [
-    { id: 'curso-ads', name: 'Análise e Desenvolvimento de Sistemas' },
-    { id: 'curso-jogos', name: 'Jogos Digitais' }
-  ];
+
 
   const [rules, setRules] = useState([
     { id: 1, courseId: 'curso-ads', type: 'Ensino', grupo: '1.1', descricao: 'Participação em monitoria no curso', aproveitamento: '20 h por semestre', requisito: 'Declaração e relatório das atividades' },

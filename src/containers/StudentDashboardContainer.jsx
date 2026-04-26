@@ -16,7 +16,7 @@ const StudentDashboardContainer = () => {
     { id: 4, courseId: 'curso-ads', type: 'Extensão', grupo: '3.1', descricao: 'Participação em seminários', limit: 40 }
   ];
 
-  const [progressData, setProgressData] = useState([
+  const [progressData] = useState([
     { ruleId: 1, approvedHours: 20, sentHours: 25 },
     { ruleId: 2, approvedHours: 4, sentHours: 4 }
   ]);
