@@ -14,7 +14,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 const ValidationScreen = () => {
   const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex] = useState(0);
   const [horasValidadas, setHorasValidadas] = useState('');
   const [justificativa, setJustificativa] = useState('');
 
