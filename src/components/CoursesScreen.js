@@ -12,6 +12,7 @@ import {
   WarningFilled,
   ReadOutlined
 } from '@ant-design/icons';
+import useAuth from '../hooks/useAuth';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './CoursesScreen.css';
@@ -33,7 +34,7 @@ const CoursesScreen = ({
   onAddCourse,
   onAddStudent
 }) => {
-  const userRole = localStorage.getItem('userRole');
+  const { isAdmin } = useAuth();
 
   return (
     <Layout className="courses-layout">
@@ -73,7 +74,7 @@ const CoursesScreen = ({
                 </div>
               </div>
 
-              {userRole === 'ADMIN' && (
+              {isAdmin && (
                 <div className="course-actions">
                   <Button
                     className="edit-button"
@@ -112,7 +113,7 @@ const CoursesScreen = ({
         closeIcon={<span style={{color: '#fff'}}>X</span>}
       >
         <div className="add-drawer-content">
-          {userRole === 'ADMIN' && (
+          {isAdmin && (
             <>
               <div className="add-option-btn" onClick={onAddCoordinator}>
                 <UserOutlined className="add-option-icon" />

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import CodeVerificationScreen from '../components/CodeVerificationScreen';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const CodeVerificationContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +18,7 @@ const CodeVerificationContainer = () => {
 
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/auth/verify-code`, {
+      await api.post('/api/auth/verify-code', {
         email: email,
         codigo: values.otp
       });

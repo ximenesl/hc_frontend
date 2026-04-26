@@ -11,20 +11,24 @@ import {
   LogoutOutlined,
   BookOutlined
 } from '@ant-design/icons';
+import useAuth from '../hooks/useAuth';
 import './NavigationDrawer.css';
 
 const { Title, Text } = Typography;
 
 const NavigationDrawer = ({ visible, onClose }) => {
   const navigate = useNavigate();
+  const { userName, userRole, logout } = useAuth();
 
   const handleNavigation = (path) => {
     onClose();
     navigate(path);
   };
 
-  const userName = localStorage.getItem('userName') || 'Usuário';
-  const userRole = localStorage.getItem('userRole') || 'Visitante';
+  const handleLogout = () => {
+    logout();
+    handleNavigation('/login');
+  };
 
   return (
     <Drawer
@@ -90,10 +94,7 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item" onClick={() => {
-          localStorage.clear();
-          handleNavigation('/login');
-        }}>
+        <div className="drawer-menu-item" onClick={handleLogout}>
           <LogoutOutlined className="drawer-icon" />
           <Text className="drawer-text">Sair</Text>
         </div>

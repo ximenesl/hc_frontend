@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import ResetPasswordScreen from '../components/ResetPasswordScreen';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const ResetPasswordContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +20,7 @@ const ResetPasswordContainer = () => {
 
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/auth/reset-password`, {
+      await api.post('/api/auth/reset-password', {
         email: email,
         codigo: codigo,
         novaSenha: values.password

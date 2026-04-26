@@ -1,30 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import axios from 'axios';
+import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 import LoginScreen from '../components/LoginScreen';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const LoginContainer = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { saveSession } = useAuth();
 
   const handleLogin = async (values) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+      const response = await api.post('/api/auth/login', {
         email: values.username,
         senha: values.password
       });
-      
+
       const { token, nome, role } = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('userName', nome);
-      localStorage.setItem('userRole', role);
-      
+      saveSession({ token, nome, role });
+
       message.success(`Bem-vindo, ${nome}!`);
-      
+
       if (role === 'ALUNO') {
         navigate('/student-dashboard');
       } else {

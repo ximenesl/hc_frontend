@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import ForgotPasswordScreen from '../components/ForgotPasswordScreen';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const ForgotPasswordContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +11,7 @@ const ForgotPasswordContainer = () => {
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/auth/forgot-password`, {
+      await api.post('/api/auth/forgot-password', {
         email: values.email
       });
       localStorage.setItem('resetEmail', values.email);

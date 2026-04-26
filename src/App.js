@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import SplashScreen from './components/SplashScreen';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
 import LoginContainer from './containers/LoginContainer';
 
 import HomeContainer from './containers/HomeContainer';
