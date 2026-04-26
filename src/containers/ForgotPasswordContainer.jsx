@@ -4,7 +4,7 @@ import { message } from 'antd';
 import axios from 'axios';
 import ForgotPasswordScreen from '../components/ForgotPasswordScreen';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const ForgotPasswordContainer = () => {
   const [loading, setLoading] = useState(false);

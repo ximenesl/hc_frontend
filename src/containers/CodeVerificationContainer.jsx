@@ -4,7 +4,7 @@ import { message } from 'antd';
 import axios from 'axios';
 import CodeVerificationScreen from '../components/CodeVerificationScreen';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const CodeVerificationContainer = () => {
   const [loading, setLoading] = useState(false);
