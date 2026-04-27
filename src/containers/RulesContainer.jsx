@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { message } from 'antd';
 import RulesScreen from '../components/RulesScreen';
+import api from '../api/axiosConfig';
 
 const RulesContainer = () => {
   const { courseId } = useParams();
@@ -8,22 +10,42 @@ const RulesContainer = () => {
   
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingRule, setEditingRule] = useState(null);
+  const [rules, setRules] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  const fetchRules = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get(`/api/regras/curso/${courseId}`);
+      // As regras vêm com type, convertendo do BD
+      const formattedRules = response.data.map(r => ({
+        id: r.id,
+        courseId: r.courseId,
+        type: r.type, // Ensino, Pesquisa, Extensão
+        grupo: r.grupo,
+        descricao: r.descricao,
+        aproveitamento: r.aproveitamento,
+        requisito: r.requisito
+      }));
+      setRules(formattedRules);
+    } catch (error) {
+      console.error('Erro ao buscar regras:', error);
+      message.error('Erro ao carregar regras');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  const [rules, setRules] = useState([
-    { id: 1, courseId: 'curso-ads', type: 'Ensino', grupo: '1.1', descricao: 'Participação em monitoria no curso', aproveitamento: '20 h por semestre', requisito: 'Declaração e relatório das atividades' },
-    { id: 2, courseId: 'curso-ads', type: 'Ensino', grupo: '1.2', descricao: 'Comparecimento a defesas de monografias', aproveitamento: '2h por participação', requisito: 'Relatório do evento e Lista de presença' },
-    { id: 3, courseId: 'curso-ads', type: 'Ensino', grupo: '1.3', descricao: 'Disciplina cursada em outros cursos da Faculdade Senac', aproveitamento: '20h por disciplina', requisito: 'Histórico oficial' },
-    { id: 4, courseId: 'curso-ads', type: 'Pesquisa', grupo: '2.1', descricao: 'Participação em pesquisas ou atividades de pesquisa', aproveitamento: '10h por produto final', requisito: 'Relatório do professor orientador' },
-    { id: 5, courseId: 'curso-ads', type: 'Pesquisa', grupo: '2.2', descricao: 'Programas de bolsa de Iniciação Científica', aproveitamento: '20h por bolsa', requisito: 'Relatório do professor orientador' },
-    { id: 6, courseId: 'curso-ads', type: 'Extensão', grupo: '3.1', descricao: 'Participação em seminários, congressos, conferências', aproveitamento: '10h por participação /4h como público', requisito: 'Atestado ou Certificado de participação' },
-    { id: 7, courseId: 'curso-ads', type: 'Extensão', grupo: '3.2', descricao: 'Atendimento comunitário de cunho social', aproveitamento: '10h por semestre', requisito: 'Atestado de participação' }
-  ]);
+  useEffect(() => {
+    if (courseId) {
+      fetchRules();
+    }
+  }, [courseId]);
 
   const tabs = ['Ensino', 'Pesquisa', 'Extensão'];
 
-  const filteredRules = rules.filter(r => r.courseId === courseId && r.type === activeTab);
+  // Converter courseId useParams (string) para número para comparar com r.courseId (number)
+  const filteredRules = rules.filter(r => r.courseId.toString() === courseId && r.type === activeTab);
 
   const handleAdd = () => {
     setEditingRule(null);
@@ -48,31 +70,42 @@ const RulesContainer = () => {
     setIsModalVisible(true);
   };
 
-  const handleDelete = (id) => {
-    setRules(rules.filter(r => r.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/api/regras/${id}`);
+      message.success('Regra deletada com sucesso!');
+      fetchRules();
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao deletar regra');
+    }
   };
 
-  const handleSave = (values) => {
+  const handleSave = async (values) => {
     const combinedAproveitamento = `${values.aproveitamentoHoras}h ${values.aproveitamentoUnidade}`;
-    const finalValues = {
+    const payload = {
+      cursoId: parseInt(courseId, 10),
+      tipo: activeTab,
       grupo: values.grupo,
       descricao: values.descricao,
       requisito: values.requisito,
       aproveitamento: combinedAproveitamento
     };
 
-    if (editingRule) {
-      setRules(rules.map(r => r.id === editingRule.id ? { ...r, ...finalValues } : r));
-    } else {
-      const newRule = {
-        ...finalValues,
-        id: Date.now(),
-        courseId: courseId,
-        type: activeTab
-      };
-      setRules([...rules, newRule]);
+    try {
+      if (editingRule) {
+        await api.put(`/api/regras/${editingRule.id}`, payload);
+        message.success('Regra atualizada com sucesso!');
+      } else {
+        await api.post('/api/regras', payload);
+        message.success('Regra criada com sucesso!');
+      }
+      setIsModalVisible(false);
+      fetchRules();
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao salvar regra');
     }
-    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
@@ -93,6 +126,7 @@ const RulesContainer = () => {
       editingRule={editingRule}
       onSave={handleSave}
       onCancel={handleCancel}
+      loading={loading}
     />
   );
 };

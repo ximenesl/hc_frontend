@@ -1,54 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { message } from 'antd';
 import StudentsScreen from '../components/StudentsScreen';
+import api from '../api/axiosConfig';
 
 const StudentsContainer = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [coursesWithClasses, setCoursesWithClasses] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const coursesWithClasses = [
-    { id: 'curso-ads', name: 'Análise e Desenvolvimento de Sistemas', classes: ['TAD-01', 'TAD-02'] },
-    { id: 'curso-jogos', name: 'Jogos Digitais', classes: ['JD-01', 'JD-02'] }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [usersRes, cursosRes, certsRes] = await Promise.all([
+          api.get('/api/users'),
+          api.get('/api/cursos'),
+          api.get('/api/certificates')
+        ]);
 
-  const students = [
-    {
-      id: 1,
-      nome: 'Carlos de Oliveira',
-      matricula: '202101234',
-      codigoTurma: 'TAD-01',
-      codigoCurso: 'curso-ads',
-      horasCompletas: 100,
-      horasTotais: 100,
-    },
-    {
-      id: 2,
-      nome: 'Ana Souza',
-      matricula: '202101235',
-      codigoTurma: 'TAD-02',
-      codigoCurso: 'curso-ads',
-      horasCompletas: 60,
-      horasTotais: 100,
-    },
-    {
-      id: 3,
-      nome: 'Pedro Santos',
-      matricula: '202101236',
-      codigoTurma: 'JD-01',
-      codigoCurso: 'curso-jogos',
-      horasCompletas: 90,
-      horasTotais: 100,
-    },
-    {
-      id: 4,
-      nome: 'Lucas Almeida',
-      matricula: '202101237',
-      codigoTurma: 'JD-02',
-      codigoCurso: 'curso-jogos',
-      horasCompletas: 45,
-      horasTotais: 100,
-    }
-  ];
+        const certs = certsRes.data;
+
+        // Formatar os cursos
+        const formattedCourses = cursosRes.data.map(c => ({
+          id: c.id,
+          name: c.nome,
+          // Simulando turmas já que não temos entidade Turma
+          classes: [`T-${c.id}-01`]
+        }));
+        setCoursesWithClasses(formattedCourses);
+
+        // Filtrar apenas alunos
+        const alunos = usersRes.data.filter(u => u.role === 'ALUNO');
+        
+        const formattedStudents = alunos.map(aluno => {
+          // Filtrar certificados aprovados desse aluno para somar as horas
+          const alunoCerts = certs.filter(c => c.alunoId === aluno.id && (c.status === 'APROVADO' || c.status === 'DEFERIDO' || c.status === 'VALIDADO'));
+          const horasCompletas = alunoCerts.reduce((acc, curr) => acc + (curr.cargaHoraria || 0), 0);
+          
+          return {
+            id: aluno.id,
+            nome: aluno.nome,
+            matricula: `MAT-${aluno.id}`, // Simulando matricula se nao tiver
+            codigoTurma: aluno.curso ? `T-${aluno.curso.id}-01` : '-',
+            codigoCurso: aluno.curso ? aluno.curso.id : null,
+            horasCompletas: horasCompletas,
+            horasTotais: 100 // Exemplo de horas totais necessárias
+          };
+        });
+
+        setStudents(formattedStudents);
+      } catch (error) {
+        console.error(error);
+        message.error('Erro ao carregar dados dos alunos');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = (value) => {
     setSearchText(value);
@@ -78,6 +91,7 @@ const StudentsContainer = () => {
   return (
     <StudentsScreen
       students={filteredStudents}
+      loading={loading}
       onSearch={handleSearch}
       courses={coursesWithClasses}
       availableClasses={availableClasses}

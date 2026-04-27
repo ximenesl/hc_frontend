@@ -1,31 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import CoursesScreen from '../components/CoursesScreen';
+import api from '../api/axiosConfig';
 
 const CoursesContainer = () => {
   const navigate = useNavigate();
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [courseToDelete, setCourseToDelete] = useState(null);
-  const courses = [
-    {
-      id: 1,
-      name: 'Análise e Desenvolvimento de Sistemas',
-      coordinatorName: 'João Silva',
-      coordinatorEmail: 'joao@email.com',
-      studentsCount: 150,
-      creationDate: '10/08/2021',
-    },
-    {
-      id: 2,
-      name: 'Jogos Digitais',
-      coordinatorName: 'Maria Santos',
-      coordinatorEmail: 'maria@email.com',
-      studentsCount: 80,
-      creationDate: '15/05/2020',
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchCourses = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/api/cursos');
+      
+      // Formatting the courses for the table
+      const formattedCourses = response.data.map(c => ({
+        id: c.id,
+        name: c.nome,
+        coordinatorName: c.coordenadorNome || 'Não atribuído',
+        coordinatorEmail: c.coordenadorEmail || '-',
+        studentsCount: c.studentsCount || 0,
+        creationDate: c.dataCriacao ? new Date(c.dataCriacao).toLocaleDateString('pt-BR') : '-',
+      }));
+      setCourses(formattedCourses);
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao carregar cursos');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
   const handleEdit = (id) => {
     navigate(`/courses/edit/${id}`);
@@ -36,9 +48,17 @@ const CoursesContainer = () => {
     setIsDeleteModalVisible(true);
   };
 
-  const confirmDelete = () => {
-    setIsDeleteModalVisible(false);
-    setCourseToDelete(null);
+  const confirmDelete = async () => {
+    try {
+      await api.delete(`/api/cursos/${courseToDelete}`);
+      message.success('Curso deletado com sucesso!');
+      setIsDeleteModalVisible(false);
+      setCourseToDelete(null);
+      fetchCourses();
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao deletar o curso');
+    }
   };
 
   const handleAdd = () => {
@@ -48,6 +68,7 @@ const CoursesContainer = () => {
   return (
     <CoursesScreen
       courses={courses}
+      loading={loading}
       onEdit={handleEdit}
       onDelete={handleDelete}
       onAdd={handleAdd}
