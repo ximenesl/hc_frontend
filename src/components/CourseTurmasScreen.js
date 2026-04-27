@@ -63,7 +63,7 @@ const CourseTurmasScreen = ({
           type="link" 
           icon={<ArrowLeftOutlined />} 
           onClick={() => navigate('/courses')}
-          style={{ marginBottom: '20px', color: '#fff' }}
+          style={{ marginBottom: '20px', color: 'var(--senac-blue)', fontWeight: 'bold' }}
         >
           Voltar para Cursos
         </Button>
@@ -86,8 +86,8 @@ const CourseTurmasScreen = ({
               renderItem={(turma) => (
                 <List.Item
                   actions={[
-                    <Button type="text" icon={<EditOutlined />} onClick={() => handleEditClick(turma)}>Editar</Button>,
-                    <Button type="text" danger icon={<DeleteOutlined />} onClick={() => onDeleteTurma(turma.id)}>Excluir</Button>
+                    <Button type="primary" ghost icon={<EditOutlined />} onClick={() => handleEditClick(turma)}>Editar</Button>,
+                    <Button type="primary" danger ghost icon={<DeleteOutlined />} onClick={() => onDeleteTurma(turma.id)}>Excluir</Button>
                   ]}
                 >
                   <List.Item.Meta title={turma.nome} />

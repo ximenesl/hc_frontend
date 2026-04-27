@@ -99,6 +99,21 @@ h5.ant-typography.course-title {
   gap: 12px;
 }
 
+button.ant-btn.view-turmas-button {
+  background-color: var(--senac-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  height: 40px;
+  padding: 0 16px;
+}
+
+button.ant-btn.view-turmas-button:hover {
+  background-color: #003366;
+  color: #ffffff;
+}
+
 button.ant-btn.edit-button {
   flex: 1;
   background-color: #ffffff;

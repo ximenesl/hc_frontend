@@ -1,0 +1,195 @@
+.coordinators-layout {
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.coordinators-content {
+  padding: 24px 16px 100px 16px;
+  overflow-y: auto;
+}
+
+.coordinators-inner-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.coordinators-page-title {
+  color: #000000 !important;
+  margin-bottom: 20px !important;
+  font-weight: 700 !important;
+}
+
+span.ant-input-affix-wrapper.coordinators-search-input {
+  border-radius: 4px;
+  border: 1px solid #a0a0a0;
+  background-color: #ffffff;
+  padding: 8px 12px;
+  margin-bottom: 24px;
+}
+
+span.ant-input-affix-wrapper.coordinators-search-input input.ant-input {
+  color: #333333;
+  background-color: #ffffff;
+}
+
+span.ant-input-affix-wrapper.coordinators-search-input input.ant-input::placeholder {
+  color: #999999;
+}
+
+.coordinator-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+
+.coordinator-card .ant-card-body {
+  padding: 20px;
+}
+
+.coordinator-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.coordinator-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.coordinator-name {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.coordinator-detail {
+  color: #666666;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.coordinator-detail .anticon {
+  font-size: 14px;
+  color: #999;
+}
+
+.coordinator-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+button.ant-btn.coord-edit-button {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid var(--senac-blue);
+  color: var(--senac-blue);
+  border-radius: 6px;
+  font-weight: 600;
+  height: 38px;
+}
+
+button.ant-btn.coord-edit-button:hover {
+  background-color: var(--senac-blue);
+  color: #ffffff;
+}
+
+button.ant-btn.coord-delete-button {
+  width: 44px;
+  height: 38px;
+  background-color: #ffffff;
+  border: 1px solid #ff4d4f;
+  color: #ff4d4f;
+  border-radius: 6px;
+}
+
+button.ant-btn.coord-delete-button:hover {
+  background-color: #ff4d4f;
+  color: #ffffff;
+}
+
+button.ant-btn.coord-delete-button .anticon {
+  font-size: 16px;
+}
+
+/* Delete Modal */
+.coord-delete-modal .ant-modal-content {
+  background-color: var(--senac-blue);
+  border-radius: 16px;
+}
+
+.coord-delete-modal .ant-modal-header {
+  background-color: transparent;
+}
+
+.coord-delete-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.coord-delete-warning-icon {
+  font-size: 48px;
+  color: var(--senac-orange);
+  margin-bottom: 16px;
+}
+
+h4.ant-typography.coord-delete-warning-title {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+button.ant-btn.coord-delete-confirm-btn {
+  width: 100%;
+  background-color: var(--senac-orange);
+  border: none;
+  border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+button.ant-btn.coord-delete-cancel-btn {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+button.ant-btn.coord-delete-cancel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Edit Modal */
+.coord-edit-modal .ant-modal-content {
+  border-radius: 12px;
+}
+
+.coord-edit-modal .ant-modal-header {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.coord-edit-modal .ant-modal-title {
+  color: #000;
+  font-weight: 700;
+}

@@ -9,7 +9,8 @@ import {
   SettingOutlined,
   MessageOutlined,
   LogoutOutlined,
-  BookOutlined
+  BookOutlined,
+  SolutionOutlined
 } from '@ant-design/icons';
 import useAuth from '../hooks/useAuth';
 import './NavigationDrawer.css';
@@ -18,7 +19,7 @@ const { Title, Text } = Typography;
 
 const NavigationDrawer = ({ visible, onClose }) => {
   const navigate = useNavigate();
-  const { userName, userRole, logout } = useAuth();
+  const { userName, userRole, isAdmin, logout } = useAuth();
 
   const handleNavigation = (path) => {
     onClose();
@@ -81,6 +82,16 @@ const NavigationDrawer = ({ visible, onClose }) => {
           <Text className="drawer-text">Gestão de Cursos</Text>
         </div>
         <div className="drawer-divider" />
+
+        {isAdmin && (
+          <>
+            <div className="drawer-menu-item" onClick={() => handleNavigation('/coordinators')}>
+              <SolutionOutlined className="drawer-icon" />
+              <Text className="drawer-text">Gestão de Coordenadores</Text>
+            </div>
+            <div className="drawer-divider" />
+          </>
+        )}
 
         <div className="drawer-menu-item" onClick={() => handleNavigation('/rules')}>
           <SettingOutlined className="drawer-icon" />
