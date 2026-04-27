@@ -32,7 +32,8 @@ const CoursesScreen = ({
   onConfirmDelete,
   onAddCoordinator,
   onAddCourse,
-  onAddStudent
+  onAddStudent,
+  onViewTurmas
 }) => {
   const { isAdmin } = useAuth();
 
