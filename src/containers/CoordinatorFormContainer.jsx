@@ -46,8 +46,9 @@ const CoordinatorFormContainer = () => {
       message.success('Coordenador criado com sucesso!');
       navigate('/courses');
     } catch (error) {
-      console.error(error);
-      message.error('Erro ao criar coordenador');
+      console.error('Erro detalhado:', error.response?.data || error.message);
+      const errorMsg = error.response?.data?.message;
+      message.error(typeof errorMsg === 'string' ? errorMsg : 'Erro ao criar coordenador');
     }
   };
 

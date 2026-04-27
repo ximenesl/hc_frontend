@@ -11,11 +11,11 @@ const StudentFormContainer = () => {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    cpf: '',
     cursoId: null,
     turmaId: null
   });
 
+  useEffect(() => {
     const fetchDados = async () => {
       try {
         const [cursosRes, turmasRes] = await Promise.all([
@@ -45,6 +45,7 @@ const StudentFormContainer = () => {
     }
 
     try {
+      await api.post('/api/users', {
         nome: formData.nome,
         email: formData.email,
         role: 'ALUNO',
@@ -54,8 +55,9 @@ const StudentFormContainer = () => {
       message.success('Aluno criado com sucesso!');
       navigate('/students');
     } catch (error) {
-      console.error(error);
-      message.error('Erro ao criar aluno');
+      console.error('Erro detalhado:', error.response?.data || error.message);
+      const errorMsg = error.response?.data?.message;
+      message.error(typeof errorMsg === 'string' ? errorMsg : 'Erro ao criar aluno');
     }
   };
 
@@ -63,6 +65,7 @@ const StudentFormContainer = () => {
     navigate('/students');
   };
 
+  return (
     <StudentFormScreen 
       cursos={cursos}
       turmas={availableTurmas}
