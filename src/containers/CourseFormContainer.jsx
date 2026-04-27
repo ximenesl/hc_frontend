@@ -28,7 +28,11 @@ const CourseFormContainer = () => {
     }
 
     try {
-      await api.post('/api/cursos', { nome: formData.nome });
+      const payload = { 
+        nome: formData.nome,
+        horasTotais: formData.cargaHoraria ? parseInt(formData.cargaHoraria) : 100
+      };
+      await api.post('/api/cursos', payload);
       message.success('Curso criado com sucesso!');
       navigate('/courses');
     } catch (error) {

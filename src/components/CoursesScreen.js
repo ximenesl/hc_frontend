@@ -20,10 +20,10 @@ import './CoursesScreen.css';
 const { Content } = Layout;
 const { Text, Title } = Typography;
 
-const CoursesScreen = ({ 
-  courses, 
-  onEdit, 
-  onDelete, 
+const CoursesScreen = ({
+  courses,
+  onEdit,
+  onDelete,
   onAdd,
   isAddModalVisible,
   isDeleteModalVisible,
@@ -77,6 +77,13 @@ const CoursesScreen = ({
               {isAdmin && (
                 <div className="course-actions">
                   <Button
+                    className="view-turmas-button"
+                    onClick={() => onViewTurmas(course.id)}
+                    style={{ marginRight: '8px' }}
+                  >
+                    Turmas
+                  </Button>
+                  <Button
                     className="edit-button"
                     icon={<EditOutlined />}
                     onClick={() => onEdit(course.id)}
@@ -103,14 +110,13 @@ const CoursesScreen = ({
       />
       <MainFooter />
 
-      {/* Modal de Adicionar (Usando Modal do antd customizado para ficar embaixo) */}
       <Modal
         open={isAddModalVisible}
         onCancel={onCloseAddModal}
         footer={null}
         title="Adicionar"
         className="custom-bottom-modal"
-        closeIcon={<span style={{color: '#fff'}}>X</span>}
+        closeIcon={<span style={{ color: '#fff' }}>X</span>}
       >
         <div className="add-drawer-content">
           {isAdmin && (
@@ -146,14 +152,13 @@ const CoursesScreen = ({
         </div>
       </Modal>
 
-      {/* Modal de Excluir */}
       <Modal
         open={isDeleteModalVisible}
         onCancel={onCloseDeleteModal}
         footer={null}
         centered
         className="custom-delete-modal"
-        closeIcon={<span style={{color: '#fff'}}>X</span>}
+        closeIcon={<span style={{ color: '#fff' }}>X</span>}
       >
         <div className="delete-drawer-content">
           <WarningFilled className="delete-warning-icon" />
@@ -161,14 +166,14 @@ const CoursesScreen = ({
             Tem certeza que deseja<br />excluir o curso?
           </Title>
 
-          <Button 
-            type="primary" 
+          <Button
+            type="primary"
             className="delete-confirm-btn"
             onClick={onConfirmDelete}
           >
             Excluir
           </Button>
-          <Button 
+          <Button
             className="delete-cancel-btn"
             onClick={onCloseDeleteModal}
           >

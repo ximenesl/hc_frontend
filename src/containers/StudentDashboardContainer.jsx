@@ -15,27 +15,12 @@ const StudentDashboardContainer = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      // Pega o usuario atual (mockando pegar todos e filtrar pelo token ou email logado)
-      // Como não temos a rota /me exata que retorne tudo detalhado, pegamos a lista de usuarios e o email salvo no localStorage ou decodificado
-      // Para simplificar, vou assumir que tem endpoint ou usar a lista
-      const usersRes = await api.get('/api/users');
-      // Precisa do ID do usuário logado. Idealmente viria do contexto ou JWT. 
-      // Como workaround temporário, pegar o primeiro ALUNO ou simular.
-      // Vou buscar todos e tentar pegar o aluno atual pelo token. Se não der, pega o primeiro.
-      const userStr = localStorage.getItem('user'); // Supondo que salvou algo no login
-      let currentUser = null;
-      if (userStr) {
-        const parsed = JSON.parse(userStr);
-        currentUser = usersRes.data.find(u => u.email === parsed.email);
-      }
-      
-      if (!currentUser) {
-        currentUser = usersRes.data.find(u => u.role === 'ALUNO');
-      }
+      const userRes = await api.get('/api/users/me');
+      const currentUser = userRes.data;
 
       if (!currentUser) {
         setLoading(false);
-        return; // Sem alunos
+        return; 
       }
 
       setStudent({
@@ -43,7 +28,7 @@ const StudentDashboardContainer = () => {
         nome: currentUser.nome,
         matricula: `MAT-${currentUser.id}`,
         cursoId: currentUser.curso ? currentUser.curso.id : null,
-        horasTotaisNecessarias: 100
+        horasTotaisNecessarias: currentUser.curso && currentUser.curso.horasTotais ? currentUser.curso.horasTotais : 100
       });
 
       let courseRules = [];
@@ -63,10 +48,9 @@ const StudentDashboardContainer = () => {
       const certsRes = await api.get('/api/certificates');
       const studentCerts = certsRes.data.filter(c => c.alunoId === currentUser.id);
 
-      // Agrupar por regra. Não temos ruleId no certificado atual no BD, então associamos por nome temporariamente ou apenas mostramos.
-      // Assumindo que a categoria vem como nome do certificado no BD (Gambiarra temporaria pq o BD nao tem regra_id no Certificado)
+      // Agrupar por regra.
       const progress = courseRules.map(rule => {
-        const certsForRule = studentCerts.filter(c => c.nome === rule.descricao);
+        const certsForRule = studentCerts.filter(c => c.regraId === rule.id);
         const sentHours = certsForRule.reduce((sum, c) => sum + (c.cargaHoraria || 0), 0);
         const approvedCerts = certsForRule.filter(c => c.status === 'APROVADO' || c.status === 'DEFERIDO' || c.status === 'VALIDADO');
         const approvedHours = approvedCerts.reduce((sum, c) => sum + (c.cargaHoraria || 0), 0);
@@ -123,7 +107,8 @@ const StudentDashboardContainer = () => {
     try {
       const formData = new FormData();
       formData.append('alunoId', student.id);
-      formData.append('nome', rule.descricao); // Salvando a descricao da regra como nome para vincular depois
+      formData.append('nome', "Certificado - " + rule.descricao); 
+      formData.append('regraId', rule.id);
       formData.append('cargaHoraria', values.horas);
       formData.append('file', values.file);
 

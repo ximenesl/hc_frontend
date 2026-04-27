@@ -12,6 +12,7 @@ import CoursesContainer from './containers/CoursesContainer';
 import RulesCourseSelectionContainer from './containers/RulesCourseSelectionContainer';
 import RulesContainer from './containers/RulesContainer';
 import CourseFormContainer from './containers/CourseFormContainer';
+import CourseTurmasContainer from './containers/CourseTurmasContainer';
 import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
 import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
 import CodeVerificationContainer from './containers/CodeVerificationContainer';
@@ -68,6 +69,7 @@ function App() {
             <Route path="/courses" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><CoursesContainer /></ProtectedRoute>} />
             <Route path="/courses/new" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />
             <Route path="/courses/edit/:id" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />
+            <Route path="/courses/:id/turmas" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><CourseTurmasContainer /></ProtectedRoute>} />
             <Route path="/coordinators/new" element={<ProtectedRoute allowedRoles={['ADMIN']}><CoordinatorFormContainer /></ProtectedRoute>} />
             <Route path="/rules" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><RulesCourseSelectionContainer /></ProtectedRoute>} />
             <Route path="/rules/:courseId" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><RulesContainer /></ProtectedRoute>} />

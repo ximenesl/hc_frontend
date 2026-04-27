@@ -18,7 +18,7 @@ const selectTheme = {
   }
 };
 
-const StudentFormScreen = ({ cursos, formData, onChange, onSave, onCancel }) => {
+const StudentFormScreen = ({ cursos, turmas, formData, onChange, onSave, onCancel }) => {
   return (
     <Layout className="student-form-layout">
       <MainHeader />
@@ -67,6 +67,23 @@ const StudentFormScreen = ({ cursos, formData, onChange, onSave, onCancel }) => 
               >
                 {cursos && cursos.map(c => (
                   <Option key={c.id} value={c.id}>{c.nome}</Option>
+                ))}
+              </Select>
+            </ConfigProvider>
+          </div>
+
+          <div className="student-form-group">
+            <Text strong className="student-form-label">Turma</Text>
+            <ConfigProvider theme={selectTheme}>
+              <Select 
+                placeholder="Selecione a turma" 
+                className="student-custom-select"
+                value={formData?.turmaId}
+                onChange={(value) => onChange('turmaId', value)}
+                disabled={!formData?.cursoId}
+              >
+                {turmas && turmas.map(t => (
+                  <Option key={t.id} value={t.id}>{t.nome}</Option>
                 ))}
               </Select>
             </ConfigProvider>

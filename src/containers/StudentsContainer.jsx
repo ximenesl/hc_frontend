@@ -26,11 +26,11 @@ const StudentsContainer = () => {
         const turmas = turmasRes.data;
 
         const formattedCourses = cursosRes.data.map(c => {
-          const courseTurmas = turmas.filter(t => t.cursoId === c.id).map(t => t.nome);
+          const courseTurmas = turmas.filter(t => t.cursoId === c.id);
           return {
             id: c.id,
             name: c.nome,
-            classes: courseTurmas
+            classes: courseTurmas.map(t => t.nome)
           };
         });
         setCoursesWithClasses(formattedCourses);
@@ -42,9 +42,8 @@ const StudentsContainer = () => {
           const horasCompletas = alunoCerts.reduce((acc, curr) => acc + (curr.cargaHoraria || 0), 0);
           
           let turmaName = '-';
-          if (aluno.curso) {
-             const cursoTurmas = turmas.filter(t => t.cursoId === aluno.curso.id);
-             if (cursoTurmas.length > 0) turmaName = cursoTurmas[0].nome;
+          if (aluno.turma) {
+             turmaName = aluno.turma.nome;
           }
 
           return {
@@ -54,7 +53,7 @@ const StudentsContainer = () => {
             codigoTurma: turmaName,
             codigoCurso: aluno.curso ? aluno.curso.id : null,
             horasCompletas: horasCompletas,
-            horasTotais: 100
+            horasTotais: aluno.curso && aluno.curso.horasTotais ? aluno.curso.horasTotais : 100
           };
         });
 

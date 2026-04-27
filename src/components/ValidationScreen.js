@@ -113,8 +113,8 @@ const ValidationScreen = () => {
               </div>
 
               <div className="info-row">
-                <Text strong>Categoria / Nome</Text>
-                <Text strong>{currentCert.nome}</Text>
+                <Text strong>Categoria / Regra</Text>
+                <Text strong>{currentCert.regraDescricao || currentCert.nome}</Text>
               </div>
 
               <div className="info-row">

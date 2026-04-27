@@ -7,7 +7,7 @@ import api from '../api/axiosConfig';
 const RulesContainer = () => {
   const { courseId } = useParams();
   const [activeTab, setActiveTab] = useState('Ensino');
-  
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingRule, setEditingRule] = useState(null);
   const [rules, setRules] = useState([]);
@@ -17,7 +17,7 @@ const RulesContainer = () => {
     try {
       setLoading(true);
       const response = await api.get(`/api/regras/curso/${courseId}`);
-      // As regras vêm com type, convertendo do BD
+
       const formattedRules = response.data.map(r => ({
         id: r.id,
         courseId: r.courseId,
@@ -55,7 +55,7 @@ const RulesContainer = () => {
   const handleEdit = (rule) => {
     let horas = '';
     let unidade = rule.aproveitamento;
-    
+
     const match = rule.aproveitamento.match(/^(\d+)\s*h?\s*(.*)$/i);
     if (match) {
       horas = match[1];
@@ -114,7 +114,7 @@ const RulesContainer = () => {
   };
 
   return (
-    <RulesScreen 
+    <RulesScreen
       tabs={tabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}

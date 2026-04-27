@@ -43,6 +43,10 @@ const CoursesContainer = () => {
     navigate(`/courses/edit/${id}`);
   };
 
+  const handleViewTurmas = (id) => {
+    navigate(`/courses/${id}/turmas`);
+  };
+
   const handleDelete = (id) => {
     setCourseToDelete(id);
     setIsDeleteModalVisible(true);
@@ -70,6 +74,7 @@ const CoursesContainer = () => {
       courses={courses}
       loading={loading}
       onEdit={handleEdit}
+      onViewTurmas={handleViewTurmas}
       onDelete={handleDelete}
       onAdd={handleAdd}
       isAddModalVisible={isAddModalVisible}

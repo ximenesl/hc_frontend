@@ -1,4 +1,3 @@
-/* Layout e Contêiners */
 .courses-layout {
   height: 100vh;
   background-color: #ffffff;
@@ -16,7 +15,6 @@
   flex-direction: column;
 }
 
-/* Cartões */
 .course-card {
   margin-bottom: 20px;
   border-radius: 8px;
@@ -29,7 +27,6 @@
   padding: 20px;
 }
 
-/* Título */
 h5.ant-typography.course-title {
   margin-top: 0;
   margin-bottom: 16px;
@@ -37,7 +34,6 @@ h5.ant-typography.course-title {
   font-weight: 700;
 }
 
-/* Informações do Coordenador */
 .course-info-row {
   display: flex;
   align-items: center;
@@ -55,13 +51,11 @@ h5.ant-typography.course-title {
   font-size: 13px;
 }
 
-/* Divisória */
 .course-divider {
   margin: 16px 0;
   border-color: #dfdfdf;
 }
 
-/* Estatísticas */
 .course-stats-row {
   display: flex;
   justify-content: space-between;
@@ -100,7 +94,6 @@ h5.ant-typography.course-title {
   line-height: 1;
 }
 
-/* Botões de Ação */
 .course-actions {
   display: flex;
   gap: 12px;
@@ -267,8 +260,7 @@ button.ant-btn.delete-cancel-btn {
 }
 
 button.ant-btn.delete-cancel-btn:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   border-color: #ffffff;
 }
-

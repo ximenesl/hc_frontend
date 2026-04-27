@@ -1,16 +1,13 @@
-/* Layout principal da tela de estudantes */
 .students-layout {
   height: 100vh;
   background-color: #ffffff;
 }
 
-/* Área de conteúdo rolável */
 .students-content {
   padding: 24px 16px 100px 16px;
   overflow-y: auto;
 }
 
-/* Limite de largura para o conteúdo */
 .students-inner-content {
   max-width: 600px;
   margin: 0 auto;
@@ -18,7 +15,6 @@
   flex-direction: column;
 }
 
-/* Campo de busca - Sobrescrevendo o tema usando maior especificidade (sem !important) */
 span.ant-input-affix-wrapper.students-search-input {
   border-radius: 4px;
   border: 1px solid #a0a0a0;
@@ -41,7 +37,6 @@ span.ant-input-affix-wrapper.students-search-input input.ant-input::placeholder 
   font-size: 20px;
 }
 
-/* Seção de filtros e pílulas */
 .students-filter-section {
   display: flex;
   flex-direction: column;
