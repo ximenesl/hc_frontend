@@ -18,7 +18,7 @@ const selectTheme = {
   }
 };
 
-const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
+const CourseFormScreen = ({ isEdit, formData, onChange, onSave, onCancel }) => {
   return (
     <Layout className="form-layout">
       <MainHeader />
@@ -28,18 +28,33 @@ const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
           
           <div className="form-group">
             <Text strong className="form-label">Nome do Curso</Text>
-            <Input placeholder="Insira o nome do curso" className="custom-input" />
+            <Input 
+              placeholder="Insira o nome do curso" 
+              className="custom-input" 
+              value={formData?.nome}
+              onChange={(e) => onChange('nome', e.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <Text strong className="form-label">Sigla/Código</Text>
-            <Input placeholder="Insira a sigla/código do curso" className="custom-input" />
+            <Input 
+              placeholder="Insira a sigla/código do curso" 
+              className="custom-input" 
+              value={formData?.sigla}
+              onChange={(e) => onChange('sigla', e.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <Text strong className="form-label">Carga Horária Total</Text>
             <div className="hours-input-group">
-              <Input placeholder="Insira as horas" className="custom-input hours-input" />
+              <Input 
+                placeholder="Insira as horas" 
+                className="custom-input hours-input" 
+                value={formData?.cargaHoraria}
+                onChange={(e) => onChange('cargaHoraria', e.target.value)}
+              />
               <Text strong className="hours-text">horas</Text>
             </div>
           </div>
@@ -50,6 +65,8 @@ const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
               <Select 
                 placeholder="Selecione a categoria do curso" 
                 className="custom-select"
+                value={formData?.categoria || undefined}
+                onChange={(value) => onChange('categoria', value)}
               >
                 <Option value="graduacao">Graduação</Option>
                 <Option value="pos">Pós-Graduação</Option>
@@ -76,6 +93,9 @@ const CourseFormScreen = ({ isEdit, onSave, onCancel }) => {
           <div className="form-actions-bottom">
             <Button type="primary" className="btn-save-bottom" onClick={onSave}>
               {isEdit ? 'Salvar Alterações' : 'Salvar'}
+            </Button>
+            <Button className="btn-cancel-bottom" onClick={onCancel} style={{ marginLeft: 16 }}>
+              Cancelar
             </Button>
           </div>
           

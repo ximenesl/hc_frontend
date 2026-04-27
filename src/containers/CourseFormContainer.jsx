@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { message } from 'antd';
 import CourseFormScreen from '../components/CourseFormScreen';
+import api from '../api/axiosConfig';
 
 const CourseFormContainer = () => {
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
   const location = useLocation();
 
   const isEdit = location.pathname.includes('/edit');
 
-  const handleSave = () => {
-    navigate('/courses');
+  const [formData, setFormData] = useState({
+    nome: '',
+    sigla: '',
+    cargaHoraria: '',
+    categoria: ''
+  });
+
+  const handleChange = (name, value) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = async () => {
+    if (!formData.nome) {
+      message.error('O nome do curso é obrigatório');
+      return;
+    }
+
+    try {
+      await api.post('/api/cursos', { nome: formData.nome });
+      message.success('Curso criado com sucesso!');
+      navigate('/courses');
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao criar curso');
+    }
   };
 
   const handleCancel = () => {
@@ -21,6 +45,8 @@ const CourseFormContainer = () => {
   return (
     <CourseFormScreen
       isEdit={isEdit}
+      formData={formData}
+      onChange={handleChange}
       onSave={handleSave}
       onCancel={handleCancel}
     />

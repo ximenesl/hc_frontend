@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Typography, Card, Badge, List, Space, Spin } from 'antd';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './HomeScreen.css';
@@ -19,6 +20,19 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
       </Layout>
     );
   }
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px', borderRadius: '8px' }}>
+          <p style={{ color: '#fff', margin: 0, fontWeight: 'bold' }}>{label}</p>
+          <p style={{ color: '#1890ff', margin: 0 }}>{`Enviados: ${payload[0].value}`}</p>
+          <p style={{ color: '#52c41a', margin: 0 }}>{`Aprovados: ${payload[1].value}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <Layout className="home-layout">
@@ -42,37 +56,40 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
             </Card>
           </Space>
 
-          {/* Dashboard de Cursos */}
           <div className="dashboard-section" style={{ marginTop: 24 }}>
             <Title level={4} className="section-title">Certificados por Curso</Title>
             <Card className="dashboard-card" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: 12 }}>
               {dashboardData && dashboardData.length > 0 ? (
-                dashboardData.map((curso) => (
-                  <div key={curso.id} style={{ marginBottom: 16 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <Text strong style={{ color: '#fff' }}>{curso.nome}</Text>
-                      <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12 }}>
-                        {curso.aprovados} aprovados / {curso.enviados} enviados
-                      </Text>
-                    </div>
-                    <div style={{ width: '100%', height: 12, backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
-                      <div style={{ 
-                        width: curso.enviados > 0 ? `${(curso.aprovados / curso.enviados) * 100}%` : '0%', 
-                        height: '100%', 
-                        backgroundColor: curso.cor,
-                        borderRadius: 6,
-                        transition: 'width 0.5s ease'
-                      }} />
-                    </div>
-                  </div>
-                ))
+                <div style={{ width: '100%', height: 300 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={dashboardData}
+                      margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                      <XAxis dataKey="nome" stroke="#fff" tick={{ fill: 'rgba(255,255,255,0.7)' }} />
+                      <YAxis stroke="#fff" tick={{ fill: 'rgba(255,255,255,0.7)' }} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend wrapperStyle={{ color: 'rgba(255,255,255,0.7)' }} />
+                      <Bar dataKey="enviados" name="Enviados" radius={[4, 4, 0, 0]}>
+                        {dashboardData.map((entry, index) => (
+                          <Cell key={`cell-env-${index}`} fill={entry.cor} opacity={0.5} />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="aprovados" name="Aprovados" radius={[4, 4, 0, 0]}>
+                        {dashboardData.map((entry, index) => (
+                          <Cell key={`cell-apr-${index}`} fill={entry.cor} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               ) : (
                 <Text style={{ color: 'rgba(255,255,255,0.5)' }}>Nenhum dado disponível.</Text>
               )}
             </Card>
           </div>
 
-          {/* Última Ação */}
           {lastAction && (
             <div className="last-action-section" style={{ marginTop: 24 }}>
               <Title level={4} className="section-title">Última Ação</Title>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Typography, Input, Select, Button, ConfigProvider } from 'antd';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
-import './CourseFormScreen.css'; /* Reusing the same layout css */
+import './CourseFormScreen.css';
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -18,7 +18,7 @@ const selectTheme = {
   }
 };
 
-const CoordinatorFormScreen = ({ onSave, onCancel }) => {
+const CoordinatorFormScreen = ({ cursos, formData, onChange, onSave, onCancel }) => {
   return (
     <Layout className="form-layout">
       <MainHeader />
@@ -28,12 +28,23 @@ const CoordinatorFormScreen = ({ onSave, onCancel }) => {
           
           <div className="form-group">
             <Text strong className="form-label">Nome Completo*</Text>
-            <Input placeholder="Insira o nome do coordenador" className="custom-input" />
+            <Input 
+              placeholder="Insira o nome do coordenador" 
+              className="custom-input" 
+              value={formData?.nome}
+              onChange={(e) => onChange('nome', e.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <Text strong className="form-label">Email Institucional*</Text>
-            <Input placeholder="Insira o email institucional" className="custom-input" type="email" />
+            <Input 
+              placeholder="Insira o email institucional" 
+              className="custom-input" 
+              type="email" 
+              value={formData?.email}
+              onChange={(e) => onChange('email', e.target.value)}
+            />
           </div>
 
           <div className="form-group">
@@ -42,9 +53,12 @@ const CoordinatorFormScreen = ({ onSave, onCancel }) => {
               <Select 
                 placeholder="Selecione o curso a ser vinculado" 
                 className="custom-select"
+                value={formData?.cursoId}
+                onChange={(value) => onChange('cursoId', value)}
               >
-                <Option value="curso1">Análise e Desenvolvimento de Sistemas</Option>
-                <Option value="curso2">Jogos Digitais</Option>
+                {cursos && cursos.map(c => (
+                  <Option key={c.id} value={c.id}>{c.nome}</Option>
+                ))}
               </Select>
             </ConfigProvider>
           </div>
@@ -52,6 +66,9 @@ const CoordinatorFormScreen = ({ onSave, onCancel }) => {
           <div className="form-actions-bottom">
             <Button type="primary" className="btn-save-bottom" onClick={onSave}>
               Salvar
+            </Button>
+            <Button className="btn-cancel-bottom" onClick={onCancel} style={{ marginLeft: 16 }}>
+              Cancelar
             </Button>
           </div>
           

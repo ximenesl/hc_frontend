@@ -26,19 +26,15 @@ const HomeContainer = () => {
         const certs = certsRes.data;
         const cursos = cursosRes.data;
 
-        // Total de Alunos
         const alunos = users.filter(u => u.role === 'ALUNO');
         const totalAlunos = alunos.length;
 
-        // Pendências
         const pendencias = certs.filter(c => c.status === 'PENDENTE').length;
 
         setStats({ totalAlunos, pendencias });
 
-        // Sort certificates by ID descending (most recent first)
         const sortedCerts = [...certs].sort((a, b) => b.id - a.id);
         
-        // Format for the list (top 3)
         const recent = sortedCerts.slice(0, 3).map(cert => ({
           id: cert.id,
           tipo: cert.nome || 'Certificado de Curso',
@@ -50,7 +46,6 @@ const HomeContainer = () => {
         
         setRecentSubmissions(recent);
 
-        // Last action
         if (sortedCerts.length > 0) {
           const lastCert = sortedCerts[0];
           setLastAction({
@@ -61,7 +56,6 @@ const HomeContainer = () => {
           });
         }
 
-        // Dashboard Data: cursos by certs sent and approved
         const userCourseMap = {};
         users.forEach(u => {
           if (u.curso) {
@@ -102,7 +96,7 @@ const HomeContainer = () => {
         setDashboardData(dashboardList);
 
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
+        console.error(error);
         message.error('Erro ao carregar dados do dashboard.');
       } finally {
         setLoading(false);

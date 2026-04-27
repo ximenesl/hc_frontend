@@ -18,7 +18,7 @@ const selectTheme = {
   }
 };
 
-const StudentFormScreen = ({ onSave }) => {
+const StudentFormScreen = ({ cursos, formData, onChange, onSave, onCancel }) => {
   return (
     <Layout className="student-form-layout">
       <MainHeader />
@@ -28,29 +28,46 @@ const StudentFormScreen = ({ onSave }) => {
           
           <div className="student-form-group">
             <Text strong className="student-form-label">Nome Completo</Text>
-            <Input placeholder="Insira o nome completo do aluno" className="student-custom-input" />
+            <Input 
+              placeholder="Insira o nome completo do aluno" 
+              className="student-custom-input" 
+              value={formData?.nome}
+              onChange={(e) => onChange('nome', e.target.value)}
+            />
           </div>
 
           <div className="student-form-group">
             <Text strong className="student-form-label">Email do Aluno</Text>
-            <Input placeholder="Insira o email do aluno" className="student-custom-input" />
+            <Input 
+              placeholder="Insira o email do aluno" 
+              className="student-custom-input" 
+              value={formData?.email}
+              onChange={(e) => onChange('email', e.target.value)}
+            />
           </div>
 
           <div className="student-form-group">
             <Text strong className="student-form-label">CPF</Text>
-            <Input placeholder="Insira o CPF" className="student-custom-input" />
+            <Input 
+              placeholder="Insira o CPF" 
+              className="student-custom-input" 
+              value={formData?.cpf}
+              onChange={(e) => onChange('cpf', e.target.value)}
+            />
           </div>
 
           <div className="student-form-group">
-            <Text strong className="student-form-label">Código da Turma</Text>
+            <Text strong className="student-form-label">Curso</Text>
             <ConfigProvider theme={selectTheme}>
               <Select 
-                placeholder="Selecione o código da turma" 
+                placeholder="Selecione o curso" 
                 className="student-custom-select"
+                value={formData?.cursoId}
+                onChange={(value) => onChange('cursoId', value)}
               >
-                <Option value="tad01">TAD-01</Option>
-                <Option value="tad02">TAD-02</Option>
-                <Option value="tad03">TAD-03</Option>
+                {cursos && cursos.map(c => (
+                  <Option key={c.id} value={c.id}>{c.nome}</Option>
+                ))}
               </Select>
             </ConfigProvider>
           </div>
@@ -58,6 +75,9 @@ const StudentFormScreen = ({ onSave }) => {
           <div className="student-form-actions-bottom">
             <Button type="primary" className="student-btn-save-bottom" onClick={onSave}>
               Salvar
+            </Button>
+            <Button className="student-btn-cancel-bottom" onClick={onCancel} style={{ marginLeft: 16 }}>
+              Cancelar
             </Button>
           </div>
           
