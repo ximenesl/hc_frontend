@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import CourseTurmasScreen from '../components/CourseTurmasScreen';
@@ -10,7 +10,7 @@ const CourseTurmasContainer = () => {
   const [turmas, setTurmas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchDados = async () => {
+  const fetchDados = useCallback(async () => {
     try {
       setLoading(true);
       const [cursoRes, turmasRes] = await Promise.all([
@@ -25,11 +25,11 @@ const CourseTurmasContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchDados();
-  }, [id]);
+  }, [fetchDados]);
 
   const handleAddTurma = async (nome) => {
     try {

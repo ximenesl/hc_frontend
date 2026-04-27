@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { message } from 'antd';
 import StudentDashboardScreen from '../components/StudentDashboardScreen';
 import api from '../api/axiosConfig';
@@ -12,7 +12,7 @@ const StudentDashboardContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCategoria, setSelectedCategoria] = useState(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const userRes = await api.get('/api/users/me');
@@ -70,11 +70,11 @@ const StudentDashboardContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const totalApprovedHours = progressData.reduce((acc, curr) => acc + curr.approvedHours, 0);
   const categories = ['Ensino', 'Pesquisa', 'Extensão'];
