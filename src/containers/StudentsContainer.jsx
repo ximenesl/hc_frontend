@@ -15,39 +15,46 @@ const StudentsContainer = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [usersRes, cursosRes, certsRes] = await Promise.all([
+        const [usersRes, cursosRes, certsRes, turmasRes] = await Promise.all([
           api.get('/api/users'),
           api.get('/api/cursos'),
-          api.get('/api/certificates')
+          api.get('/api/certificates'),
+          api.get('/api/turmas')
         ]);
 
         const certs = certsRes.data;
+        const turmas = turmasRes.data;
 
-        // Formatar os cursos
-        const formattedCourses = cursosRes.data.map(c => ({
-          id: c.id,
-          name: c.nome,
-          // Simulando turmas já que não temos entidade Turma
-          classes: [`T-${c.id}-01`]
-        }));
+        const formattedCourses = cursosRes.data.map(c => {
+          const courseTurmas = turmas.filter(t => t.cursoId === c.id).map(t => t.nome);
+          return {
+            id: c.id,
+            name: c.nome,
+            classes: courseTurmas
+          };
+        });
         setCoursesWithClasses(formattedCourses);
 
-        // Filtrar apenas alunos
         const alunos = usersRes.data.filter(u => u.role === 'ALUNO');
         
         const formattedStudents = alunos.map(aluno => {
-          // Filtrar certificados aprovados desse aluno para somar as horas
           const alunoCerts = certs.filter(c => c.alunoId === aluno.id && (c.status === 'APROVADO' || c.status === 'DEFERIDO' || c.status === 'VALIDADO'));
           const horasCompletas = alunoCerts.reduce((acc, curr) => acc + (curr.cargaHoraria || 0), 0);
           
+          let turmaName = '-';
+          if (aluno.curso) {
+             const cursoTurmas = turmas.filter(t => t.cursoId === aluno.curso.id);
+             if (cursoTurmas.length > 0) turmaName = cursoTurmas[0].nome;
+          }
+
           return {
             id: aluno.id,
             nome: aluno.nome,
-            matricula: `MAT-${aluno.id}`, // Simulando matricula se nao tiver
-            codigoTurma: aluno.curso ? `T-${aluno.curso.id}-01` : '-',
+            matricula: `MAT-${aluno.id}`,
+            codigoTurma: turmaName,
             codigoCurso: aluno.curso ? aluno.curso.id : null,
             horasCompletas: horasCompletas,
-            horasTotais: 100 // Exemplo de horas totais necessárias
+            horasTotais: 100
           };
         });
 

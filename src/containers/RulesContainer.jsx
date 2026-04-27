@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import RulesScreen from '../components/RulesScreen';
@@ -13,7 +13,7 @@ const RulesContainer = () => {
   const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchRules = async () => {
+  const fetchRules = useCallback(async () => {
     try {
       setLoading(true);
       const response = await api.get(`/api/regras/curso/${courseId}`);
@@ -34,13 +34,13 @@ const RulesContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [courseId]);
 
   useEffect(() => {
     if (courseId) {
       fetchRules();
     }
-  }, [courseId]);
+  }, [courseId, fetchRules]);
 
   const tabs = ['Ensino', 'Pesquisa', 'Extensão'];
 
