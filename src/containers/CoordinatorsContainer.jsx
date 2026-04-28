@@ -32,13 +32,16 @@ const CoordinatorsContainer = () => {
 
       const coords = usersRes.data
         .filter(u => u.role === 'COORDENADOR')
-        .map(u => ({
-          id: u.id,
-          nome: u.nome,
-          email: u.email,
-          cursoId: u.curso ? u.curso.id : null,
-          cursoNome: u.curso ? u.curso.nome : null
-        }));
+        .map(u => {
+          const firstCurso = (u.cursos && u.cursos.length > 0) ? u.cursos[0] : null;
+          return {
+            id: u.id,
+            nome: u.nome,
+            email: u.email,
+            cursoId: firstCurso ? firstCurso.id : null,
+            cursoNome: firstCurso ? firstCurso.nome : null
+          };
+        });
 
       setCoordinators(coords);
     } catch (error) {

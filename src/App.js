@@ -67,6 +67,7 @@ function App() {
             <Route path="/validation" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><ValidationContainer /></ProtectedRoute>} />
             <Route path="/students" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentsContainer /></ProtectedRoute>} />
             <Route path="/students/new" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />
+            <Route path="/students/edit/:id" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />
             <Route path="/courses" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><CoursesContainer /></ProtectedRoute>} />
             <Route path="/courses/new" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />
             <Route path="/courses/edit/:id" element={<ProtectedRoute allowedRoles={['ADMIN']}><CourseFormContainer /></ProtectedRoute>} />

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { message } from 'antd';
 import StudentFormScreen from '../components/StudentFormScreen';
 import api from '../api/axiosConfig';
 
 const StudentFormContainer = () => {
+  const { id } = useParams();
+  const isEdit = !!id;
   const navigate = useNavigate();
   const [cursos, setCursos] = useState([]);
   const [turmas, setTurmas] = useState([]);
@@ -24,13 +26,25 @@ const StudentFormContainer = () => {
         ]);
         setCursos(cursosRes.data);
         setTurmas(turmasRes.data);
+
+        if (isEdit) {
+          const userRes = await api.get(`/api/users/${id}`);
+          const user = userRes.data;
+          const firstCurso = (user.cursos && user.cursos.length > 0) ? user.cursos[0] : null;
+          setFormData({
+            nome: user.nome,
+            email: user.email,
+            cursoId: firstCurso ? firstCurso.id : null,
+            turmaId: user.turma ? user.turma.id : null
+          });
+        }
       } catch (error) {
         console.error(error);
         message.error('Erro ao carregar dados');
       }
     };
     fetchDados();
-  }, []);
+  }, [id, isEdit]);
 
   const availableTurmas = turmas.filter(t => t.cursoId === formData.cursoId);
 
@@ -45,19 +59,26 @@ const StudentFormContainer = () => {
     }
 
     try {
-      await api.post('/api/users', {
+      const payload = {
         nome: formData.nome,
         email: formData.email,
         role: 'ALUNO',
         cursoId: formData.cursoId,
         turmaId: formData.turmaId
-      });
-      message.success('Aluno criado com sucesso!');
+      };
+
+      if (isEdit) {
+        await api.put(`/api/users/${id}`, payload);
+        message.success('Aluno atualizado com sucesso!');
+      } else {
+        await api.post('/api/users', payload);
+        message.success('Aluno criado com sucesso!');
+      }
       navigate('/students');
     } catch (error) {
       console.error('Erro detalhado:', error.response?.data || error.message);
       const errorMsg = error.response?.data?.message;
-      message.error(typeof errorMsg === 'string' ? errorMsg : 'Erro ao criar aluno');
+      message.error(typeof errorMsg === 'string' ? errorMsg : `Erro ao ${isEdit ? 'atualizar' : 'criar'} aluno`);
     }
   };
 
@@ -73,6 +94,7 @@ const StudentFormContainer = () => {
       onChange={handleChange}
       onSave={handleSave} 
       onCancel={handleCancel}
+      isEdit={isEdit}
     />
   );
 };
