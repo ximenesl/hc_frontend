@@ -33,13 +33,16 @@ const CoordinatorsContainer = () => {
       const coords = usersRes.data
         .filter(u => u.role === 'COORDENADOR')
         .map(u => {
-          const firstCurso = (u.cursos && u.cursos.length > 0) ? u.cursos[0] : null;
+          const courseNames = (u.cursos && u.cursos.length > 0) 
+            ? u.cursos.map(c => c.nome).join(', ') 
+            : 'Sem vínculo';
+          const firstCursoId = (u.cursos && u.cursos.length > 0) ? u.cursos[0].id : null;
           return {
             id: u.id,
             nome: u.nome,
             email: u.email,
-            cursoId: firstCurso ? firstCurso.id : null,
-            cursoNome: firstCurso ? firstCurso.nome : null
+            cursoId: firstCursoId,
+            cursoNome: courseNames
           };
         });
 

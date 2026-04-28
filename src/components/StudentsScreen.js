@@ -178,7 +178,7 @@ const StudentsScreen = ({
             </Button>
             <Button
               onClick={onCloseDeleteModal}
-              style={{ height: '45px', borderRadius: '8px' }}
+              style={{ height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
             >
               Cancelar
             </Button>

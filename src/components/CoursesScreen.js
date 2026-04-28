@@ -120,33 +120,11 @@ const CoursesScreen = ({
         closeIcon={<span style={{ color: '#fff' }}>X</span>}
       >
         <div className="add-drawer-content">
-          {isAdmin && (
-            <>
-              <div className="add-option-btn" onClick={onAddCoordinator}>
-                <UserOutlined className="add-option-icon" />
-                <div className="add-option-text">
-                  <Text className="add-option-title">Novo Coordenador</Text>
-                  <Text className="add-option-desc">Cadastre um novo coordenador</Text>
-                </div>
-                <RightOutlined className="add-option-arrow" />
-              </div>
-
-              <div className="add-option-btn" onClick={onAddCourse}>
-                <ReadOutlined className="add-option-icon" />
-                <div className="add-option-text">
-                  <Text className="add-option-title">Novo Curso</Text>
-                  <Text className="add-option-desc">Cadastre um novo curso</Text>
-                </div>
-                <RightOutlined className="add-option-arrow" />
-              </div>
-            </>
-          )}
-
-          <div className="add-option-btn" onClick={onAddStudent}>
-            <TeamOutlined className="add-option-icon" />
+          <div className="add-option-btn" onClick={onAddCourse}>
+            <ReadOutlined className="add-option-icon" />
             <div className="add-option-text">
-              <Text className="add-option-title">Novo Aluno</Text>
-              <Text className="add-option-desc">Cadastre um novo aluno</Text>
+              <Text className="add-option-title">Novo Curso</Text>
+              <Text className="add-option-desc">Cadastre um novo curso</Text>
             </div>
             <RightOutlined className="add-option-arrow" />
           </div>
@@ -171,12 +149,14 @@ const CoursesScreen = ({
             type="primary"
             className="delete-confirm-btn"
             onClick={onConfirmDelete}
+            style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
           >
             Excluir
           </Button>
           <Button
             className="delete-cancel-btn"
             onClick={onCloseDeleteModal}
+            style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
           >
             Cancelar
           </Button>

@@ -165,12 +165,14 @@ const CoordinatorsScreen = ({
             type="primary"
             className="coord-delete-confirm-btn"
             onClick={onConfirmDelete}
+            style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
           >
             Excluir
           </Button>
           <Button
             className="coord-delete-cancel-btn"
             onClick={onCloseDeleteModal}
+            style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
           >
             Cancelar
           </Button>
