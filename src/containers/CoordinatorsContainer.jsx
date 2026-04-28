@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { message, Form } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import CoordinatorsScreen from '../components/CoordinatorsScreen';
 import api from '../api/axiosConfig';
 
@@ -15,6 +16,9 @@ const CoordinatorsContainer = () => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editingCoord, setEditingCoord] = useState(null);
   const [editForm] = Form.useForm();
+
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
     try {
@@ -110,6 +114,13 @@ const CoordinatorsContainer = () => {
     }
   };
 
+  const handleAdd = () => setIsAddModalVisible(true);
+  const handleCloseAddModal = () => setIsAddModalVisible(false);
+  const handleAddCoordinator = () => {
+    setIsAddModalVisible(false);
+    navigate('/coordinators/new');
+  };
+
   return (
     <CoordinatorsScreen
       coordinators={filteredCoordinators}
@@ -125,6 +136,10 @@ const CoordinatorsContainer = () => {
       onCloseEditModal={() => { setIsEditModalVisible(false); setEditingCoord(null); }}
       editForm={editForm}
       onSaveEdit={handleSaveEdit}
+      onAdd={handleAdd}
+      isAddModalVisible={isAddModalVisible}
+      onCloseAddModal={handleCloseAddModal}
+      onAddCoordinator={handleAddCoordinator}
     />
   );
 };

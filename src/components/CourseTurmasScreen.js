@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Typography, List, Button, Spin, Modal, Form, Input } from 'antd';
-import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Layout, Typography, List, Button, Spin, Modal, Form, Input, ConfigProvider, FloatButton } from 'antd';
+import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, BookOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import './CourseTurmasScreen.css';
 
 const { Content } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
+
+const lightTheme = {
+  token: {
+    colorText: '#333333',
+    colorTextHeading: '#000000',
+    colorBgContainer: '#ffffff',
+    colorBorder: '#d9d9d9',
+    colorTextPlaceholder: 'rgba(0, 0, 0, 0.45)',
+  },
+  components: {
+    Input: {
+      colorBgContainer: '#ffffff',
+      colorText: '#333333',
+    },
+    Button: {
+      colorText: '#333333',
+    }
+  }
+};
 
 const CourseTurmasScreen = ({ 
   curso, 
@@ -18,6 +38,7 @@ const CourseTurmasScreen = ({
 }) => {
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
+  const [bottomModalVisible, setBottomModalVisible] = useState(false);
   const [editingTurma, setEditingTurma] = useState(null);
   const [form] = Form.useForm();
 
@@ -31,7 +52,16 @@ const CourseTurmasScreen = ({
     }
   }, [modalVisible, editingTurma, form]);
 
+  const handleOpenBottomModal = () => {
+    setBottomModalVisible(true);
+  };
+
+  const handleCloseBottomModal = () => {
+    setBottomModalVisible(false);
+  };
+
   const handleAddClick = () => {
+    setBottomModalVisible(false);
     setEditingTurma(null);
     setModalVisible(true);
   };
@@ -56,76 +86,130 @@ const CourseTurmasScreen = ({
   };
 
   return (
-    <Layout className="courses-layout">
-      <MainHeader />
-      <Content className="courses-content" style={{ padding: '20px' }}>
-        <Button 
-          type="link" 
-          icon={<ArrowLeftOutlined />} 
-          onClick={() => navigate('/courses')}
-          style={{ marginBottom: '20px', color: 'var(--senac-blue)', fontWeight: 'bold' }}
-        >
-          Voltar para Cursos
-        </Button>
-        
-        {loading ? (
-          <div style={{ textAlign: 'center', marginTop: '50px' }}><Spin size="large" /></div>
-        ) : (
-          <div style={{ background: '#fff', borderRadius: '8px', padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Title level={4} style={{ margin: 0 }}>Turmas do Curso: {curso?.nome}</Title>
-              <Button type="primary" icon={<PlusOutlined />} onClick={handleAddClick}>
-                Adicionar Turma
-              </Button>
-            </div>
+    <ConfigProvider theme={lightTheme}>
+      <Layout className="turmas-layout">
+        <MainHeader />
+        <Content className="turmas-content">
+          <div className="turmas-inner-content">
+            <Button 
+              type="link" 
+              icon={<ArrowLeftOutlined />} 
+              onClick={() => navigate('/courses')}
+              className="back-button"
+            >
+              Voltar para Cursos
+            </Button>
             
-            <List
-              itemLayout="horizontal"
-              dataSource={turmas}
-              locale={{ emptyText: 'Nenhuma turma cadastrada para este curso.' }}
-              renderItem={(turma) => (
-                <List.Item
-                  actions={[
-                    <Button type="primary" ghost icon={<EditOutlined />} onClick={() => handleEditClick(turma)}>Editar</Button>,
-                    <Button type="primary" danger ghost icon={<DeleteOutlined />} onClick={() => onDeleteTurma(turma.id)}>Excluir</Button>
-                  ]}
-                >
-                  <List.Item.Meta title={turma.nome} />
-                </List.Item>
-              )}
-            />
+            {loading ? (
+              <div style={{ textAlign: 'center', marginTop: '100px' }}><Spin size="large" /></div>
+            ) : (
+              <>
+                <div className="turmas-header">
+                  <Title level={4} className="turmas-title">
+                    Turmas: {curso?.nome}
+                  </Title>
+                </div>
+                
+                <div className="turmas-card-list">
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={turmas}
+                    locale={{ emptyText: 'Nenhuma turma cadastrada.' }}
+                    renderItem={(turma) => (
+                      <List.Item
+                        className="turma-item"
+                        actions={[
+                          <Button 
+                            type="primary" 
+                            ghost 
+                            icon={<EditOutlined />} 
+                            onClick={() => handleEditClick(turma)}
+                            className="action-button edit-btn"
+                          >
+                            Editar
+                          </Button>,
+                          <Button 
+                            type="primary" 
+                            danger 
+                            ghost 
+                            icon={<DeleteOutlined />} 
+                            onClick={() => onDeleteTurma(turma.id)}
+                            className="action-button delete-btn"
+                          >
+                            Excluir
+                          </Button>
+                        ]}
+                      >
+                        <List.Item.Meta 
+                          title={<span className="turma-name">{turma.nome}</span>} 
+                        />
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </>
+            )}
           </div>
-        )}
-      </Content>
-      <MainFooter />
-      
-      <Modal
-        open={modalVisible}
-        title={editingTurma ? "Editar Turma" : "Adicionar Turma"}
-        onCancel={() => setModalVisible(false)}
-        footer={[
-          <Button key="back" onClick={() => setModalVisible(false)}>
-            Cancelar
-          </Button>,
-          <Button key="submit" type="primary" onClick={handleModalSave}>
-            Salvar
-          </Button>,
-        ]}
-      >
-        <Form
-          form={form}
-          layout="vertical"
+        </Content>
+        
+        <FloatButton
+          className="add-float-button"
+          icon={<PlusOutlined />}
+          type="primary"
+          onClick={handleOpenBottomModal}
+        />
+        <MainFooter />
+        
+        <Modal
+          open={bottomModalVisible}
+          onCancel={handleCloseBottomModal}
+          footer={null}
+          title={<span style={{ color: '#fff' }}>Adicionar</span>}
+          className="custom-bottom-modal"
+          closeIcon={<span style={{color: '#fff'}}>X</span>}
         >
-          <Form.Item
-            name="nome"
-            label="Nome da Turma"
-            rules={[{ required: true, message: 'Por favor, insira o nome da turma!' }]}
+          <div className="add-drawer-content">
+            <div className="add-option-btn" onClick={handleAddClick}>
+              <BookOutlined className="add-option-icon" />
+              <div className="add-option-text">
+                <Text className="add-option-title" style={{ color: '#fff' }}>Nova Turma</Text>
+                <Text className="add-option-desc" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Cadastre uma nova turma</Text>
+              </div>
+              <RightOutlined className="add-option-arrow" />
+            </div>
+          </div>
+        </Modal>
+
+        <Modal
+          open={modalVisible}
+          title={editingTurma ? "Editar Turma" : "Adicionar Turma"}
+          onCancel={() => setModalVisible(false)}
+          className="turma-modal"
+          footer={[
+            <Button key="back" onClick={() => setModalVisible(false)} className="modal-footer-btn cancel-btn">
+              Cancelar
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleModalSave} className="modal-footer-btn save-btn">
+              Salvar
+            </Button>,
+          ]}
+        >
+          <Form
+            form={form}
+            layout="vertical"
+            style={{ marginTop: '20px' }}
           >
-            <Input placeholder="Ex: Turma 101" />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </Layout>
+            <Form.Item
+              name="nome"
+              label="Nome da Turma"
+              rules={[{ required: true, message: 'Por favor, insira o nome da turma!' }]}
+            >
+              <Input placeholder="Ex: Turma 101" />
+            </Form.Item>
+          </Form>
+        </Modal>
+      </Layout>
+    </ConfigProvider>
   );
 };
 

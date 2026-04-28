@@ -18,6 +18,21 @@ const CourseFormContainer = () => {
     categoria: ''
   });
 
+  const [coordinators, setCoordinators] = useState([]);
+
+  useEffect(() => {
+    const fetchCoordinators = async () => {
+      try {
+        const usersRes = await api.get('/api/users');
+        const coords = usersRes.data.filter(u => u.role === 'COORDENADOR');
+        setCoordinators(coords);
+      } catch (error) {
+        console.error('Erro ao buscar coordenadores:', error);
+      }
+    };
+    fetchCoordinators();
+  }, []);
+
   useEffect(() => {
     if (isEdit && id) {
       const fetchCourse = async () => {
@@ -28,7 +43,8 @@ const CourseFormContainer = () => {
             nome: course.nome,
             sigla: '', // O backend não tem sigla ainda na entidade Curso, mas o form tem
             cargaHoraria: course.horasTotais?.toString() || '',
-            categoria: '' // O backend não tem categoria ainda na entidade Curso
+            categoria: '', // O backend não tem categoria ainda na entidade Curso
+            coordenadorId: course.coordenadorId || ''
           });
         } catch (error) {
           console.error(error);
@@ -52,7 +68,8 @@ const CourseFormContainer = () => {
     try {
       const payload = { 
         nome: formData.nome,
-        horasTotais: formData.cargaHoraria ? parseInt(formData.cargaHoraria) : 100
+        horasTotais: formData.cargaHoraria ? parseInt(formData.cargaHoraria) : 100,
+        coordenadorId: formData.coordenadorId || null
       };
       
       if (isEdit && id) {
@@ -81,6 +98,7 @@ const CourseFormContainer = () => {
       onChange={handleChange}
       onSave={handleSave}
       onCancel={handleCancel}
+      coordinators={coordinators}
     />
   );
 };

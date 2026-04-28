@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import StudentsScreen from '../components/StudentsScreen';
 import api from '../api/axiosConfig';
 
@@ -94,6 +95,16 @@ const StudentsContainer = () => {
     setSelectedClass(null);
   };
 
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleAdd = () => setIsAddModalVisible(true);
+  const handleCloseAddModal = () => setIsAddModalVisible(false);
+  const handleAddStudent = () => {
+    setIsAddModalVisible(false);
+    navigate('/students/new');
+  };
+
   return (
     <StudentsScreen
       students={filteredStudents}
@@ -105,6 +116,10 @@ const StudentsContainer = () => {
       selectedClass={selectedClass}
       onCourseChange={handleCourseChange}
       onClassChange={setSelectedClass}
+      onAdd={handleAdd}
+      isAddModalVisible={isAddModalVisible}
+      onCloseAddModal={handleCloseAddModal}
+      onAddStudent={handleAddStudent}
     />
   );
 };

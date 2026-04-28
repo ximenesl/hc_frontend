@@ -1,12 +1,15 @@
 import React from 'react';
-import { Layout, Input, Typography, List, Card, Button, Modal, Form, Select, ConfigProvider } from 'antd';
+import { Layout, Input, Typography, List, Card, Button, Modal, Form, Select, ConfigProvider, FloatButton } from 'antd';
 import {
   SearchOutlined,
   MailOutlined,
   BookOutlined,
   EditOutlined,
   DeleteOutlined,
-  WarningFilled
+  WarningFilled,
+  UserOutlined,
+  RightOutlined,
+  PlusOutlined
 } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -54,7 +57,11 @@ const CoordinatorsScreen = ({
   isEditModalVisible,
   onCloseEditModal,
   editForm,
-  onSaveEdit
+  onSaveEdit,
+  onAdd,
+  isAddModalVisible,
+  onCloseAddModal,
+  onAddCoordinator
 }) => {
   return (
     <Layout className="coordinators-layout">
@@ -110,7 +117,34 @@ const CoordinatorsScreen = ({
         </div>
       </Content>
 
+      <FloatButton
+        className="add-float-button"
+        icon={<PlusOutlined />}
+        type="primary"
+        onClick={onAdd}
+      />
       <MainFooter activeKey="courses" />
+
+      {/* Add Modal */}
+      <Modal
+        open={isAddModalVisible}
+        onCancel={onCloseAddModal}
+        footer={null}
+        title="Adicionar"
+        className="custom-bottom-modal"
+        closeIcon={<span style={{color: '#fff'}}>X</span>}
+      >
+        <div className="add-drawer-content">
+          <div className="add-option-btn" onClick={onAddCoordinator}>
+            <UserOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title">Novo Coordenador</Text>
+              <Text className="add-option-desc">Cadastre um novo coordenador</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+        </div>
+      </Modal>
 
       {/* Delete confirmation modal */}
       <Modal

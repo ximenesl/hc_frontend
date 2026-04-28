@@ -1,0 +1,146 @@
+.turmas-layout {
+  height: 100vh;
+  background-color: #f5f5f5; /* Light gray background */
+  overflow: hidden;
+}
+
+.turmas-content {
+  padding: 24px 16px 100px 16px;
+  overflow-y: auto;
+}
+
+.turmas-inner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.turmas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.turmas-title {
+  color: #333333 !important; /* Dark text */
+  margin: 0 !important;
+  font-weight: 700 !important;
+}
+
+.turmas-card-list {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.turma-item {
+  background: #ffffff;
+  border: 1px solid #f0f0f0 !important;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  padding: 16px 20px !important;
+  transition: all 0.3s ease;
+}
+
+.turma-item:hover {
+  background: #fafafa;
+}
+
+.turma-name {
+  color: #333333 !important; /* Dark text */
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.back-button {
+  color: var(--senac-blue) !important; /* Blue text */
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-turma-btn {
+  background-color: var(--senac-orange) !important;
+  border: none !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+
+.action-button {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+.edit-btn {
+  border-color: var(--senac-orange) !important;
+  color: var(--senac-orange) !important;
+}
+
+.edit-btn:hover {
+  background: rgba(245, 145, 32, 0.05) !important;
+}
+
+.delete-btn {
+  border-color: #ff4d4f !important;
+  color: #ff4d4f !important;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 77, 79, 0.05) !important;
+}
+
+/* Modal Styling - Light Theme */
+.turma-modal .ant-modal-content {
+  background-color: #ffffff !important;
+  border-radius: 16px !important;
+}
+
+.turma-modal .ant-modal-title {
+  color: #333333 !important;
+  font-weight: 700 !important;
+}
+
+.turma-modal .ant-modal-close {
+  color: #999999 !important;
+}
+
+.turma-modal .ant-form-item-label label {
+  color: #666666 !important;
+  font-weight: 500;
+}
+
+.turma-modal .ant-input {
+  background: #ffffff !important;
+  border: 1px solid #d9d9d9 !important;
+  color: #333333 !important;
+  border-radius: 8px !important;
+}
+
+.turma-modal .ant-input::placeholder {
+  color: #bfbfbf !important;
+}
+
+.modal-footer-btn {
+  height: 40px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+.save-btn {
+  background-color: var(--senac-orange) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+.cancel-btn {
+  background: #f5f5f5 !important;
+  border: 1px solid #d9d9d9 !important;
+  color: #666666 !important;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, Form, Input } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, Form, Input, FloatButton } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './RulesScreen.css';
@@ -48,9 +48,15 @@ const RulesScreen = ({
   isModalVisible,
   editingRule,
   onSave,
-  onCancel
+  onCancel,
+  isModalityModalVisible,
+  onOpenModalityModal,
+  onCloseModalityModal,
+  onSaveModality
 }) => {
   const [form] = Form.useForm();
+  const [modalityForm] = Form.useForm();
+  const [bottomModalVisible, setBottomModalVisible] = React.useState(false);
 
   useEffect(() => {
     if (isModalVisible) {
@@ -64,6 +70,24 @@ const RulesScreen = ({
 
   const handleFinish = (values) => {
     onSave(values);
+  };
+
+  const handleFinishModality = (values) => {
+    onSaveModality(values.modalityName);
+    modalityForm.resetFields();
+  };
+
+  const handleOpenAddOptions = () => setBottomModalVisible(true);
+  const handleCloseAddOptions = () => setBottomModalVisible(false);
+
+  const handleOptionRegra = () => {
+    setBottomModalVisible(false);
+    onAdd();
+  };
+
+  const handleOptionModalidade = () => {
+    setBottomModalVisible(false);
+    onOpenModalityModal();
   };
 
   return (
@@ -81,17 +105,6 @@ const RulesScreen = ({
               onChange={onTabChange} 
               className="custom-segmented"
             />
-          </div>
-
-          <div className="rules-add-container">
-            <Button 
-              type="primary" 
-              icon={<PlusOutlined />} 
-              onClick={onAdd}
-              className="add-rule-btn"
-            >
-              Nova Regra
-            </Button>
           </div>
 
           <div className="rules-list">
@@ -129,7 +142,41 @@ const RulesScreen = ({
         </div>
       </Content>
 
+      <FloatButton
+        className="add-float-button"
+        icon={<PlusOutlined />}
+        type="primary"
+        onClick={handleOpenAddOptions}
+      />
       <MainFooter activeKey="rules" />
+
+      <Modal
+        open={bottomModalVisible}
+        onCancel={handleCloseAddOptions}
+        footer={null}
+        title={<span style={{ color: '#fff' }}>Adicionar</span>}
+        className="custom-bottom-modal"
+        closeIcon={<span style={{color: '#fff'}}>X</span>}
+      >
+        <div className="add-drawer-content">
+          <div className="add-option-btn" onClick={handleOptionRegra}>
+            <FileTextOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title" style={{ color: '#fff' }}>Nova Regra</Text>
+              <Text className="add-option-desc" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Cadastre uma nova regra para o curso</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+          <div className="add-option-btn" onClick={handleOptionModalidade}>
+            <AppstoreAddOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title" style={{ color: '#fff' }}>Nova Modalidade</Text>
+              <Text className="add-option-desc" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Adicione uma categoria de atividade</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+        </div>
+      </Modal>
 
       <ConfigProvider theme={modalTheme}>
         <Modal
@@ -202,6 +249,36 @@ const RulesScreen = ({
               </Button>
               <Button type="primary" htmlType="submit">
                 Salvar
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        <Modal
+          title={<span style={{ color: '#000' }}>Nova Modalidade</span>}
+          open={isModalityModalVisible}
+          onCancel={onCloseModalityModal}
+          footer={null}
+        >
+          <Form
+            form={modalityForm}
+            layout="vertical"
+            onFinish={handleFinishModality}
+          >
+            <Form.Item
+              name="modalityName"
+              label="Nome da Modalidade"
+              rules={[{ required: true, message: 'Por favor, insira o nome' }]}
+            >
+              <Input placeholder="Ex: Extensão, Ensino, Pesquisa, etc." />
+            </Form.Item>
+
+            <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>
+              <Button onClick={onCloseModalityModal} style={{ marginRight: 8, color: '#000' }}>
+                Cancelar
+              </Button>
+              <Button type="primary" htmlType="submit">
+                Adicionar
               </Button>
             </Form.Item>
           </Form>

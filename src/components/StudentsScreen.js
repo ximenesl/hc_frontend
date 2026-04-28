@@ -1,6 +1,6 @@
 import React from 'react';
-import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider } from 'antd';
-import { SearchOutlined, RightOutlined } from '@ant-design/icons';
+import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal } from 'antd';
+import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './StudentsScreen.css';
@@ -27,7 +27,11 @@ const StudentsScreen = ({
   selectedCourse, 
   selectedClass, 
   onCourseChange, 
-  onClassChange 
+  onClassChange,
+  onAdd,
+  isAddModalVisible,
+  onCloseAddModal,
+  onAddStudent
 }) => {
   return (
     <Layout className="students-layout">
@@ -104,7 +108,33 @@ const StudentsScreen = ({
         </div>
       </Content>
 
+      <FloatButton
+        className="add-float-button"
+        icon={<PlusOutlined />}
+        type="primary"
+        onClick={onAdd}
+      />
       <MainFooter activeKey="students" />
+
+      <Modal
+        open={isAddModalVisible}
+        onCancel={onCloseAddModal}
+        footer={null}
+        title="Adicionar"
+        className="custom-bottom-modal"
+        closeIcon={<span style={{color: '#fff'}}>X</span>}
+      >
+        <div className="add-drawer-content">
+          <div className="add-option-btn" onClick={onAddStudent}>
+            <TeamOutlined className="add-option-icon" />
+            <div className="add-option-text">
+              <Text className="add-option-title">Novo Aluno</Text>
+              <Text className="add-option-desc">Cadastre um novo aluno</Text>
+            </div>
+            <RightOutlined className="add-option-arrow" />
+          </div>
+        </div>
+      </Modal>
     </Layout>
   );
 };

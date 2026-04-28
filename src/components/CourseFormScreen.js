@@ -18,7 +18,7 @@ const selectTheme = {
   }
 };
 
-const CourseFormScreen = ({ isEdit, formData, onChange, onSave, onCancel }) => {
+const CourseFormScreen = ({ isEdit, formData, onChange, onSave, onCancel, coordinators }) => {
   return (
     <Layout className="form-layout">
       <MainHeader />
@@ -82,9 +82,12 @@ const CourseFormScreen = ({ isEdit, formData, onChange, onSave, onCancel }) => {
                 <Select 
                   placeholder="Selecione o coordenador" 
                   className="custom-select"
+                  value={formData?.coordenadorId || undefined}
+                  onChange={(value) => onChange('coordenadorId', value)}
                 >
-                  <Option value="joao">João Silva</Option>
-                  <Option value="maria">Maria Santos</Option>
+                  {coordinators?.map(coord => (
+                    <Option key={coord.id} value={coord.id}>{coord.nome}</Option>
+                  ))}
                 </Select>
               </ConfigProvider>
             </div>

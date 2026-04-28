@@ -7,8 +7,10 @@ import api from '../api/axiosConfig';
 const RulesContainer = () => {
   const { courseId } = useParams();
   const [activeTab, setActiveTab] = useState('Ensino');
+  const [dynamicTabs, setDynamicTabs] = useState(['Ensino', 'Pesquisa', 'Extensão']);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalityModalVisible, setIsModalityModalVisible] = useState(false);
   const [editingRule, setEditingRule] = useState(null);
   const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,6 +30,10 @@ const RulesContainer = () => {
         requisito: r.requisito
       }));
       setRules(formattedRules);
+
+      const fetchedTypes = [...new Set(formattedRules.map(r => r.type))].filter(Boolean);
+      setDynamicTabs(prev => [...new Set([...prev, ...fetchedTypes])]);
+
     } catch (error) {
       console.error('Erro ao buscar regras:', error);
       message.error('Erro ao carregar regras');
@@ -41,8 +47,6 @@ const RulesContainer = () => {
       fetchRules();
     }
   }, [courseId, fetchRules]);
-
-  const tabs = ['Ensino', 'Pesquisa', 'Extensão'];
 
   // Converter courseId useParams (string) para número para comparar com r.courseId (number)
   const filteredRules = rules.filter(r => r.courseId.toString() === courseId && r.type === activeTab);
@@ -113,9 +117,17 @@ const RulesContainer = () => {
     setEditingRule(null);
   };
 
+  const handleAddModality = (newModality) => {
+    if (!dynamicTabs.includes(newModality)) {
+      setDynamicTabs(prev => [...prev, newModality]);
+    }
+    setActiveTab(newModality);
+    setIsModalityModalVisible(false);
+  };
+
   return (
     <RulesScreen
-      tabs={tabs}
+      tabs={dynamicTabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}
       rules={filteredRules}
@@ -127,6 +139,10 @@ const RulesContainer = () => {
       onSave={handleSave}
       onCancel={handleCancel}
       loading={loading}
+      isModalityModalVisible={isModalityModalVisible}
+      onOpenModalityModal={() => setIsModalityModalVisible(true)}
+      onCloseModalityModal={() => setIsModalityModalVisible(false)}
+      onSaveModality={handleAddModality}
     />
   );
 };
