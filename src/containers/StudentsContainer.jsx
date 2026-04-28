@@ -47,14 +47,17 @@ const StudentsContainer = () => {
              turmaName = aluno.turma.nome;
           }
 
+          const firstCurso = (aluno.cursos && aluno.cursos.length > 0) ? aluno.cursos[0] : null;
+
           return {
             id: aluno.id,
             nome: aluno.nome,
             matricula: `MAT-${aluno.id}`,
             codigoTurma: turmaName,
-            codigoCurso: aluno.curso ? aluno.curso.id : null,
+            codigoCurso: firstCurso ? firstCurso.id : null,
+            cursoNome: firstCurso ? firstCurso.nome : 'Não vinculado',
             horasCompletas: horasCompletas,
-            horasTotais: aluno.curso && aluno.curso.horasTotais ? aluno.curso.horasTotais : 100
+            horasTotais: firstCurso && firstCurso.horasTotais ? firstCurso.horasTotais : 100
           };
         });
 

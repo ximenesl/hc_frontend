@@ -86,6 +86,7 @@ const StudentsScreen = ({
                     <div className="student-info">
                       <Text className="student-name">{student.nome}</Text>
                       <Text className="student-matricula">Matrícula: {student.matricula}</Text>
+                      <Text className="student-matricula">Curso: {student.cursoNome}</Text>
                       <Text className="student-matricula">Turma: {student.codigoTurma}</Text>
                     </div>
                     <RightOutlined className="student-arrow" />
