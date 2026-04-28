@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal } from 'antd';
-import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined } from '@ant-design/icons';
+import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined, WarningFilled } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './StudentsScreen.css';
@@ -31,7 +31,12 @@ const StudentsScreen = ({
   onAdd,
   isAddModalVisible,
   onCloseAddModal,
-  onAddStudent
+  onAddStudent,
+  onEdit,
+  onDelete,
+  isDeleteModalVisible,
+  onCloseDeleteModal,
+  onConfirmDelete
 }) => {
   return (
     <Layout className="students-layout">
@@ -89,7 +94,19 @@ const StudentsScreen = ({
                       <Text className="student-matricula">Curso: {student.cursoNome}</Text>
                       <Text className="student-matricula">Turma: {student.codigoTurma}</Text>
                     </div>
-                    <RightOutlined className="student-arrow" />
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <Button 
+                        icon={<EditOutlined />} 
+                        onClick={() => onEdit(student.id)}
+                        className="edit-button-mini"
+                      />
+                      <Button 
+                        icon={<DeleteOutlined />} 
+                        danger
+                        onClick={() => onDelete(student.id)}
+                        className="delete-button-mini"
+                      />
+                    </div>
                   </div>
 
                   <div className="student-progress-row">
@@ -133,6 +150,38 @@ const StudentsScreen = ({
               <Text className="add-option-desc">Cadastre um novo aluno</Text>
             </div>
             <RightOutlined className="add-option-arrow" />
+          </div>
+        </div>
+      </Modal>
+      
+      <Modal
+        open={isDeleteModalVisible}
+        onCancel={onCloseDeleteModal}
+        footer={null}
+        centered
+        className="custom-delete-modal"
+        closeIcon={<span style={{ color: '#fff' }}>X</span>}
+      >
+        <div className="delete-drawer-content" style={{ textAlign: 'center', padding: '20px' }}>
+          <WarningFilled style={{ fontSize: '48px', color: '#ff4d4f', marginBottom: '16px' }} />
+          <Typography.Title level={4}>
+            Tem certeza que deseja<br />excluir o aluno?
+          </Typography.Title>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '24px' }}>
+            <Button
+              type="primary"
+              danger
+              onClick={onConfirmDelete}
+              style={{ height: '45px', borderRadius: '8px' }}
+            >
+              Excluir
+            </Button>
+            <Button
+              onClick={onCloseDeleteModal}
+              style={{ height: '45px', borderRadius: '8px' }}
+            >
+              Cancelar
+            </Button>
           </div>
         </div>
       </Modal>

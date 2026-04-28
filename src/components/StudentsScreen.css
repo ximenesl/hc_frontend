@@ -142,3 +142,15 @@ span.ant-input-affix-wrapper.students-search-input input.ant-input::placeholder 
   min-width: 70px;
   text-align: right;
 }
+
+.edit-button-mini {
+  background-color: #f0f0f0;
+  border-color: #d9d9d9;
+  color: #595959;
+}
+
+.delete-button-mini {
+  background-color: #fff1f0;
+  border-color: #ffa39e;
+  color: #f5222d;
+}

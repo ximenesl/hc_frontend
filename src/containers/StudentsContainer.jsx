@@ -108,6 +108,30 @@ const StudentsContainer = () => {
     navigate('/students/new');
   };
 
+  const handleEdit = (id) => {
+    navigate(`/students/edit/${id}`);
+  };
+
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [studentToDelete, setStudentToDelete] = useState(null);
+
+  const handleDelete = (id) => {
+    setStudentToDelete(id);
+    setIsDeleteModalVisible(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await api.delete(`/api/users/${studentToDelete}`);
+      message.success('Aluno excluído com sucesso!');
+      setStudents(prev => prev.filter(s => s.id !== studentToDelete));
+      setIsDeleteModalVisible(false);
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao excluir aluno');
+    }
+  };
+
   return (
     <StudentsScreen
       students={filteredStudents}
@@ -123,6 +147,11 @@ const StudentsContainer = () => {
       isAddModalVisible={isAddModalVisible}
       onCloseAddModal={handleCloseAddModal}
       onAddStudent={handleAddStudent}
+      onEdit={handleEdit}
+      onDelete={handleDelete}
+      isDeleteModalVisible={isDeleteModalVisible}
+      onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
+      onConfirmDelete={confirmDelete}
     />
   );
 };
