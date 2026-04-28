@@ -18,12 +18,15 @@ const RulesContainer = () => {
   const fetchRules = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await api.get(`/api/regras/curso/${courseId}`);
+      const [rulesRes, tiposRes] = await Promise.all([
+        api.get(`/api/regras/curso/${courseId}`),
+        api.get(`/api/regras/curso/${courseId}/tipos`)
+      ]);
 
-      const formattedRules = response.data.map(r => ({
+      const formattedRules = rulesRes.data.map(r => ({
         id: r.id,
         courseId: r.courseId,
-        type: r.type, // Ensino, Pesquisa, Extensão
+        type: r.type,
         grupo: r.grupo,
         descricao: r.descricao,
         aproveitamento: r.aproveitamento,
@@ -31,8 +34,9 @@ const RulesContainer = () => {
       }));
       setRules(formattedRules);
 
-      const fetchedTypes = [...new Set(formattedRules.map(r => r.type))].filter(Boolean);
-      setDynamicTabs(prev => [...new Set([...prev, ...fetchedTypes])]);
+      const defaultTabs = ['Ensino', 'Pesquisa', 'Extensão'];
+      const backendTipos = tiposRes.data || [];
+      setDynamicTabs([...new Set([...defaultTabs, ...backendTipos])]);
 
     } catch (error) {
       console.error('Erro ao buscar regras:', error);
@@ -48,7 +52,6 @@ const RulesContainer = () => {
     }
   }, [courseId, fetchRules]);
 
-  // Converter courseId useParams (string) para número para comparar com r.courseId (number)
   const filteredRules = rules.filter(r => r.courseId.toString() === courseId && r.type === activeTab);
 
   const handleAdd = () => {
