@@ -46,7 +46,10 @@ const CoursesScreen = ({
           <Title level={4} className="courses-page-title">Gestão de Curso</Title>
           {courses.map(course => (
             <Card className="course-card" key={course.id}>
-              <Title level={5} className="course-title">{course.name}</Title>
+              <div className="course-header-row">
+                <Title level={5} className="course-title">{course.name}</Title>
+                {course.sigla && <Text className="course-sigla-tag">{course.sigla}</Text>}
+              </div>
 
               <div className="course-info-row">
                 <UserOutlined className="course-icon" />
@@ -56,6 +59,11 @@ const CoursesScreen = ({
                 <MailOutlined className="course-icon" />
                 <Text className="course-text">{course.coordinatorEmail}</Text>
               </div>
+              <div className="course-info-row">
+                <ReadOutlined className="course-icon" />
+                <Text className="course-text" style={{ textTransform: 'capitalize' }}>{course.categoria || '-'}</Text>
+              </div>
+
 
               <Divider className="course-divider" />
 

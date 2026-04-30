@@ -21,6 +21,8 @@ const CoursesContainer = () => {
       const formattedCourses = response.data.map(c => ({
         id: c.id,
         name: c.nome,
+        sigla: c.sigla || '-',
+        categoria: c.categoria || '-',
         coordinatorName: c.coordenadorNome || 'Não atribuído',
         coordinatorEmail: c.coordenadorEmail || '-',
         studentsCount: c.studentsCount || 0,
@@ -60,8 +62,9 @@ const CoursesContainer = () => {
       setCourseToDelete(null);
       fetchCourses();
     } catch (error) {
-      console.error(error);
-      message.error('Erro ao deletar o curso');
+      console.error('Erro ao deletar:', error.response?.data || error);
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : 'Erro ao deletar o curso. Verifique se existem alunos ou turmas vinculados.');
     }
   };
 

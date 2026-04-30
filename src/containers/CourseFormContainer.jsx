@@ -39,6 +39,7 @@ const CourseFormContainer = () => {
         try {
           const response = await api.get(`/api/cursos/${id}`);
           const course = response.data;
+          console.log('Curso carregado para edição:', course);
           setFormData({
             nome: course.nome,
             sigla: course.sigla || '',
@@ -47,7 +48,8 @@ const CourseFormContainer = () => {
             coordenadorId: course.coordenadorId || ''
           });
         } catch (error) {
-          console.error(error);
+          console.error('Erro ao carregar curso:', error);
+
           message.error('Erro ao carregar dados do curso');
         }
       };

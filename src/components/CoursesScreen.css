@@ -33,12 +33,32 @@
   padding: 20px;
 }
 
+.course-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
 h5.ant-typography.course-title {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0 !important;
   color: #000;
   font-weight: 700;
+  flex: 1;
 }
+
+.course-sigla-tag {
+  background-color: var(--senac-blue);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
 
 .course-info-row {
   display: flex;
