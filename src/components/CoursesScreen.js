@@ -9,12 +9,12 @@ import {
   DeleteOutlined,
   PlusOutlined,
   RightOutlined,
-  WarningFilled,
   ReadOutlined
 } from '@ant-design/icons';
 import useAuth from '../hooks/useAuth';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './CoursesScreen.css';
 
 const { Content } = Layout;
@@ -137,39 +137,14 @@ const CoursesScreen = ({
           </div>
         </Modal>
       )}
-      {isAdmin && (
-        <Modal
-          open={isDeleteModalVisible}
-          onCancel={onCloseDeleteModal}
-          footer={null}
-          centered
-          className="custom-delete-modal"
-          closeIcon={<span style={{ color: '#fff' }}>X</span>}
-        >
-          <div className="delete-drawer-content">
-            <WarningFilled className="delete-warning-icon" />
-            <Title level={4} className="delete-warning-title">
-              Tem certeza que deseja<br />excluir o curso?
-            </Title>
 
-            <Button
-              type="primary"
-              className="delete-confirm-btn"
-              onClick={onConfirmDelete}
-              style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
-            >
-              Excluir
-            </Button>
-            <Button
-              className="delete-cancel-btn"
-              onClick={onCloseDeleteModal}
-              style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
-            >
-              Cancelar
-            </Button>
-          </div>
-        </Modal>
-      )}
+      <DeleteConfirmationModal
+        visible={isDeleteModalVisible}
+        onCancel={onCloseDeleteModal}
+        onConfirm={onConfirmDelete}
+        title="Deseja excluir este curso?"
+        message="Esta ação excluirá permanentemente o curso e todos os dados vinculados."
+      />
 
     </Layout>
   );

@@ -6,13 +6,13 @@ import {
   BookOutlined,
   EditOutlined,
   DeleteOutlined,
-  WarningFilled,
   UserOutlined,
   RightOutlined,
   PlusOutlined
 } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './CoordinatorsScreen.css';
 
 const { Content } = Layout;
@@ -146,38 +146,13 @@ const CoordinatorsScreen = ({
         </div>
       </Modal>
 
-      {/* Delete confirmation modal */}
-      <Modal
-        open={isDeleteModalVisible}
+      <DeleteConfirmationModal
+        visible={isDeleteModalVisible}
         onCancel={onCloseDeleteModal}
-        footer={null}
-        centered
-        className="coord-delete-modal"
-        closeIcon={<span style={{ color: '#fff' }}>X</span>}
-      >
-        <div className="coord-delete-content">
-          <WarningFilled className="coord-delete-warning-icon" />
-          <Title level={4} className="coord-delete-warning-title">
-            Deseja excluir este cadastro?
-          </Title>
-
-          <Button
-            type="primary"
-            className="coord-delete-confirm-btn"
-            onClick={onConfirmDelete}
-            style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
-          >
-            Excluir
-          </Button>
-          <Button
-            className="coord-delete-cancel-btn"
-            onClick={onCloseDeleteModal}
-            style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
-          >
-            Cancelar
-          </Button>
-        </div>
-      </Modal>
+        onConfirm={onConfirmDelete}
+        title="Deseja excluir este coordenador?"
+        message="Esta ação excluirá permanentemente o acesso do coordenador ao sistema."
+      />
 
       {/* Edit modal */}
       <ConfigProvider theme={formTheme}>

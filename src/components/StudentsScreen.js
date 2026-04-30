@@ -1,8 +1,9 @@
 import React from 'react';
 import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal, Button } from 'antd';
-import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined, WarningFilled } from '@ant-design/icons';
+import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './StudentsScreen.css';
 
 const { Content } = Layout;
@@ -155,37 +156,13 @@ const StudentsScreen = ({
         </div>
       </Modal>
       
-      <Modal
-        open={isDeleteModalVisible}
+      <DeleteConfirmationModal
+        visible={isDeleteModalVisible}
         onCancel={onCloseDeleteModal}
-        footer={null}
-        centered
-        className="custom-delete-modal"
-        closeIcon={<span style={{ color: '#fff' }}>X</span>}
-      >
-        <div className="delete-drawer-content" style={{ textAlign: 'center', padding: '20px' }}>
-          <WarningFilled style={{ fontSize: '48px', color: '#ff4d4f', marginBottom: '16px' }} />
-          <Title level={4}>
-            Deseja excluir este cadastro?
-          </Title>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '24px' }}>
-            <Button
-              type="primary"
-              danger
-              onClick={onConfirmDelete}
-              style={{ height: '45px', borderRadius: '8px' }}
-            >
-              Excluir
-            </Button>
-            <Button
-              onClick={onCloseDeleteModal}
-              style={{ height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
-            >
-              Cancelar
-            </Button>
-          </div>
-        </div>
-      </Modal>
+        onConfirm={onConfirmDelete}
+        title="Deseja excluir este cadastro?"
+        message="Esta ação excluirá permanentemente o aluno do sistema."
+      />
     </Layout>
   );
 };
