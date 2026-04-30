@@ -17,6 +17,39 @@
   margin: 0 auto;
 }
 
+.empty-rules-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  margin-top: 20px;
+  border: 2px dashed #e0e0e0;
+}
+
+.empty-rules-icon {
+  font-size: 64px;
+  color: #d0d0d0;
+  margin-bottom: 20px;
+}
+
+.empty-rules-text {
+  color: #333333;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.empty-rules-subtext {
+  color: #888888;
+  font-size: 14px;
+}
+
+
 .rules-tabs-container {
   display: flex;
   border-radius: 8px;

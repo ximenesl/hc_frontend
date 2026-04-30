@@ -134,11 +134,14 @@ const RulesScreen = ({
               </div>
             ))}
             {rules.length === 0 && (
-              <div style={{ textAlign: 'center', marginTop: '20px', color: '#666' }}>
-                Nenhuma regra cadastrada para este curso nesta categoria.
+              <div className="empty-rules-container">
+                <AppstoreAddOutlined className="empty-rules-icon" />
+                <Text className="empty-rules-text">Nenhuma regra cadastrada para este curso nesta categoria.</Text>
+                <Text className="empty-rules-subtext">Clique no botão + abaixo para começar a adicionar as regras de validação.</Text>
               </div>
             )}
           </div>
+
         </div>
       </Content>
 
