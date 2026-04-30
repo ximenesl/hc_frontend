@@ -43,6 +43,7 @@ const CoursesScreen = ({
 
       <Content className="courses-content">
         <div className="courses-inner-content">
+          <Title level={4} className="courses-page-title">Gestão de Curso</Title>
           {courses.map(course => (
             <Card className="course-card" key={course.id}>
               <Title level={5} className="course-title">{course.name}</Title>
@@ -137,6 +138,7 @@ const CoursesScreen = ({
         </Modal>
       )}
 
+<<<<<<< HEAD
       {isAdmin && (
         <Modal
           open={isDeleteModalVisible}

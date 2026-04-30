@@ -79,9 +79,12 @@ const StudentsContainer = () => {
 
   const filteredStudents = students.filter(student => {
     const term = searchText.toLowerCase();
-    const matchSearch = student.nome.toLowerCase().includes(term) ||
-      student.matricula.toLowerCase().includes(term) ||
-      student.codigoTurma.toLowerCase().includes(term);
+    
+    const matchSearch = (
+      (student.nome && student.nome.toLowerCase().includes(term)) ||
+      (student.matricula && student.matricula.toLowerCase().includes(term)) ||
+      (student.codigoTurma && student.codigoTurma.toLowerCase().includes(term))
+    );
 
     const matchCourse = selectedCourse ? student.codigoCurso === selectedCourse : true;
     const matchClass = selectedClass ? student.codigoTurma === selectedClass : true;

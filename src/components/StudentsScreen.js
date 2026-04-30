@@ -6,7 +6,7 @@ import MainFooter from './MainFooter';
 import './StudentsScreen.css';
 
 const { Content } = Layout;
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { Option } = Select;
 
 const selectTheme = {
@@ -44,6 +44,7 @@ const StudentsScreen = ({
 
       <Content className="students-content">
         <div className="students-inner-content">
+          <Title level={4} className="students-page-title">Gestão de Aluno</Title>
 
           <Input
             className="students-search-input"
@@ -164,9 +165,9 @@ const StudentsScreen = ({
       >
         <div className="delete-drawer-content" style={{ textAlign: 'center', padding: '20px' }}>
           <WarningFilled style={{ fontSize: '48px', color: '#ff4d4f', marginBottom: '16px' }} />
-          <Typography.Title level={4}>
-            Tem certeza que deseja<br />excluir o aluno?
-          </Typography.Title>
+          <Title level={4}>
+            Deseja excluir este cadastro?
+          </Title>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '24px' }}>
             <Button
               type="primary"
