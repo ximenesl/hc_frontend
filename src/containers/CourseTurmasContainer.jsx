@@ -60,9 +60,11 @@ const CourseTurmasContainer = () => {
       fetchDados();
     } catch (error) {
       console.error(error);
-      message.error('Erro ao deletar turma');
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : 'Erro ao deletar turma. Verifique se existem alunos vinculados.');
     }
   };
+
 
   return (
     <CourseTurmasScreen
