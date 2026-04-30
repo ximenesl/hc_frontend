@@ -158,7 +158,7 @@ const CoordinatorsScreen = ({
         <div className="coord-delete-content">
           <WarningFilled className="coord-delete-warning-icon" />
           <Title level={4} className="coord-delete-warning-title">
-            Tem certeza que deseja<br />excluir este coordenador?
+            Deseja excluir este cadastro?
           </Title>
 
           <Button

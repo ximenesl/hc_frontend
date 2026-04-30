@@ -44,7 +44,7 @@ const CoordinatorFormContainer = () => {
         cursoId: formData.cursoId
       });
       message.success('Coordenador criado com sucesso!');
-      navigate('/courses');
+      navigate('/coordinators');
     } catch (error) {
       console.error('Erro detalhado:', error.response?.data || error.message);
       const errorMsg = error.response?.data?.message;
@@ -53,7 +53,7 @@ const CoordinatorFormContainer = () => {
   };
 
   const handleCancel = () => {
-    navigate('/courses');
+    navigate('/coordinators');
   };
 
   return (
