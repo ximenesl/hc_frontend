@@ -108,9 +108,64 @@ code {
 .custom-bottom-modal .ant-modal-title,
 .custom-delete-modal .ant-modal-title {
   color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
 }
 
 .custom-bottom-modal .ant-modal-close,
 .custom-delete-modal .ant-modal-close {
   color: #ffffff !important;
-}
+}
+
+.add-drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.add-option-btn {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-option-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.add-option-icon {
+  font-size: 24px;
+  color: var(--senac-orange);
+  margin-right: 16px;
+}
+
+.add-option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-option-title {
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.add-option-desc {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 12px;
+}
+
+.add-option-arrow {
+  color: #ffffff;
+  font-size: 16px;
+  opacity: 0.5;
+}
+
