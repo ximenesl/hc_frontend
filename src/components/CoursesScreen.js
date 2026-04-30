@@ -137,8 +137,6 @@ const CoursesScreen = ({
           </div>
         </Modal>
       )}
-
-<<<<<<< HEAD
       {isAdmin && (
         <Modal
           open={isDeleteModalVisible}
