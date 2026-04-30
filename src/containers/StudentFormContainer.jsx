@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { message } from 'antd';
 import StudentFormScreen from '../components/StudentFormScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 
 const StudentFormContainer = () => {
   const { id } = useParams();
+  const { isCoordenador, cursoIds } = useAuth();
   const isEdit = !!id;
   const navigate = useNavigate();
   const [cursos, setCursos] = useState([]);
@@ -24,12 +26,30 @@ const StudentFormContainer = () => {
           api.get('/api/cursos'),
           api.get('/api/turmas')
         ]);
-        setCursos(cursosRes.data);
+        
+        let filteredCursos = cursosRes.data;
+        if (isCoordenador) {
+          filteredCursos = filteredCursos.filter(c => cursoIds.includes(c.id));
+        }
+        
+        setCursos(filteredCursos);
         setTurmas(turmasRes.data);
 
         if (isEdit) {
           const userRes = await api.get(`/api/users/${id}`);
           const user = userRes.data;
+          
+          // Safety check for Coordinators
+          if (isCoordenador && user.role === 'ALUNO') {
+            const userCursos = user.cursos || [];
+            const hasPermission = userCursos.some(c => cursoIds.includes(c.id));
+            if (!hasPermission) {
+              message.error('Você não tem permissão para editar este aluno');
+              navigate('/students');
+              return;
+            }
+          }
+
           const firstCurso = (user.cursos && user.cursos.length > 0) ? user.cursos[0] : null;
           setFormData({
             nome: user.nome,
@@ -38,13 +58,15 @@ const StudentFormContainer = () => {
             turmaId: user.turma ? user.turma.id : null
           });
         }
+
       } catch (error) {
         console.error(error);
         message.error('Erro ao carregar dados');
       }
     };
     fetchDados();
-  }, [id, isEdit]);
+  }, [id, isEdit, isCoordenador, cursoIds]);
+
 
   const availableTurmas = turmas.filter(t => t.cursoId === formData.cursoId);
 

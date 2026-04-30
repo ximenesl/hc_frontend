@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { message } from 'antd';
 import RulesScreen from '../components/RulesScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 
 const RulesContainer = () => {
   const { courseId } = useParams();
+  const navigate = useNavigate();
+  const { isCoordenador, cursoIds } = useAuth();
   const [activeTab, setActiveTab] = useState('Ensino');
   const [dynamicTabs, setDynamicTabs] = useState(['Ensino', 'Pesquisa', 'Extensão']);
 
@@ -47,10 +51,16 @@ const RulesContainer = () => {
   }, [courseId]);
 
   useEffect(() => {
+    if (isCoordenador && !cursoIds.includes(parseInt(courseId, 10))) {
+      message.error('Você não tem permissão para acessar as regras deste curso');
+      navigate('/courses');
+      return;
+    }
     if (courseId) {
       fetchRules();
     }
-  }, [courseId, fetchRules]);
+  }, [courseId, fetchRules, isCoordenador, cursoIds, navigate]);
+
 
   const filteredRules = rules.filter(r => r.courseId.toString() === courseId && r.type === activeTab);
 

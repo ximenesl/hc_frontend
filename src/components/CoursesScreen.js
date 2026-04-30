@@ -84,31 +84,32 @@ const CoursesScreen = ({
                 </div>
               </div>
 
-              {(isAdmin || isCoordenador) && (
-                <div className="course-actions">
-                  <Button
-                    className="view-turmas-button"
-                    onClick={() => onViewTurmas(course.id)}
-                    style={{ marginRight: '8px' }}
-                  >
-                    Turmas
-                  </Button>
-                  <Button
-                    className="edit-button"
-                    icon={<EditOutlined />}
-                    onClick={() => onEdit(course.id)}
-                  >
-                    Editar
-                  </Button>
-                  {isAdmin && (
+              <div className="course-actions">
+                <Button
+                  className="view-turmas-button"
+                  onClick={() => onViewTurmas(course.id)}
+                  style={{ marginRight: '8px' }}
+                >
+                  Turmas
+                </Button>
+                {isAdmin && (
+                  <>
+                    <Button
+                      className="edit-button"
+                      icon={<EditOutlined />}
+                      onClick={() => onEdit(course.id)}
+                    >
+                      Editar
+                    </Button>
                     <Button
                       className="delete-button"
                       icon={<DeleteOutlined />}
                       onClick={() => onDelete(course.id)}
                     />
-                  )}
-                </div>
-              )}
+                  </>
+                )}
+              </div>
+
             </Card>
           ))}
         </div>

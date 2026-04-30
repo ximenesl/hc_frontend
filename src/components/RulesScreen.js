@@ -3,6 +3,7 @@ import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, F
 import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import useAuth from '../hooks/useAuth';
 import './RulesScreen.css';
 
 const { Content } = Layout;
@@ -54,6 +55,7 @@ const RulesScreen = ({
   onCloseModalityModal,
   onSaveModality
 }) => {
+  const { isAdmin } = useAuth();
   const [form] = Form.useForm();
   const [modalityForm] = Form.useForm();
   const [bottomModalVisible, setBottomModalVisible] = React.useState(false);
@@ -112,10 +114,12 @@ const RulesScreen = ({
               <div className="rules-card" key={rule.id}>
                 <div className="rules-card-header">
                   <Text className="rules-group">Grupo {rule.grupo}</Text>
-                  <div className="rules-card-actions">
-                    <Button type="text" icon={<EditOutlined style={{ color: '#004A8F' }} />} onClick={() => onEdit(rule)} />
-                    <Button type="text" danger icon={<DeleteOutlined />} onClick={() => onDelete(rule.id)} />
-                  </div>
+                  {isAdmin && (
+                    <div className="rules-card-actions">
+                      <Button type="text" icon={<EditOutlined style={{ color: '#004A8F' }} />} onClick={() => onEdit(rule)} />
+                      <Button type="text" danger icon={<DeleteOutlined />} onClick={() => onDelete(rule.id)} />
+                    </div>
+                  )}
                 </div>
                 
                 <div className="rules-info">
@@ -137,7 +141,7 @@ const RulesScreen = ({
               <div className="empty-rules-container">
                 <AppstoreAddOutlined className="empty-rules-icon" />
                 <Text className="empty-rules-text">Nenhuma regra cadastrada para este curso nesta categoria.</Text>
-                <Text className="empty-rules-subtext">Clique no botão + abaixo para começar a adicionar as regras de validação.</Text>
+                {isAdmin && <Text className="empty-rules-subtext">Clique no botão + abaixo para começar a adicionar as regras de validação.</Text>}
               </div>
             )}
           </div>
@@ -145,12 +149,15 @@ const RulesScreen = ({
         </div>
       </Content>
 
-      <FloatButton
-        className="add-float-button"
-        icon={<PlusOutlined />}
-        type="primary"
-        onClick={handleOpenAddOptions}
-      />
+      {isAdmin && (
+        <FloatButton
+          className="add-float-button"
+          icon={<PlusOutlined />}
+          type="primary"
+          onClick={handleOpenAddOptions}
+        />
+      )}
+
       <MainFooter activeKey="rules" />
 
       <Modal

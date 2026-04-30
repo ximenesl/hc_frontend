@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import CoursesScreen from '../components/CoursesScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
+
 
 const CoursesContainer = () => {
   const navigate = useNavigate();
@@ -17,8 +19,15 @@ const CoursesContainer = () => {
       setLoading(true);
       const response = await api.get('/api/cursos');
       
+      const { isAdmin, isCoordenador, cursoIds } = useAuth();
+      
+      let data = response.data;
+      if (isCoordenador) {
+        data = data.filter(c => cursoIds.includes(c.id));
+      }
+
       // Formatting the courses for the table
-      const formattedCourses = response.data.map(c => ({
+      const formattedCourses = data.map(c => ({
         id: c.id,
         name: c.nome,
         sigla: c.sigla || '-',
@@ -29,6 +38,7 @@ const CoursesContainer = () => {
         creationDate: c.dataCriacao ? new Date(c.dataCriacao).toLocaleDateString('pt-BR') : '-',
       }));
       setCourses(formattedCourses);
+
     } catch (error) {
       console.error(error);
       message.error('Erro ao carregar cursos');

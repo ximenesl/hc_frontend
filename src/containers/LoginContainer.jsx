@@ -18,8 +18,9 @@ const LoginContainer = () => {
         senha: values.password
       });
 
-      const { token, nome, role } = response.data;
-      saveSession({ token, nome, role });
+      const { token, nome, role, cursoIds } = response.data;
+      saveSession({ token, nome, role, cursoIds });
+
 
       message.success(`Bem-vindo, ${nome}!`);
 

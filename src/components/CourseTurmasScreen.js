@@ -4,6 +4,7 @@ import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOut
 import { useNavigate } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import useAuth from '../hooks/useAuth';
 import './CourseTurmasScreen.css';
 
 const { Content } = Layout;
@@ -36,6 +37,7 @@ const CourseTurmasScreen = ({
   onEditTurma, 
   onDeleteTurma 
 }) => {
+  const { isAdmin } = useAuth();
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
   const [bottomModalVisible, setBottomModalVisible] = useState(false);
@@ -118,7 +120,7 @@ const CourseTurmasScreen = ({
                     renderItem={(turma) => (
                       <List.Item
                         className="turma-item"
-                        actions={[
+                        actions={isAdmin ? [
                           <Button 
                             type="primary" 
                             ghost 
@@ -138,7 +140,7 @@ const CourseTurmasScreen = ({
                           >
                             Excluir
                           </Button>
-                        ]}
+                        ] : []}
                       >
                         <List.Item.Meta 
                           title={<span className="turma-name">{turma.nome}</span>} 
@@ -152,12 +154,15 @@ const CourseTurmasScreen = ({
           </div>
         </Content>
         
-        <FloatButton
-          className="add-float-button"
-          icon={<PlusOutlined />}
-          type="primary"
-          onClick={handleOpenBottomModal}
-        />
+        {isAdmin && (
+          <FloatButton
+            className="add-float-button"
+            icon={<PlusOutlined />}
+            type="primary"
+            onClick={handleOpenBottomModal}
+          />
+        )}
+
         <MainFooter />
         
         <Modal

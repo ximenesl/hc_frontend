@@ -3,8 +3,10 @@ import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import StudentsScreen from '../components/StudentsScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 
 const StudentsContainer = () => {
+  const { isCoordenador, cursoIds } = useAuth();
   const [searchText, setSearchText] = useState('');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -26,7 +28,12 @@ const StudentsContainer = () => {
         const certs = certsRes.data;
         const turmas = turmasRes.data;
 
-        const formattedCourses = cursosRes.data.map(c => {
+        let filteredCursos = cursosRes.data;
+        if (isCoordenador) {
+          filteredCursos = filteredCursos.filter(c => cursoIds.includes(c.id));
+        }
+
+        const formattedCourses = filteredCursos.map(c => {
           const courseTurmas = turmas.filter(t => t.cursoId === c.id);
           return {
             id: c.id,
@@ -36,7 +43,12 @@ const StudentsContainer = () => {
         });
         setCoursesWithClasses(formattedCourses);
 
-        const alunos = usersRes.data.filter(u => u.role === 'ALUNO');
+        let alunos = usersRes.data.filter(u => u.role === 'ALUNO');
+        if (isCoordenador) {
+          alunos = alunos.filter(aluno => 
+            aluno.cursos && aluno.cursos.some(c => cursoIds.includes(c.id))
+          );
+        }
         
         const formattedStudents = alunos.map(aluno => {
           const alunoCerts = certs.filter(c => c.alunoId === aluno.id && (c.status === 'APROVADO' || c.status === 'DEFERIDO' || c.status === 'VALIDADO'));
@@ -71,7 +83,8 @@ const StudentsContainer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isCoordenador, cursoIds]);
+
 
   const handleSearch = (value) => {
     setSearchText(value);

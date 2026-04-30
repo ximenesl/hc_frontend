@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import CourseTurmasScreen from '../components/CourseTurmasScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 
 const CourseTurmasContainer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { isCoordenador, cursoIds } = useAuth();
   const [curso, setCurso] = useState(null);
   const [turmas, setTurmas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,8 +31,14 @@ const CourseTurmasContainer = () => {
   }, [id]);
 
   useEffect(() => {
+    if (isCoordenador && !cursoIds.includes(parseInt(id, 10))) {
+      message.error('Você não tem permissão para acessar as turmas deste curso');
+      navigate('/courses');
+      return;
+    }
     fetchDados();
-  }, [fetchDados]);
+  }, [fetchDados, isCoordenador, cursoIds, id, navigate]);
+
 
   const handleAddTurma = async (nome) => {
     try {
