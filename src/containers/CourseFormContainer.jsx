@@ -41,9 +41,9 @@ const CourseFormContainer = () => {
           const course = response.data;
           setFormData({
             nome: course.nome,
-            sigla: '', // O backend não tem sigla ainda na entidade Curso, mas o form tem
+            sigla: course.sigla || '',
             cargaHoraria: course.horasTotais?.toString() || '',
-            categoria: '', // O backend não tem categoria ainda na entidade Curso
+            categoria: course.categoria || '',
             coordenadorId: course.coordenadorId || ''
           });
         } catch (error) {
@@ -69,7 +69,9 @@ const CourseFormContainer = () => {
       const payload = { 
         nome: formData.nome,
         horasTotais: formData.cargaHoraria ? parseInt(formData.cargaHoraria) : 100,
-        coordenadorId: formData.coordenadorId || null
+        coordenadorId: formData.coordenadorId || null,
+        sigla: formData.sigla,
+        categoria: formData.categoria
       };
       
       if (isEdit && id) {

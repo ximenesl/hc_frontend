@@ -15,6 +15,12 @@
   flex-direction: column;
 }
 
+.courses-page-title {
+  color: #000000 !important;
+  margin-bottom: 20px !important;
+  font-weight: 700 !important;
+}
+
 .course-card {
   margin-bottom: 20px;
   border-radius: 8px;

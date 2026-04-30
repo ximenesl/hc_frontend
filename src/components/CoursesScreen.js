@@ -43,6 +43,7 @@ const CoursesScreen = ({
 
       <Content className="courses-content">
         <div className="courses-inner-content">
+          <Title level={4} className="courses-page-title">Gestão de Curso</Title>
           {courses.map(course => (
             <Card className="course-card" key={course.id}>
               <Title level={5} className="course-title">{course.name}</Title>
@@ -142,7 +143,7 @@ const CoursesScreen = ({
         <div className="delete-drawer-content">
           <WarningFilled className="delete-warning-icon" />
           <Title level={4} className="delete-warning-title">
-            Tem certeza que deseja<br />excluir o curso?
+            Deseja excluir este cadastro?
           </Title>
 
           <Button
