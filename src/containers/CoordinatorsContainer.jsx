@@ -36,12 +36,12 @@ const CoordinatorsContainer = () => {
           const courseNames = (u.cursos && u.cursos.length > 0) 
             ? u.cursos.map(c => c.nome).join(', ') 
             : 'Sem vínculo';
-          const firstCursoId = (u.cursos && u.cursos.length > 0) ? u.cursos[0].id : null;
+          const courseIds = (u.cursos && u.cursos.length > 0) ? u.cursos.map(c => c.id) : [];
           return {
             id: u.id,
             nome: u.nome,
             email: u.email,
-            cursoId: firstCursoId,
+            cursoIds: courseIds,
             cursoNome: courseNames
           };
         });
@@ -76,7 +76,7 @@ const CoordinatorsContainer = () => {
     editForm.setFieldsValue({
       nome: coord.nome,
       email: coord.email,
-      cursoId: coord.cursoId
+      cursoIds: coord.cursoIds
     });
     setIsEditModalVisible(true);
   };
@@ -89,7 +89,7 @@ const CoordinatorsContainer = () => {
         nome: values.nome,
         email: values.email,
         role: 'COORDENADOR',
-        cursoId: values.cursoId || null
+        cursoIds: values.cursoIds || []
       });
       message.success('Coordenador atualizado com sucesso!');
       setIsEditModalVisible(false);

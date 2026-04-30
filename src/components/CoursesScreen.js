@@ -35,7 +35,7 @@ const CoursesScreen = ({
   onAddStudent,
   onViewTurmas
 }) => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, isCoordenador } = useAuth();
 
   return (
     <Layout className="courses-layout">
@@ -75,7 +75,7 @@ const CoursesScreen = ({
                 </div>
               </div>
 
-              {isAdmin && (
+              {(isAdmin || isCoordenador) && (
                 <div className="course-actions">
                   <Button
                     className="view-turmas-button"
@@ -91,11 +91,13 @@ const CoursesScreen = ({
                   >
                     Editar
                   </Button>
-                  <Button
-                    className="delete-button"
-                    icon={<DeleteOutlined />}
-                    onClick={() => onDelete(course.id)}
-                  />
+                  {isAdmin && (
+                    <Button
+                      className="delete-button"
+                      icon={<DeleteOutlined />}
+                      onClick={() => onDelete(course.id)}
+                    />
+                  )}
                 </div>
               )}
             </Card>
@@ -103,65 +105,71 @@ const CoursesScreen = ({
         </div>
       </Content>
 
-      <FloatButton
-        className="add-float-button"
-        icon={<PlusOutlined />}
-        type="primary"
-        onClick={onAdd}
-      />
+      {isAdmin && (
+        <FloatButton
+          className="add-float-button"
+          icon={<PlusOutlined />}
+          type="primary"
+          onClick={onAdd}
+        />
+      )}
       <MainFooter />
 
-      <Modal
-        open={isAddModalVisible}
-        onCancel={onCloseAddModal}
-        footer={null}
-        title="Adicionar"
-        className="custom-bottom-modal"
-        closeIcon={<span style={{ color: '#fff' }}>X</span>}
-      >
-        <div className="add-drawer-content">
-          <div className="add-option-btn" onClick={onAddCourse}>
-            <ReadOutlined className="add-option-icon" />
-            <div className="add-option-text">
-              <Text className="add-option-title">Novo Curso</Text>
-              <Text className="add-option-desc">Cadastre um novo curso</Text>
+      {isAdmin && (
+        <Modal
+          open={isAddModalVisible}
+          onCancel={onCloseAddModal}
+          footer={null}
+          title="Adicionar"
+          className="custom-bottom-modal"
+          closeIcon={<span style={{ color: '#fff' }}>X</span>}
+        >
+          <div className="add-drawer-content">
+            <div className="add-option-btn" onClick={onAddCourse}>
+              <ReadOutlined className="add-option-icon" />
+              <div className="add-option-text">
+                <Text className="add-option-title">Novo Curso</Text>
+                <Text className="add-option-desc">Cadastre um novo curso</Text>
+              </div>
+              <RightOutlined className="add-option-arrow" />
             </div>
-            <RightOutlined className="add-option-arrow" />
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
 
-      <Modal
-        open={isDeleteModalVisible}
-        onCancel={onCloseDeleteModal}
-        footer={null}
-        centered
-        className="custom-delete-modal"
-        closeIcon={<span style={{ color: '#fff' }}>X</span>}
-      >
-        <div className="delete-drawer-content">
-          <WarningFilled className="delete-warning-icon" />
-          <Title level={4} className="delete-warning-title">
-            Tem certeza que deseja<br />excluir o curso?
-          </Title>
+      {isAdmin && (
+        <Modal
+          open={isDeleteModalVisible}
+          onCancel={onCloseDeleteModal}
+          footer={null}
+          centered
+          className="custom-delete-modal"
+          closeIcon={<span style={{ color: '#fff' }}>X</span>}
+        >
+          <div className="delete-drawer-content">
+            <WarningFilled className="delete-warning-icon" />
+            <Title level={4} className="delete-warning-title">
+              Tem certeza que deseja<br />excluir o curso?
+            </Title>
 
-          <Button
-            type="primary"
-            className="delete-confirm-btn"
-            onClick={onConfirmDelete}
-            style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
-          >
-            Excluir
-          </Button>
-          <Button
-            className="delete-cancel-btn"
-            onClick={onCloseDeleteModal}
-            style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
-          >
-            Cancelar
-          </Button>
-        </div>
-      </Modal>
+            <Button
+              type="primary"
+              className="delete-confirm-btn"
+              onClick={onConfirmDelete}
+              style={{ width: '100%', height: '45px', marginBottom: '8px', borderRadius: '8px' }}
+            >
+              Excluir
+            </Button>
+            <Button
+              className="delete-cancel-btn"
+              onClick={onCloseDeleteModal}
+              style={{ width: '100%', height: '45px', borderRadius: '8px', backgroundColor: '#F59120', color: '#fff', border: 'none' }}
+            >
+              Cancelar
+            </Button>
+          </div>
+        </Modal>
+      )}
 
     </Layout>
   );

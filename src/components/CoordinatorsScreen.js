@@ -213,10 +213,14 @@ const CoordinatorsScreen = ({
             </Form.Item>
 
             <Form.Item
-              name="cursoId"
-              label="Vínculo com Curso"
+              name="cursoIds"
+              label="Cursos que Coordena"
             >
-              <Select placeholder="Selecione o curso" allowClear>
+              <Select 
+                mode="multiple" 
+                placeholder="Selecione os cursos" 
+                allowClear
+              >
                 {cursos && cursos.map(c => (
                   <Option key={c.id} value={c.id}>{c.nome}</Option>
                 ))}

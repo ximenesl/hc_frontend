@@ -96,3 +96,21 @@ code {
 .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   color: #333;
 }
+
+/* Global Modal Styles */
+.custom-bottom-modal .ant-modal-content,
+.custom-delete-modal .ant-modal-content {
+  background-color: var(--senac-blue) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+
+.custom-bottom-modal .ant-modal-title,
+.custom-delete-modal .ant-modal-title {
+  color: #ffffff !important;
+}
+
+.custom-bottom-modal .ant-modal-close,
+.custom-delete-modal .ant-modal-close {
+  color: #ffffff !important;
+}
