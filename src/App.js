@@ -16,11 +16,11 @@ import CourseTurmasContainer from './containers/CourseTurmasContainer';
 import CoordinatorFormContainer from './containers/CoordinatorFormContainer';
 import CoordinatorsContainer from './containers/CoordinatorsContainer';
 import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
-import CodeVerificationContainer from './containers/CodeVerificationContainer';
-import ResetPasswordContainer from './containers/ResetPasswordContainer';
 import StudentFormContainer from './containers/StudentFormContainer';
 import StudentDashboardContainer from './containers/StudentDashboardContainer';
+import ChangePasswordContainer from './containers/ChangePasswordContainer';
 import './App.css';
+
 
 const theme = {
   token: {
@@ -51,9 +51,8 @@ const theme = {
 };
 
 
-import ChangePasswordContainer from './containers/ChangePasswordContainer';
-
 function App() {
+
   return (
     <ConfigProvider theme={theme}>
       <div className="app-container">

@@ -7,8 +7,8 @@ import {
   FileSearchOutlined,
   TeamOutlined,
   SettingOutlined,
-  MessageOutlined,
   LogoutOutlined,
+
   BookOutlined,
   SolutionOutlined,
   LockOutlined
