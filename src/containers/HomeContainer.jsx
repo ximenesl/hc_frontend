@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { message } from 'antd';
 import HomeScreen from '../components/HomeScreen';
 import api from '../api/axiosConfig';
+import useAuth from '../hooks/useAuth';
 
 const HomeContainer = () => {
+  const { isCoordenador, cursoIds } = useAuth();
   const [stats, setStats] = useState({
     totalAlunos: 0,
     pendencias: 0
@@ -22,9 +24,26 @@ const HomeContainer = () => {
           api.get('/api/cursos')
         ]);
 
-        const users = usersRes.data;
-        const certs = certsRes.data;
-        const cursos = cursosRes.data;
+        let users = usersRes.data;
+        let certs = certsRes.data;
+        let cursos = cursosRes.data;
+
+        // Se for coordenador, filtrar dados para mostrar apenas o que é relevante para os cursos dele
+        if (isCoordenador) {
+          // Filtrar alunos: apenas alunos vinculados aos cursos do coordenador
+          users = users.filter(u => 
+            u.role === 'ADMIN' || // Mantemos admins na lista geral mas filtramos alunos abaixo
+            (u.role === 'ALUNO' && u.cursos && u.cursos.some(c => cursoIds.includes(c.id))) ||
+            (u.role === 'COORDENADOR' && u.cursos && u.cursos.some(c => cursoIds.includes(c.id)))
+          );
+
+          // Filtrar certificados: apenas certificados de alunos dos cursos do coordenador
+          const alunoIdsNoCurso = users.filter(u => u.role === 'ALUNO').map(u => u.id);
+          certs = certs.filter(c => alunoIdsNoCurso.includes(c.alunoId));
+
+          // Filtrar cursos: apenas os cursos que ele coordena
+          cursos = cursos.filter(c => cursoIds.includes(c.id));
+        }
 
         const alunos = users.filter(u => u.role === 'ALUNO');
         const totalAlunos = alunos.length;
@@ -57,9 +76,9 @@ const HomeContainer = () => {
         }
 
         const userCourseMap = {};
-        users.forEach(u => {
-          if (u.curso) {
-            userCourseMap[u.id] = u.curso.id;
+        usersRes.data.forEach(u => {
+          if (u.cursos && u.cursos.length > 0) {
+            userCourseMap[u.id] = u.cursos[0].id;
           }
         });
 
@@ -104,7 +123,8 @@ const HomeContainer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isCoordenador, cursoIds]);
+
 
   return (
     <HomeScreen 
