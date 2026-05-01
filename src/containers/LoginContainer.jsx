@@ -45,6 +45,7 @@ const LoginContainer = () => {
       onLogin={handleLogin} 
       onShowRegister={() => navigate('/register')}
       onForgotPassword={() => navigate('/forgot-password')}
+      onRedefinePassword={() => navigate('/change-password')}
       isLoading={loading} 
     />
   );
