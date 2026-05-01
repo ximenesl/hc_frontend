@@ -35,7 +35,7 @@ const CoursesScreen = ({
   onAddStudent,
   onViewTurmas
 }) => {
-  const { isAdmin, isCoordenador } = useAuth();
+  const { isAdmin } = useAuth();
 
   return (
     <Layout className="courses-layout">

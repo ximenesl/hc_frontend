@@ -8,6 +8,7 @@ import useAuth from '../hooks/useAuth';
 
 const CoursesContainer = () => {
   const navigate = useNavigate();
+  const { isCoordenador, cursoIds } = useAuth();
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [courseToDelete, setCourseToDelete] = useState(null);
@@ -18,8 +19,6 @@ const CoursesContainer = () => {
     try {
       setLoading(true);
       const response = await api.get('/api/cursos');
-      
-      const { isAdmin, isCoordenador, cursoIds } = useAuth();
       
       let data = response.data;
       if (isCoordenador) {
