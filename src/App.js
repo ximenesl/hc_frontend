@@ -19,6 +19,7 @@ import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
 import StudentFormContainer from './containers/StudentFormContainer';
 import StudentDashboardContainer from './containers/StudentDashboardContainer';
 import ChangePasswordContainer from './containers/ChangePasswordContainer';
+import PublicChangePasswordContainer from './containers/PublicChangePasswordContainer';
 import './App.css';
 
 
@@ -61,6 +62,8 @@ function App() {
             <Route path="/" element={<SplashScreen />} />
             <Route path="/login" element={<LoginContainer />} />
             <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
+            <Route path="/redefine-password" element={<PublicChangePasswordContainer />} />
+
 
             <Route path="/home" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><HomeContainer /></ProtectedRoute>} />
             <Route path="/student-dashboard" element={<ProtectedRoute allowedRoles={['ALUNO']}><StudentDashboardContainer /></ProtectedRoute>} />
