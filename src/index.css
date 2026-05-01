@@ -98,8 +98,16 @@ code {
   color: #333;
 }
 
-/* Global Modal Styles - Extreme Specificity to override AntD CSS-in-JS */
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-content {
+/* Global Modal Styles - Ant Design v5 Variable Overrides */
+.ant-modal.custom-bottom-modal {
+  --ant-modal-content-bg: #004587 !important;
+  --ant-modal-header-bg: transparent !important;
+  --ant-modal-title-color: #ffffff !important;
+  --ant-modal-close-color: #ffffff !important;
+  --ant-modal-close-hover-bg: rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-bottom-modal .ant-modal-content {
   background-color: #004587 !important;
   border-radius: 24px 24px 0 0 !important;
   padding: 32px 24px !important;
@@ -107,41 +115,36 @@ body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-c
   box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-header {
+.custom-bottom-modal .ant-modal-header {
   background-color: transparent !important;
   border-bottom: none !important;
   padding: 0 !important;
   margin-bottom: 24px !important;
 }
 
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-title {
+.custom-bottom-modal .ant-modal-title {
   color: #ffffff !important;
   font-size: 20px !important;
   font-weight: 700 !important;
   text-align: center !important;
-  background-color: transparent !important;
 }
 
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-body {
+.custom-bottom-modal .ant-modal-body {
   padding: 0 !important;
   color: #ffffff !important;
 }
 
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-close {
+.custom-bottom-modal .ant-modal-close {
   color: #ffffff !important;
   top: 20px !important;
 }
 
-/* Ensure Typography inside blue modal is white */
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-typography,
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .add-option-title,
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .add-option-desc {
+.custom-bottom-modal .ant-typography,
+.custom-bottom-modal .add-option-title,
+.custom-bottom-modal .add-option-desc {
   color: #ffffff !important;
 }
 
-body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-close:hover {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-}
 
 
 .add-drawer-content {
