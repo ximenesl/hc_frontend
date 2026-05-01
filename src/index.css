@@ -99,69 +99,71 @@ code {
 }
 
 /* Global Modal Styles */
-.custom-bottom-modal .ant-modal-content {
-  background-color: var(--senac-blue) !important;
-  border-radius: 20px 20px 0 0 !important;
+div.custom-bottom-modal .ant-modal-content {
+  background-color: #004587 !important;
+  border-radius: 24px 24px 0 0 !important;
   padding: 32px 24px !important;
   color: #ffffff !important;
   overflow: hidden !important;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.2) !important;
 }
 
-.custom-bottom-modal .ant-modal-header {
+div.custom-bottom-modal .ant-modal-header {
   background-color: transparent !important;
   border-bottom: none !important;
   padding: 0 !important;
   margin-bottom: 24px !important;
 }
 
-.custom-bottom-modal .ant-modal-title {
+div.custom-bottom-modal .ant-modal-title {
   color: #ffffff !important;
   font-size: 20px !important;
   font-weight: 700 !important;
-  text-align: center;
+  text-align: center !important;
   background-color: transparent !important;
+  width: 100%;
 }
 
-.custom-bottom-modal .ant-modal-body {
+div.custom-bottom-modal .ant-modal-body {
   padding: 0 !important;
   color: #ffffff !important;
 }
 
-.custom-bottom-modal .ant-modal-close {
+div.custom-bottom-modal .ant-modal-close {
   color: #ffffff !important;
   top: 20px !important;
 }
 
-.custom-bottom-modal .ant-modal-close:hover {
+div.custom-bottom-modal .ant-modal-close:hover {
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
-
 
 .add-drawer-content {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding-bottom: 8px;
 }
 
 .add-option-btn {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .add-option-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px);
 }
 
 .add-option-icon {
-  font-size: 28px;
-  color: var(--senac-orange);
+  font-size: 28px !important;
+  color: #F59120 !important; /* Senac Orange */
   margin-right: 20px;
 }
 
@@ -185,9 +187,10 @@ code {
 }
 
 .add-option-arrow {
-  color: #ffffff;
-  font-size: 18px;
+  color: #ffffff !important;
+  font-size: 18px !important;
   opacity: 0.6;
 }
+
 
 

@@ -1,11 +1,18 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const useAuth = () => {
   const token = localStorage.getItem('token');
   const userName = localStorage.getItem('userName') || 'Usuário';
   const userRole = localStorage.getItem('userRole') || '';
   const cursoIdsStr = localStorage.getItem('cursoIds') || '[]';
-  const cursoIds = JSON.parse(cursoIdsStr);
+
+  const cursoIds = useMemo(() => {
+    try {
+      return JSON.parse(cursoIdsStr);
+    } catch (e) {
+      return [];
+    }
+  }, [cursoIdsStr]);
 
   const logout = useCallback(() => {
     localStorage.clear();
@@ -23,8 +30,20 @@ const useAuth = () => {
   const isCoordenador = userRole === 'COORDENADOR';
   const isAluno = userRole === 'ALUNO';
 
-  return { token, userName, userRole, cursoIds, isAuthenticated, isAdmin, isCoordenador, isAluno, logout, saveSession };
+  return useMemo(() => ({
+    token, 
+    userName, 
+    userRole, 
+    cursoIds, 
+    isAuthenticated, 
+    isAdmin, 
+    isCoordenador, 
+    isAluno, 
+    logout, 
+    saveSession 
+  }), [token, userName, userRole, cursoIds, isAuthenticated, isAdmin, isCoordenador, isAluno, logout, saveSession]);
 
 };
 
 export default useAuth;
+

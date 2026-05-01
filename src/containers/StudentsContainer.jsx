@@ -18,14 +18,12 @@ const StudentsContainer = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [usersRes, cursosRes, certsRes, turmasRes] = await Promise.all([
+        const [usersRes, cursosRes, turmasRes] = await Promise.all([
           api.get('/api/users'),
           api.get('/api/cursos'),
-          api.get('/api/certificates'),
           api.get('/api/turmas')
         ]);
 
-        const certs = certsRes.data;
         const turmas = turmasRes.data;
 
         let filteredCursos = cursosRes.data;
@@ -51,9 +49,6 @@ const StudentsContainer = () => {
         }
         
         const formattedStudents = alunos.map(aluno => {
-          const alunoCerts = certs.filter(c => c.alunoId === aluno.id && (c.status === 'APROVADO' || c.status === 'DEFERIDO' || c.status === 'VALIDADO'));
-          const horasCompletas = alunoCerts.reduce((acc, curr) => acc + (curr.cargaHoraria || 0), 0);
-          
           let turmaName = '-';
           if (aluno.turma) {
              turmaName = aluno.turma.nome;
@@ -68,7 +63,7 @@ const StudentsContainer = () => {
             codigoTurma: turmaName,
             codigoCurso: firstCurso ? firstCurso.id : null,
             cursoNome: firstCurso ? firstCurso.nome : 'Não vinculado',
-            horasCompletas: horasCompletas,
+            horasCompletas: aluno.horasAprovadas || 0,
             horasTotais: firstCurso && firstCurso.horasTotais ? firstCurso.horasTotais : 100
           };
         });
@@ -84,6 +79,7 @@ const StudentsContainer = () => {
 
     fetchData();
   }, [isCoordenador, cursoIds]);
+
 
 
   const handleSearch = (value) => {

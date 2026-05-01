@@ -46,13 +46,10 @@ const theme = {
       colorPrimaryHover: '#e68112',
       controlHeight: 48,
       fontWeight: 600,
-    },
-    Modal: {
-      colorBgElevated: '#ffffff',
-      colorText: '#000000',
     }
   }
 };
+
 
 function App() {
   return (

@@ -140,7 +140,7 @@ const StudentsScreen = ({
         open={isAddModalVisible}
         onCancel={onCloseAddModal}
         footer={null}
-        title="Adicionar"
+        title={<span style={{ color: '#fff' }}>Adicionar</span>}
         className="custom-bottom-modal"
         closeIcon={<span style={{color: '#fff'}}>X</span>}
       >
