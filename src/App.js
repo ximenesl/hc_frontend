@@ -51,6 +51,8 @@ const theme = {
 };
 
 
+import ChangePasswordContainer from './containers/ChangePasswordContainer';
+
 function App() {
   return (
     <ConfigProvider theme={theme}>
@@ -60,12 +62,12 @@ function App() {
             <Route path="/" element={<SplashScreen />} />
             <Route path="/login" element={<LoginContainer />} />
             <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
-            <Route path="/verify-code" element={<CodeVerificationContainer />} />
-            <Route path="/reset-password" element={<ResetPasswordContainer />} />
 
             <Route path="/home" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><HomeContainer /></ProtectedRoute>} />
             <Route path="/student-dashboard" element={<ProtectedRoute allowedRoles={['ALUNO']}><StudentDashboardContainer /></ProtectedRoute>} />
             <Route path="/validation" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><ValidationContainer /></ProtectedRoute>} />
+            <Route path="/change-password" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR', 'ALUNO']}><ChangePasswordContainer /></ProtectedRoute>} />
+
             <Route path="/students" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentsContainer /></ProtectedRoute>} />
             <Route path="/students/new" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />
             <Route path="/students/edit/:id" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />

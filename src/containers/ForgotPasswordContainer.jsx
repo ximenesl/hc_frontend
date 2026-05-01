@@ -14,9 +14,9 @@ const ForgotPasswordContainer = () => {
       await api.post('/api/auth/forgot-password', {
         email: values.email
       });
-      localStorage.setItem('resetEmail', values.email);
-      message.success('Código de recuperação enviado para o seu e-mail!');
-      navigate('/verify-code');
+      message.success('Uma nova senha temporária foi enviada para o seu e-mail!');
+      message.info('Verifique sua caixa de entrada e spam.');
+      navigate('/login');
     } catch (error) {
       if (error.response && error.response.status === 404) {
         message.error('Usuário não encontrado com o e-mail fornecido.');
@@ -24,6 +24,7 @@ const ForgotPasswordContainer = () => {
         message.error('Erro ao solicitar recuperação. Tente novamente mais tarde.');
       }
     } finally {
+
       setLoading(false);
     }
   };

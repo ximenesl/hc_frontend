@@ -10,8 +10,10 @@ import {
   MessageOutlined,
   LogoutOutlined,
   BookOutlined,
-  SolutionOutlined
+  SolutionOutlined,
+  LockOutlined
 } from '@ant-design/icons';
+
 import useAuth from '../hooks/useAuth';
 import './NavigationDrawer.css';
 
@@ -99,9 +101,9 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item">
-          <MessageOutlined className="drawer-icon" />
-          <Text className="drawer-text">Ajuda/Suporte</Text>
+        <div className="drawer-menu-item" onClick={() => handleNavigation('/change-password')}>
+          <LockOutlined className="drawer-icon" />
+          <Text className="drawer-text">Redefinir Senha</Text>
         </div>
         <div className="drawer-divider" />
 
@@ -109,6 +111,7 @@ const NavigationDrawer = ({ visible, onClose }) => {
           <LogoutOutlined className="drawer-icon" />
           <Text className="drawer-text">Sair</Text>
         </div>
+
       </div>
     </Drawer>
   );
