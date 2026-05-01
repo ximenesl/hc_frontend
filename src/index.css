@@ -98,45 +98,51 @@ code {
   color: #333;
 }
 
-/* Global Modal Styles */
-div.custom-bottom-modal .ant-modal-content {
+/* Global Modal Styles - Extreme Specificity to override AntD CSS-in-JS */
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-content {
   background-color: #004587 !important;
   border-radius: 24px 24px 0 0 !important;
   padding: 32px 24px !important;
   color: #ffffff !important;
-  overflow: hidden !important;
-  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
-div.custom-bottom-modal .ant-modal-header {
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-header {
   background-color: transparent !important;
   border-bottom: none !important;
   padding: 0 !important;
   margin-bottom: 24px !important;
 }
 
-div.custom-bottom-modal .ant-modal-title {
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-title {
   color: #ffffff !important;
   font-size: 20px !important;
   font-weight: 700 !important;
   text-align: center !important;
   background-color: transparent !important;
-  width: 100%;
 }
 
-div.custom-bottom-modal .ant-modal-body {
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-body {
   padding: 0 !important;
   color: #ffffff !important;
 }
 
-div.custom-bottom-modal .ant-modal-close {
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-close {
   color: #ffffff !important;
   top: 20px !important;
 }
 
-div.custom-bottom-modal .ant-modal-close:hover {
+/* Ensure Typography inside blue modal is white */
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-typography,
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .add-option-title,
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .add-option-desc {
+  color: #ffffff !important;
+}
+
+body .ant-modal-root .ant-modal-wrap .ant-modal.custom-bottom-modal .ant-modal-close:hover {
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
+
 
 .add-drawer-content {
   display: flex;

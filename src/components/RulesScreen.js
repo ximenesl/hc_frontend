@@ -167,7 +167,19 @@ const RulesScreen = ({
         title={<span style={{ color: '#fff' }}>Adicionar</span>}
         className="custom-bottom-modal"
         closeIcon={<span style={{color: '#fff'}}>X</span>}
+        styles={{
+          content: {
+            backgroundColor: '#004587',
+            borderRadius: '24px 24px 0 0',
+            padding: '32px 24px',
+            boxShadow: '0 -10px 25px rgba(0, 0, 0, 0.3)'
+          },
+          body: {
+            color: '#fff'
+          }
+        }}
       >
+
         <div className="add-drawer-content">
           <div className="add-option-btn" onClick={handleOptionRegra}>
             <FileTextOutlined className="add-option-icon" />

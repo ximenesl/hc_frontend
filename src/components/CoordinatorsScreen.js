@@ -133,13 +133,25 @@ const CoordinatorsScreen = ({
         title={<span style={{ color: '#fff' }}>Adicionar</span>}
         className="custom-bottom-modal"
         closeIcon={<span style={{color: '#fff'}}>X</span>}
+        styles={{
+          content: {
+            backgroundColor: '#004587',
+            borderRadius: '24px 24px 0 0',
+            padding: '32px 24px',
+            boxShadow: '0 -10px 25px rgba(0, 0, 0, 0.3)'
+          },
+          body: {
+            color: '#fff'
+          }
+        }}
       >
+
         <div className="add-drawer-content">
           <div className="add-option-btn" onClick={onAddCoordinator}>
             <UserOutlined className="add-option-icon" />
             <div className="add-option-text">
-              <Text className="add-option-title">Novo Coordenador</Text>
-              <Text className="add-option-desc">Cadastre um novo coordenador</Text>
+              <Text className="add-option-title" style={{ color: '#fff' }}>Novo Coordenador</Text>
+              <Text className="add-option-desc" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Cadastre um novo coordenador</Text>
             </div>
             <RightOutlined className="add-option-arrow" />
           </div>
