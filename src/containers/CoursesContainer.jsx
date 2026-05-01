@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import CoursesScreen from '../components/CoursesScreen';
@@ -15,7 +15,7 @@ const CoursesContainer = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchCourses = async () => {
+  const fetchCourses = useCallback(async () => {
     try {
       setLoading(true);
       const response = await api.get('/api/cursos');
@@ -44,11 +44,11 @@ const CoursesContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isCoordenador, cursoIds]);
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [fetchCourses]);
 
   const handleEdit = (id) => {
     navigate(`/courses/edit/${id}`);

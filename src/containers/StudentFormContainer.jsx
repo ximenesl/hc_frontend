@@ -65,7 +65,7 @@ const StudentFormContainer = () => {
       }
     };
     fetchDados();
-  }, [id, isEdit, isCoordenador, cursoIds]);
+  }, [id, isEdit, isCoordenador, cursoIds, navigate]);
 
 
   const availableTurmas = turmas.filter(t => t.cursoId === formData.cursoId);
