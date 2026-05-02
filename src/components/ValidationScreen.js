@@ -94,18 +94,30 @@ const ValidationScreen = () => {
             </div>
           ) : (
             <>
-              <div className="certificate-placeholder" style={{ height: '400px', padding: 0, background: '#f0f2f5' }}>
+              <div className="certificate-placeholder" style={{ height: '400px', padding: 0, background: '#f0f2f5', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #ddd', borderRadius: '8px', marginBottom: '20px' }}>
                 {currentCert.arquivoUrl ? (
-                  <object
-                    data={`${API_BASE_URL}${currentCert.arquivoUrl}`}
-                    type="application/pdf"
-                    width="100%"
-                    height="100%"
-                  >
-                    <div style={{ padding: '20px', textAlign: 'center' }}>
-                      <Text>Seu navegador não suporta visualização de PDF. <a href={`${API_BASE_URL}${currentCert.arquivoUrl}`} target="_blank" rel="noopener noreferrer">Clique aqui para baixar</a></Text>
-                    </div>
-                  </object>
+                  <>
+                    <object
+                      data={`${API_BASE_URL}${currentCert.arquivoUrl}`}
+                      type="application/pdf"
+                      width="100%"
+                      height="100%"
+                      style={{ borderRadius: '8px' }}
+                    >
+                      <div style={{ padding: '20px', textAlign: 'center' }}>
+                        <Space direction="vertical">
+                          <Text strong>Visualização não disponível no navegador</Text>
+                          <Button 
+                            type="primary" 
+                            icon={<SolutionOutlined />} 
+                            onClick={() => window.open(`${API_BASE_URL}${currentCert.arquivoUrl}`, '_blank')}
+                          >
+                            Abrir Certificado em Nova Aba
+                          </Button>
+                        </Space>
+                      </div>
+                    </object>
+                  </>
                 ) : (
                   <Text type="secondary">Nenhum arquivo disponível</Text>
                 )}
@@ -168,14 +180,14 @@ const ValidationScreen = () => {
                 </Button>
               </div>
 
-              <div style={{ marginTop: 20, textAlign: 'center' }}>
+              <div style={{ marginTop: 40, textAlign: 'center', padding: '20px', background: '#fff0f0', borderRadius: '8px', border: '1px dashed #ff4d4f' }}>
+                <Text type="secondary" style={{ display: 'block', marginBottom: 10 }}>Área de Testes</Text>
                 <Button 
-                  type="link" 
                   danger 
                   onClick={handleReset}
-                  style={{ fontSize: 12, opacity: 0.7 }}
+                  style={{ fontWeight: 'bold' }}
                 >
-                  [ RESETAR TODOS PARA TESTE ]
+                  RESETAR TODOS OS CERTIFICADOS PARA PENDENTE
                 </Button>
               </div>
             </>
