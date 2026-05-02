@@ -101,12 +101,6 @@ const NavigationDrawer = ({ visible, onClose }) => {
         </div>
         <div className="drawer-divider" />
 
-        <div className="drawer-menu-item" onClick={() => handleNavigation('/change-password')}>
-          <LockOutlined className="drawer-icon" />
-          <Text className="drawer-text">Redefinir Senha</Text>
-        </div>
-        <div className="drawer-divider" />
-
         <div className="drawer-menu-item" onClick={handleLogout}>
           <LogoutOutlined className="drawer-icon" />
           <Text className="drawer-text">Sair</Text>
