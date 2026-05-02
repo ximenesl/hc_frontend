@@ -75,13 +75,7 @@ const HomeContainer = () => {
           });
         }
 
-        const userCourseMap = {};
-        usersRes.data.forEach(u => {
-          if (u.cursos && u.cursos.length > 0) {
-            userCourseMap[u.id] = u.cursos[0].id;
-          }
-        });
-
+        // Mapeamento de estatísticas por curso
         const courseStatsMap = {};
         cursos.forEach(c => {
           courseStatsMap[c.id] = {
@@ -103,7 +97,7 @@ const HomeContainer = () => {
         });
 
         certs.forEach(cert => {
-          const cursoId = userCourseMap[cert.alunoId];
+          const cursoId = cert.cursoId;
           if (cursoId && courseStatsMap[cursoId]) {
             courseStatsMap[cursoId].enviados += 1;
             if (cert.status === 'APROVADO' || cert.status === 'DEFERIDO' || cert.status === 'VALIDADO') {
