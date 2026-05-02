@@ -107,9 +107,10 @@ const ValidationScreen = () => {
                     >
                       <div style={{ padding: '20px', textAlign: 'center' }}>
                         <Space direction="vertical">
-                          <Text strong>Visualização não disponível no navegador</Text>
+                          <Text strong style={{ color: '#333' }}>Visualização não disponível no navegador</Text>
                           <Button 
                             type="primary" 
+                            style={{ backgroundColor: '#f57c00', borderColor: '#f57c00' }}
                             icon={<SolutionOutlined />} 
                             onClick={() => window.open(`${API_BASE_URL}${currentCert.arquivoUrl}`, '_blank')}
                           >
