@@ -22,6 +22,20 @@ const ValidationScreen = () => {
     fetchCertificates();
   }, []);
 
+  const handleReset = async () => {
+    try {
+      setLoading(true);
+      await api.post('/api/certificates/reset-tests');
+      message.success('Todos os certificados foram resetados para PENDENTE!');
+      await fetchCertificates();
+    } catch (error) {
+      console.error('Erro ao resetar certificados', error);
+      message.error('Erro ao resetar certificados');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchCertificates = async () => {
     try {
       setLoading(true);
@@ -80,19 +94,18 @@ const ValidationScreen = () => {
             </div>
           ) : (
             <>
-              <div className="certificate-placeholder" style={{ overflow: 'hidden', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                {currentCert.arquivoUrl && currentCert.arquivoUrl.toLowerCase().endsWith('.pdf') ? (
-                  <iframe
-                    src={`${API_BASE_URL}${currentCert.arquivoUrl}`}
-                    title="Certificado"
-                    style={{ width: '100%', height: '100%', border: 'none' }}
-                  />
-                ) : currentCert.arquivoUrl ? (
-                  <img
-                    src={`${API_BASE_URL}${currentCert.arquivoUrl}`}
-                    alt="Certificado"
-                    style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                  />
+              <div className="certificate-placeholder" style={{ height: '400px', padding: 0, background: '#f0f2f5' }}>
+                {currentCert.arquivoUrl ? (
+                  <object
+                    data={`${API_BASE_URL}${currentCert.arquivoUrl}`}
+                    type="application/pdf"
+                    width="100%"
+                    height="100%"
+                  >
+                    <div style={{ padding: '20px', textAlign: 'center' }}>
+                      <Text>Seu navegador não suporta visualização de PDF. <a href={`${API_BASE_URL}${currentCert.arquivoUrl}`} target="_blank" rel="noopener noreferrer">Clique aqui para baixar</a></Text>
+                    </div>
+                  </object>
                 ) : (
                   <Text type="secondary">Nenhum arquivo disponível</Text>
                 )}
@@ -152,6 +165,17 @@ const ValidationScreen = () => {
                 </Button>
                 <Button className="btn-reject" onClick={() => handleValidation('REJEITADO')}>
                   Reprovar
+                </Button>
+              </div>
+
+              <div style={{ marginTop: 20, textAlign: 'center' }}>
+                <Button 
+                  type="link" 
+                  danger 
+                  onClick={handleReset}
+                  style={{ fontSize: 12, opacity: 0.7 }}
+                >
+                  [ RESETAR TODOS PARA TESTE ]
                 </Button>
               </div>
             </>

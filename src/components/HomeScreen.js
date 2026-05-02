@@ -68,25 +68,16 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
                       margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
                     >
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                      <XAxis dataKey="nome" stroke="#fff" tick={{ fill: 'rgba(255,255,255,0.7)' }} />
-                      <YAxis stroke="#fff" tick={{ fill: 'rgba(255,255,255,0.7)' }} />
+                      <XAxis dataKey="nome" stroke="#333" tick={{ fill: '#333' }} />
+                      <YAxis stroke="#333" tick={{ fill: '#333' }} />
                       <Tooltip content={<CustomTooltip />} />
-                      <Legend wrapperStyle={{ color: 'rgba(255,255,255,0.7)' }} />
-                      <Bar dataKey="enviados" name="Enviados" radius={[4, 4, 0, 0]}>
-                        {dashboardData.map((entry, index) => (
-                          <Cell key={`cell-env-${index}`} fill={entry.cor} opacity={0.5} />
-                        ))}
-                      </Bar>
-                      <Bar dataKey="aprovados" name="Aprovados" radius={[4, 4, 0, 0]}>
-                        {dashboardData.map((entry, index) => (
-                          <Cell key={`cell-apr-${index}`} fill={entry.cor} />
-                        ))}
-                      </Bar>
-                      <Bar dataKey="recusados" name="Recusados" radius={[4, 4, 0, 0]}>
-                        {dashboardData.map((entry, index) => (
-                          <Cell key={`cell-rec-${index}`} fill={entry.cor} opacity={0.3} />
-                        ))}
-                      </Bar>
+                      <Legend 
+                        wrapperStyle={{ paddingTop: '20px' }} 
+                        formatter={(value) => <span style={{ color: '#333', fontWeight: 500 }}>{value}</span>}
+                      />
+                      <Bar dataKey="enviados" name="Enviados" fill="#1890ff" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="aprovados" name="Aprovados" fill="#52c41a" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="recusados" name="Recusados" fill="#f5222d" radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
