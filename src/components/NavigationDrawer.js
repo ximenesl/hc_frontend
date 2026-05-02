@@ -10,8 +10,7 @@ import {
   LogoutOutlined,
 
   BookOutlined,
-  SolutionOutlined,
-  LockOutlined
+  SolutionOutlined
 } from '@ant-design/icons';
 
 import useAuth from '../hooks/useAuth';

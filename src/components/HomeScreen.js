@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Typography, Card, Badge, List, Space, Spin } from 'antd';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import './HomeScreen.css';

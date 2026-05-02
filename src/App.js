@@ -18,7 +18,6 @@ import CoordinatorsContainer from './containers/CoordinatorsContainer';
 import ForgotPasswordContainer from './containers/ForgotPasswordContainer';
 import StudentFormContainer from './containers/StudentFormContainer';
 import StudentDashboardContainer from './containers/StudentDashboardContainer';
-import ChangePasswordContainer from './containers/ChangePasswordContainer';
 import PublicChangePasswordContainer from './containers/PublicChangePasswordContainer';
 import './App.css';
 
