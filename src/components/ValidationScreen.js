@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Typography, Input, Button, Spin, message, Empty } from 'antd';
+import { Layout, Typography, Input, Button, Spin, message, Empty, Space } from 'antd';
+import { SolutionOutlined } from '@ant-design/icons';
 import MainFooter from './MainFooter';
 import MainHeader from './MainHeader';
 import api from '../api/axiosConfig';
