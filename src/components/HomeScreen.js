@@ -59,7 +59,7 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
 
           <div className="dashboard-section" style={{ marginTop: 24 }}>
             <Title level={4} className="section-title">Certificados por Curso</Title>
-            <Card className="dashboard-card" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: 12 }}>
+            <Card className="dashboard-card" style={{ background: '#f9f9f9', border: '1px solid #e8e8e8', borderRadius: 12 }}>
               {dashboardData && dashboardData.length > 0 ? (
                 <div style={{ width: '100%', height: 300 }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -67,13 +67,13 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
                       data={dashboardData}
                       margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                      <XAxis dataKey="nome" stroke="#333" tick={{ fill: '#333' }} />
-                      <YAxis stroke="#333" tick={{ fill: '#333' }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#ddd" vertical={false} />
+                      <XAxis dataKey="nome" stroke="#333" tick={{ fill: '#333', fontSize: 12 }} />
+                      <YAxis stroke="#333" tick={{ fill: '#333', fontSize: 12 }} />
                       <Tooltip content={<CustomTooltip />} />
                       <Legend 
                         wrapperStyle={{ paddingTop: '20px' }} 
-                        formatter={(value) => <span style={{ color: '#333', fontWeight: 500 }}>{value}</span>}
+                        formatter={(value) => <span style={{ color: '#333', fontWeight: 600 }}>{value}</span>}
                       />
                       <Bar dataKey="enviados" name="Enviados" fill="#1890ff" radius={[4, 4, 0, 0]} />
                       <Bar dataKey="aprovados" name="Aprovados" fill="#52c41a" radius={[4, 4, 0, 0]} />
@@ -82,7 +82,7 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <Text style={{ color: 'rgba(255,255,255,0.5)' }}>Nenhum dado disponível.</Text>
+                <Text style={{ color: '#999' }}>Nenhum dado disponível.</Text>
               )}
             </Card>
           </div>
@@ -90,11 +90,11 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
           {lastAction && (
             <div className="last-action-section" style={{ marginTop: 24 }}>
               <Title level={4} className="section-title">Última Ação</Title>
-              <Card className="last-action-card" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: 12 }}>
+              <Card className="last-action-card" style={{ background: '#f9f9f9', border: '1px solid #e8e8e8', borderRadius: 12 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <Text strong style={{ color: '#fff', display: 'block', fontSize: 16 }}>{lastAction.aluno}</Text>
-                    <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14 }}>{lastAction.tipo}</Text>
+                    <Text strong style={{ color: '#333', display: 'block', fontSize: 16 }}>{lastAction.aluno}</Text>
+                    <Text style={{ color: '#666', fontSize: 14 }}>{lastAction.tipo}</Text>
                   </div>
                   <Badge
                     className={`status-badge ${lastAction.status.toLowerCase()}`}
