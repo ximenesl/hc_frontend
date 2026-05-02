@@ -89,7 +89,8 @@ const HomeContainer = () => {
             nome: c.nome,
             cor: '#1890ff', 
             enviados: 0,
-            aprovados: 0
+            aprovados: 0,
+            recusados: 0
           };
         });
 
@@ -107,11 +108,13 @@ const HomeContainer = () => {
             courseStatsMap[cursoId].enviados += 1;
             if (cert.status === 'APROVADO' || cert.status === 'DEFERIDO' || cert.status === 'VALIDADO') {
               courseStatsMap[cursoId].aprovados += 1;
+            } else if (cert.status === 'REJEITADO' || cert.status === 'INDEFERIDO' || cert.status === 'RECUSADO') {
+              courseStatsMap[cursoId].recusados += 1;
             }
           }
         });
 
-        const dashboardList = Object.values(courseStatsMap).filter(c => c.enviados > 0 || c.aprovados > 0);
+        const dashboardList = Object.values(courseStatsMap).filter(c => c.enviados > 0 || c.aprovados > 0 || c.recusados > 0);
         setDashboardData(dashboardList);
 
       } catch (error) {

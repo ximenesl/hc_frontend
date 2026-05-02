@@ -28,6 +28,7 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
           <p style={{ color: '#fff', margin: 0, fontWeight: 'bold' }}>{label}</p>
           <p style={{ color: '#1890ff', margin: 0 }}>{`Enviados: ${payload[0].value}`}</p>
           <p style={{ color: '#52c41a', margin: 0 }}>{`Aprovados: ${payload[1].value}`}</p>
+          <p style={{ color: '#f5222d', margin: 0 }}>{`Recusados: ${payload[2] ? payload[2].value : 0}`}</p>
         </div>
       );
     }
@@ -79,6 +80,11 @@ const HomeScreen = ({ stats, recentSubmissions, dashboardData, lastAction, loadi
                       <Bar dataKey="aprovados" name="Aprovados" radius={[4, 4, 0, 0]}>
                         {dashboardData.map((entry, index) => (
                           <Cell key={`cell-apr-${index}`} fill={entry.cor} />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="recusados" name="Recusados" radius={[4, 4, 0, 0]}>
+                        {dashboardData.map((entry, index) => (
+                          <Cell key={`cell-rec-${index}`} fill={entry.cor} opacity={0.3} />
                         ))}
                       </Bar>
                     </BarChart>

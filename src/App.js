@@ -68,7 +68,6 @@ function App() {
             <Route path="/home" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><HomeContainer /></ProtectedRoute>} />
             <Route path="/student-dashboard" element={<ProtectedRoute allowedRoles={['ALUNO']}><StudentDashboardContainer /></ProtectedRoute>} />
             <Route path="/validation" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><ValidationContainer /></ProtectedRoute>} />
-            <Route path="/change-password" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR', 'ALUNO']}><ChangePasswordContainer /></ProtectedRoute>} />
 
             <Route path="/students" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentsContainer /></ProtectedRoute>} />
             <Route path="/students/new" element={<ProtectedRoute allowedRoles={['ADMIN', 'COORDENADOR']}><StudentFormContainer /></ProtectedRoute>} />
