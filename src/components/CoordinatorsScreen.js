@@ -6,6 +6,7 @@ import {
   BookOutlined,
   EditOutlined,
   DeleteOutlined,
+  StopOutlined,
   UserOutlined,
   RightOutlined,
   PlusOutlined
@@ -115,7 +116,7 @@ const CoordinatorsScreen = ({
                   </Button>
                   <Button
                     className="coord-delete-button"
-                    icon={coord.ativo === false ? <DeleteOutlined /> : <DeleteOutlined />}
+                    icon={coord.ativo === false ? <DeleteOutlined /> : <StopOutlined />}
                     danger={coord.ativo === false}
                     onClick={() => onActionClick(coord.id, coord.ativo === false ? 'delete' : 'inactivate')}
                     title={coord.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
@@ -176,6 +177,7 @@ const CoordinatorsScreen = ({
         onConfirm={onConfirmAction}
         title={actionType === 'delete' ? "Deseja excluir este coordenador?" : "Deseja inativar este coordenador?"}
         message={actionType === 'delete' ? "Esta ação excluirá permanentemente o acesso do coordenador ao sistema." : "O coordenador não aparecerá nas listagens ativas."}
+        confirmText={actionType === 'delete' ? "Excluir" : "Inativar"}
       />
 
       {/* Edit modal */}

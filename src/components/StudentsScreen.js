@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal, Button, Switch } from 'antd';
-import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
@@ -110,7 +110,7 @@ const StudentsScreen = ({
                         className="edit-button-mini"
                       />
                       <Button 
-                        icon={student.ativo === false ? <DeleteOutlined /> : <DeleteOutlined />} 
+                        icon={student.ativo === false ? <DeleteOutlined /> : <StopOutlined />} 
                         danger
                         onClick={() => onActionClick(student.id, student.ativo === false ? 'delete' : 'inactivate')}
                         className="delete-button-mini"
@@ -182,6 +182,7 @@ const StudentsScreen = ({
         onConfirm={onConfirmAction}
         title={actionType === 'delete' ? "Deseja excluir este cadastro?" : "Deseja inativar este aluno?"}
         message={actionType === 'delete' ? "Esta ação excluirá permanentemente o aluno do sistema." : "O aluno não aparecerá nas listagens ativas."}
+        confirmText={actionType === 'delete' ? "Excluir" : "Inativar"}
       />
     </Layout>
   );

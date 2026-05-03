@@ -105,7 +105,8 @@ button.ant-btn.coord-edit-button:hover {
 }
 
 button.ant-btn.coord-delete-button {
-  width: 44px;
+  width: auto;
+  padding: 0 15px;
   height: 38px;
   background-color: #ffffff;
   border: 1px solid #ff4d4f;

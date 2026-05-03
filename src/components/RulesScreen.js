@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, Form, Input, FloatButton, Switch } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined, StopOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
@@ -131,8 +131,8 @@ const RulesScreen = ({
                       <Button type="text" icon={<EditOutlined style={{ color: '#004A8F' }} />} onClick={() => onEdit(rule)} />
                       <Button 
                         type="text" 
-                        danger 
-                        icon={<DeleteOutlined />} 
+                        danger={rule.ativo === false} 
+                        icon={rule.ativo === false ? <DeleteOutlined /> : <StopOutlined style={{ color: '#F59120' }} />} 
                         onClick={() => onActionClick(rule.id, rule.ativo === false ? 'delete' : 'inactivate')}
                         title={rule.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
                       />
@@ -331,6 +331,7 @@ const RulesScreen = ({
         onConfirm={onConfirmAction}
         title={actionType === 'delete' ? "Deseja excluir esta regra?" : "Deseja inativar esta regra?"}
         message={actionType === 'delete' ? "Esta ação excluirá permanentemente a regra do sistema." : "A regra não aparecerá nas listagens ativas."}
+        confirmText={actionType === 'delete' ? "Excluir" : "Inativar"}
       />
     </Layout>
   );

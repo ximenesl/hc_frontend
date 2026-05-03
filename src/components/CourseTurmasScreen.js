@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Typography, List, Button, Spin, Modal, Form, Input, ConfigProvider, FloatButton, Switch } from 'antd';
-import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, BookOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, BookOutlined, StopOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -143,9 +143,9 @@ const CourseTurmasScreen = ({
                           </Button>,
                           <Button 
                             type="primary" 
-                            danger 
+                            danger={turma.ativo === false} 
                             ghost 
-                            icon={<DeleteOutlined />} 
+                            icon={turma.ativo === false ? <DeleteOutlined /> : <StopOutlined />} 
                             onClick={() => onActionClick(turma.id, turma.ativo === false ? 'delete' : 'inactivate')}
                             className="action-button delete-btn"
                             title={turma.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
@@ -244,6 +244,7 @@ const CourseTurmasScreen = ({
           onConfirm={onConfirmAction}
           title={actionType === 'delete' ? "Deseja excluir esta turma?" : "Deseja inativar esta turma?"}
           message={actionType === 'delete' ? "Esta ação excluirá permanentemente a turma do sistema." : "A turma não aparecerá nas listagens ativas."}
+          confirmText={actionType === 'delete' ? "Excluir" : "Inativar"}
         />
       </Layout>
     </ConfigProvider>
