@@ -3,6 +3,7 @@ import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, F
 import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import useAuth from '../hooks/useAuth';
 import './RulesScreen.css';
 
@@ -47,7 +48,11 @@ const RulesScreen = ({
   rules,
   onAdd,
   onEdit,
-  onDelete,
+  onActionClick,
+  isDeleteModalVisible,
+  onCloseDeleteModal,
+  onConfirmAction,
+  actionType,
   isModalVisible,
   editingRule,
   onSave,
@@ -124,7 +129,13 @@ const RulesScreen = ({
                   {isAdmin && (
                     <div className="rules-card-actions">
                       <Button type="text" icon={<EditOutlined style={{ color: '#004A8F' }} />} onClick={() => onEdit(rule)} />
-                      <Button type="text" danger icon={<DeleteOutlined />} onClick={() => onDelete(rule.id)} />
+                      <Button 
+                        type="text" 
+                        danger 
+                        icon={<DeleteOutlined />} 
+                        onClick={() => onActionClick(rule.id, rule.ativo === false ? 'delete' : 'inactivate')}
+                        title={rule.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
+                      />
                     </div>
                   )}
                 </div>
@@ -313,6 +324,14 @@ const RulesScreen = ({
           </Form>
         </Modal>
       </ConfigProvider>
+
+      <DeleteConfirmationModal
+        visible={isDeleteModalVisible}
+        onCancel={onCloseDeleteModal}
+        onConfirm={onConfirmAction}
+        title={actionType === 'delete' ? "Deseja excluir esta regra?" : "Deseja inativar esta regra?"}
+        message={actionType === 'delete' ? "Esta ação excluirá permanentemente a regra do sistema." : "A regra não aparecerá nas listagens ativas."}
+      />
     </Layout>
   );
 };

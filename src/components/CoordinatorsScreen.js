@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Input, Typography, List, Card, Button, Modal, Form, Select, ConfigProvider, FloatButton } from 'antd';
+import { Layout, Input, Typography, List, Card, Button, Modal, Form, Select, ConfigProvider, FloatButton, Switch } from 'antd';
 import {
   SearchOutlined,
   MailOutlined,
@@ -49,11 +49,14 @@ const CoordinatorsScreen = ({
   coordinators,
   cursos,
   onSearch,
+  showInactive,
+  onToggleInactive,
   onEdit,
-  onDelete,
+  onActionClick,
   isDeleteModalVisible,
   onCloseDeleteModal,
-  onConfirmDelete,
+  onConfirmAction,
+  actionType,
   isEditModalVisible,
   onCloseEditModal,
   editForm,
@@ -80,14 +83,19 @@ const CoordinatorsScreen = ({
             onChange={(e) => onSearch(e.target.value)}
           />
 
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+            <span style={{ marginRight: 8, color: '#333' }}>Mostrar Inativos</span>
+            <Switch checked={showInactive} onChange={onToggleInactive} />
+          </div>
+
           <List
             dataSource={coordinators}
             locale={{ emptyText: 'Nenhum coordenador encontrado.' }}
             renderItem={(coord) => (
-              <Card className="coordinator-card" key={coord.id}>
+              <Card className="coordinator-card" key={coord.id} style={{ opacity: coord.ativo === false ? 0.6 : 1 }}>
                 <div className="coordinator-card-header">
                   <div className="coordinator-info">
-                    <Text className="coordinator-name">{coord.nome}</Text>
+                    <Text className="coordinator-name">{coord.nome} {coord.ativo === false && '(Inativo)'}</Text>
                     <Text className="coordinator-detail">
                       <MailOutlined /> {coord.email}
                     </Text>
@@ -107,9 +115,13 @@ const CoordinatorsScreen = ({
                   </Button>
                   <Button
                     className="coord-delete-button"
-                    icon={<DeleteOutlined />}
-                    onClick={() => onDelete(coord.id)}
-                  />
+                    icon={coord.ativo === false ? <DeleteOutlined /> : <DeleteOutlined />}
+                    danger={coord.ativo === false}
+                    onClick={() => onActionClick(coord.id, coord.ativo === false ? 'delete' : 'inactivate')}
+                    title={coord.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
+                  >
+                    {coord.ativo === false ? 'Excluir' : 'Inativar'}
+                  </Button>
                 </div>
               </Card>
             )}
@@ -161,9 +173,9 @@ const CoordinatorsScreen = ({
       <DeleteConfirmationModal
         visible={isDeleteModalVisible}
         onCancel={onCloseDeleteModal}
-        onConfirm={onConfirmDelete}
-        title="Deseja excluir este coordenador?"
-        message="Esta ação excluirá permanentemente o acesso do coordenador ao sistema."
+        onConfirm={onConfirmAction}
+        title={actionType === 'delete' ? "Deseja excluir este coordenador?" : "Deseja inativar este coordenador?"}
+        message={actionType === 'delete' ? "Esta ação excluirá permanentemente o acesso do coordenador ao sistema." : "O coordenador não aparecerá nas listagens ativas."}
       />
 
       {/* Edit modal */}

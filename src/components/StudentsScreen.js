@@ -36,10 +36,11 @@ const StudentsScreen = ({
   onCloseAddModal,
   onAddStudent,
   onEdit,
-  onDelete,
+  onActionClick,
   isDeleteModalVisible,
   onCloseDeleteModal,
-  onConfirmDelete
+  onConfirmAction,
+  actionType
 }) => {
   return (
     <Layout className="students-layout">
@@ -109,10 +110,11 @@ const StudentsScreen = ({
                         className="edit-button-mini"
                       />
                       <Button 
-                        icon={<DeleteOutlined />} 
+                        icon={student.ativo === false ? <DeleteOutlined /> : <DeleteOutlined />} 
                         danger
-                        onClick={() => onDelete(student.id)}
+                        onClick={() => onActionClick(student.id, student.ativo === false ? 'delete' : 'inactivate')}
                         className="delete-button-mini"
+                        title={student.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
                       />
                     </div>
                   </div>
@@ -177,9 +179,9 @@ const StudentsScreen = ({
       <DeleteConfirmationModal
         visible={isDeleteModalVisible}
         onCancel={onCloseDeleteModal}
-        onConfirm={onConfirmDelete}
-        title="Deseja excluir este cadastro?"
-        message="Esta ação excluirá permanentemente o aluno do sistema."
+        onConfirm={onConfirmAction}
+        title={actionType === 'delete' ? "Deseja excluir este cadastro?" : "Deseja inativar este aluno?"}
+        message={actionType === 'delete' ? "Esta ação excluirá permanentemente o aluno do sistema." : "O aluno não aparecerá nas listagens ativas."}
       />
     </Layout>
   );

@@ -63,15 +63,31 @@ const CourseTurmasContainer = () => {
     }
   };
 
-  const handleDeleteTurma = async (turmaId) => {
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [turmaToActOn, setTurmaToActOn] = useState(null);
+  const [actionType, setActionType] = useState('inactivate');
+
+  const handleActionClick = (id, type) => {
+    setTurmaToActOn(id);
+    setActionType(type);
+    setIsDeleteModalVisible(true);
+  };
+
+  const confirmAction = async () => {
     try {
-      await api.delete(`/api/turmas/${turmaId}`);
-      message.success('Turma deletada com sucesso!');
+      if (actionType === 'delete') {
+        await api.delete(`/api/turmas/${turmaToActOn}`);
+        message.success('Turma deletada com sucesso!');
+      } else {
+        await api.put(`/api/turmas/${turmaToActOn}/inativar`);
+        message.success('Turma inativada com sucesso!');
+      }
+      setIsDeleteModalVisible(false);
       fetchDados();
     } catch (error) {
       console.error(error);
       const backendMessage = error.response?.data?.message;
-      message.error(typeof backendMessage === 'string' ? backendMessage : 'Erro ao deletar turma. Verifique se existem alunos vinculados.');
+      message.error(typeof backendMessage === 'string' ? backendMessage : `Erro ao ${actionType === 'delete' ? 'deletar' : 'inativar'} turma. Verifique se existem alunos vinculados.`);
     }
   };
 
@@ -87,7 +103,11 @@ const CourseTurmasContainer = () => {
       loading={loading}
       onAddTurma={handleAddTurma}
       onEditTurma={handleEditTurma}
-      onDeleteTurma={handleDeleteTurma}
+      onActionClick={handleActionClick}
+      isDeleteModalVisible={isDeleteModalVisible}
+      onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
+      onConfirmAction={confirmAction}
+      actionType={actionType}
     />
   );
 };

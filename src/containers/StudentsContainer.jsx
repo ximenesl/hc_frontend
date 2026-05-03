@@ -128,22 +128,37 @@ const StudentsContainer = () => {
   };
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [studentToDelete, setStudentToDelete] = useState(null);
+  const [studentToActOn, setStudentToActOn] = useState(null);
+  const [actionType, setActionType] = useState('inactivate');
 
-  const handleDelete = (id) => {
-    setStudentToDelete(id);
+  const handleActionClick = (id, type) => {
+    setStudentToActOn(id);
+    setActionType(type);
     setIsDeleteModalVisible(true);
   };
 
-  const confirmDelete = async () => {
+  const confirmAction = async () => {
     try {
-      await api.delete(`/api/users/${studentToDelete}`);
-      message.success('Aluno excluído com sucesso!');
-      setStudents(prev => prev.filter(s => s.id !== studentToDelete));
+      if (actionType === 'delete') {
+        await api.delete(`/api/users/${studentToActOn}`);
+        message.success('Aluno excluído permanentemente!');
+      } else {
+        await api.put(`/api/users/${studentToActOn}/inativar`);
+        message.success('Aluno inativado com sucesso!');
+      }
+      // Data is updated locally below without needing to re-fetch
+      // re-fetch data or we can just reload the page/component
+      // The best is to extract fetchData into a useCallback, but it's inside useEffect. 
+      // Let's just update local state
+      setStudents(prev => prev.map(s => {
+        if(s.id === studentToActOn && actionType === 'inactivate') return {...s, ativo: false};
+        return s;
+      }).filter(s => actionType === 'delete' ? s.id !== studentToActOn : true));
+      
       setIsDeleteModalVisible(false);
     } catch (error) {
       console.error(error);
-      message.error('Erro ao excluir aluno');
+      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} aluno`);
     }
   };
 
@@ -165,10 +180,11 @@ const StudentsContainer = () => {
       onCloseAddModal={handleCloseAddModal}
       onAddStudent={handleAddStudent}
       onEdit={handleEdit}
-      onDelete={handleDelete}
+      onActionClick={handleActionClick}
       isDeleteModalVisible={isDeleteModalVisible}
       onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
-      onConfirmDelete={confirmDelete}
+      onConfirmAction={confirmAction}
+      actionType={actionType}
     />
   );
 };

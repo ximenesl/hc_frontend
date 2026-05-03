@@ -8,6 +8,7 @@ const CoordinatorsContainer = () => {
   const [coordinators, setCoordinators] = useState([]);
   const [cursos, setCursos] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -42,7 +43,8 @@ const CoordinatorsContainer = () => {
             nome: u.nome,
             email: u.email,
             cursoIds: courseIds,
-            cursoNome: courseNames
+            cursoNome: courseNames,
+            ativo: u.ativo
           };
         });
 
@@ -65,10 +67,9 @@ const CoordinatorsContainer = () => {
 
   const filteredCoordinators = coordinators.filter(coord => {
     const term = searchText.toLowerCase();
-    return (
-      coord.nome.toLowerCase().includes(term) ||
-      coord.email.toLowerCase().includes(term)
-    );
+    const matchSearch = coord.nome.toLowerCase().includes(term) || coord.email.toLowerCase().includes(term);
+    const matchStatus = showInactive ? coord.ativo === false : coord.ativo !== false;
+    return matchSearch && matchStatus;
   });
 
   const handleEdit = (coord) => {
@@ -102,21 +103,29 @@ const CoordinatorsContainer = () => {
     }
   };
 
-  const handleDelete = (id) => {
+  const [actionType, setActionType] = useState('inactivate');
+
+  const handleActionClick = (id, type) => {
     setCoordToDelete(id);
+    setActionType(type);
     setIsDeleteModalVisible(true);
   };
 
-  const confirmDelete = async () => {
+  const confirmAction = async () => {
     try {
-      await api.delete(`/api/users/${coordToDelete}`);
-      message.success('Coordenador excluído com sucesso!');
+      if (actionType === 'delete') {
+        await api.delete(`/api/users/${coordToDelete}`);
+        message.success('Coordenador excluído com sucesso!');
+      } else {
+        await api.put(`/api/users/${coordToDelete}/inativar`);
+        message.success('Coordenador inativado com sucesso!');
+      }
       setIsDeleteModalVisible(false);
       setCoordToDelete(null);
       fetchData();
     } catch (error) {
       console.error(error);
-      message.error('Erro ao excluir coordenador');
+      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} coordenador`);
     }
   };
 
@@ -133,11 +142,14 @@ const CoordinatorsContainer = () => {
       cursos={cursos}
       loading={loading}
       onSearch={handleSearch}
+      showInactive={showInactive}
+      onToggleInactive={setShowInactive}
       onEdit={handleEdit}
-      onDelete={handleDelete}
+      onActionClick={handleActionClick}
       isDeleteModalVisible={isDeleteModalVisible}
       onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
-      onConfirmDelete={confirmDelete}
+      onConfirmAction={confirmAction}
+      actionType={actionType}
       isEditModalVisible={isEditModalVisible}
       onCloseEditModal={() => { setIsEditModalVisible(false); setEditingCoord(null); }}
       editForm={editForm}

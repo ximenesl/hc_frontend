@@ -4,6 +4,7 @@ import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOut
 import { useNavigate } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import useAuth from '../hooks/useAuth';
 import './CourseTurmasScreen.css';
 
@@ -37,7 +38,11 @@ const CourseTurmasScreen = ({
   onToggleInactive,
   onAddTurma, 
   onEditTurma, 
-  onDeleteTurma 
+  onActionClick,
+  isDeleteModalVisible,
+  onCloseDeleteModal,
+  onConfirmAction,
+  actionType
 }) => {
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
@@ -141,10 +146,11 @@ const CourseTurmasScreen = ({
                             danger 
                             ghost 
                             icon={<DeleteOutlined />} 
-                            onClick={() => onDeleteTurma(turma.id)}
+                            onClick={() => onActionClick(turma.id, turma.ativo === false ? 'delete' : 'inactivate')}
                             className="action-button delete-btn"
+                            title={turma.ativo === false ? 'Excluir permanentemente' : 'Inativar'}
                           >
-                            Excluir
+                            {turma.ativo === false ? 'Excluir' : 'Inativar'}
                           </Button>
                         ] : []}
                       >
@@ -231,6 +237,14 @@ const CourseTurmasScreen = ({
             </Form.Item>
           </Form>
         </Modal>
+
+        <DeleteConfirmationModal
+          visible={isDeleteModalVisible}
+          onCancel={onCloseDeleteModal}
+          onConfirm={onConfirmAction}
+          title={actionType === 'delete' ? "Deseja excluir esta turma?" : "Deseja inativar esta turma?"}
+          message={actionType === 'delete' ? "Esta ação excluirá permanentemente a turma do sistema." : "A turma não aparecerá nas listagens ativas."}
+        />
       </Layout>
     </ConfigProvider>
   );

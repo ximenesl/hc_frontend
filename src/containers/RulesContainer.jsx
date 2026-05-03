@@ -94,14 +94,30 @@ const RulesContainer = () => {
     setIsModalVisible(true);
   };
 
-  const handleDelete = async (id) => {
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [ruleToActOn, setRuleToActOn] = useState(null);
+  const [actionType, setActionType] = useState('inactivate');
+
+  const handleActionClick = (id, type) => {
+    setRuleToActOn(id);
+    setActionType(type);
+    setIsDeleteModalVisible(true);
+  };
+
+  const confirmAction = async () => {
     try {
-      await api.delete(`/api/regras/${id}`);
-      message.success('Regra deletada com sucesso!');
+      if (actionType === 'delete') {
+        await api.delete(`/api/regras/${ruleToActOn}`);
+        message.success('Regra excluída com sucesso!');
+      } else {
+        await api.put(`/api/regras/${ruleToActOn}/inativar`);
+        message.success('Regra inativada com sucesso!');
+      }
+      setIsDeleteModalVisible(false);
       fetchRules();
     } catch (error) {
       console.error(error);
-      message.error('Erro ao deletar regra');
+      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} regra`);
     }
   };
 
@@ -155,7 +171,11 @@ const RulesContainer = () => {
       rules={filteredRules}
       onAdd={handleAdd}
       onEdit={handleEdit}
-      onDelete={handleDelete}
+      onActionClick={handleActionClick}
+      isDeleteModalVisible={isDeleteModalVisible}
+      onCloseDeleteModal={() => setIsDeleteModalVisible(false)}
+      onConfirmAction={confirmAction}
+      actionType={actionType}
       isModalVisible={isModalVisible}
       editingRule={editingRule}
       onSave={handleSave}
