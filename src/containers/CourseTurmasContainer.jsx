@@ -59,7 +59,8 @@ const CourseTurmasContainer = () => {
       fetchDados();
     } catch (error) {
       console.error(error);
-      message.error(error.response?.data?.message || 'Erro ao atualizar turma');
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : `Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} turma`);
     }
   };
 

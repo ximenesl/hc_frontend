@@ -125,7 +125,8 @@ const CoordinatorsContainer = () => {
       fetchData();
     } catch (error) {
       console.error(error);
-      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} coordenador`);
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : `Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} coordenador`);
     }
   };
 

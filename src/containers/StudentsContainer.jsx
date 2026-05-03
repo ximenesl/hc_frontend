@@ -158,7 +158,8 @@ const StudentsContainer = () => {
       setIsDeleteModalVisible(false);
     } catch (error) {
       console.error(error);
-      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} aluno`);
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : `Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} aluno`);
     }
   };
 

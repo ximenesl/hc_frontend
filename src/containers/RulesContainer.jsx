@@ -117,7 +117,8 @@ const RulesContainer = () => {
       fetchRules();
     } catch (error) {
       console.error(error);
-      message.error(`Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} regra`);
+      const backendMessage = error.response?.data?.message;
+      message.error(typeof backendMessage === 'string' ? backendMessage : `Erro ao ${actionType === 'delete' ? 'excluir' : 'inativar'} regra`);
     }
   };
 
