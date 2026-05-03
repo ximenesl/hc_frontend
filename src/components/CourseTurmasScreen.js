@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Typography, List, Button, Spin, Modal, Form, Input, ConfigProvider, FloatButton } from 'antd';
+import { Layout, Typography, List, Button, Spin, Modal, Form, Input, ConfigProvider, FloatButton, Switch } from 'antd';
 import { ArrowLeftOutlined, PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, BookOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from './MainHeader';
@@ -33,6 +33,8 @@ const CourseTurmasScreen = ({
   curso, 
   turmas, 
   loading, 
+  showInactive,
+  onToggleInactive,
   onAddTurma, 
   onEditTurma, 
   onDeleteTurma 
@@ -110,6 +112,10 @@ const CourseTurmasScreen = ({
                   <Title level={4} className="turmas-title">
                     Turmas: {curso?.nome}
                   </Title>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ marginRight: 8, color: '#666' }}>Mostrar Inativos</span>
+                    <Switch checked={showInactive} onChange={onToggleInactive} />
+                  </div>
                 </div>
                 
                 <div className="turmas-card-list">
@@ -143,7 +149,7 @@ const CourseTurmasScreen = ({
                         ] : []}
                       >
                         <List.Item.Meta 
-                          title={<span className="turma-name">{turma.nome}</span>} 
+                          title={<span className="turma-name" style={{ opacity: turma.ativo === false ? 0.6 : 1 }}>{turma.nome} {turma.ativo === false && '(Inativa)'}</span>} 
                         />
                       </List.Item>
                     )}

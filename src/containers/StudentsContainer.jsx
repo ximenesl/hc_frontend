@@ -10,6 +10,7 @@ const StudentsContainer = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [showInactive, setShowInactive] = useState(false);
   const [coursesWithClasses, setCoursesWithClasses] = useState([]);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +65,8 @@ const StudentsContainer = () => {
             codigoCurso: firstCurso ? firstCurso.id : null,
             cursoNome: firstCurso ? firstCurso.nome : 'Não vinculado',
             horasCompletas: aluno.horasAprovadas || 0,
-            horasTotais: firstCurso && firstCurso.horasTotais ? firstCurso.horasTotais : 100
+            horasTotais: firstCurso && firstCurso.horasTotais ? firstCurso.horasTotais : 100,
+            ativo: aluno.ativo
           };
         });
 
@@ -97,8 +99,9 @@ const StudentsContainer = () => {
 
     const matchCourse = selectedCourse ? student.codigoCurso === selectedCourse : true;
     const matchClass = selectedClass ? student.codigoTurma === selectedClass : true;
+    const matchStatus = showInactive ? student.ativo === false : student.ativo !== false;
 
-    return matchSearch && matchCourse && matchClass;
+    return matchSearch && matchCourse && matchClass && matchStatus;
   });
 
   const availableClasses = selectedCourse 
@@ -148,6 +151,8 @@ const StudentsContainer = () => {
     <StudentsScreen
       students={filteredStudents}
       loading={loading}
+      showInactive={showInactive}
+      onToggleInactive={setShowInactive}
       onSearch={handleSearch}
       courses={coursesWithClasses}
       availableClasses={availableClasses}

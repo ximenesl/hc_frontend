@@ -11,6 +11,7 @@ const CourseTurmasContainer = () => {
   const { isCoordenador, cursoIds } = useAuth();
   const [curso, setCurso] = useState(null);
   const [turmas, setTurmas] = useState([]);
+  const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchDados = useCallback(async () => {
@@ -75,10 +76,14 @@ const CourseTurmasContainer = () => {
   };
 
 
+  const filteredTurmas = turmas.filter(t => showInactive ? t.ativo === false : t.ativo !== false);
+
   return (
     <CourseTurmasScreen
       curso={curso}
-      turmas={turmas}
+      turmas={filteredTurmas}
+      showInactive={showInactive}
+      onToggleInactive={setShowInactive}
       loading={loading}
       onAddTurma={handleAddTurma}
       onEditTurma={handleEditTurma}

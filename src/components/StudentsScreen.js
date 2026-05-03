@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal, Button } from 'antd';
+import { Layout, Input, Typography, List, Card, Progress, Select, ConfigProvider, FloatButton, Modal, Button, Switch } from 'antd';
 import { SearchOutlined, RightOutlined, TeamOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -23,6 +23,8 @@ const selectTheme = {
 const StudentsScreen = ({ 
   students, 
   onSearch, 
+  showInactive,
+  onToggleInactive,
   courses, 
   availableClasses, 
   selectedCourse, 
@@ -78,6 +80,10 @@ const StudentsScreen = ({
                 >
                   {availableClasses.map(cls => <Option key={cls} value={cls}>{cls}</Option>)}
                 </Select>
+                <div style={{ display: 'flex', alignItems: 'center', marginLeft: 16 }}>
+                  <span style={{ marginRight: 8, color: '#333' }}>Mostrar Inativos</span>
+                  <Switch checked={showInactive} onChange={onToggleInactive} />
+                </div>
               </div>
             </ConfigProvider>
           </div>
@@ -88,10 +94,10 @@ const StudentsScreen = ({
             renderItem={(student) => {
               const progressPercent = Math.round((student.horasCompletas / student.horasTotais) * 100);
               return (
-                <Card className="student-card" key={student.id}>
+                <Card className="student-card" key={student.id} style={{ opacity: student.ativo === false ? 0.6 : 1 }}>
                   <div className="student-card-header">
                     <div className="student-info">
-                      <Text className="student-name">{student.nome}</Text>
+                      <Text className="student-name">{student.nome} {student.ativo === false && '(Inativo)'}</Text>
                       <Text className="student-matricula">Matrícula: {student.matricula}</Text>
                       <Text className="student-matricula">Curso: {student.cursoNome}</Text>
                       <Text className="student-matricula">Turma: {student.codigoTurma}</Text>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, Form, Input, FloatButton } from 'antd';
+import { Layout, Typography, Button, Segmented, Select, ConfigProvider, Modal, Form, Input, FloatButton, Switch } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, RightOutlined, FileTextOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
@@ -42,6 +42,8 @@ const RulesScreen = ({
   tabs, 
   activeTab, 
   onTabChange, 
+  showInactive,
+  onToggleInactive,
   rules,
   onAdd,
   onEdit,
@@ -109,11 +111,16 @@ const RulesScreen = ({
             />
           </div>
 
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+            <span style={{ marginRight: 8, color: '#666' }}>Mostrar Inativos</span>
+            <Switch checked={showInactive} onChange={onToggleInactive} />
+          </div>
+
           <div className="rules-list">
             {rules.map(rule => (
-              <div className="rules-card" key={rule.id}>
+              <div className="rules-card" key={rule.id} style={{ opacity: rule.ativo === false ? 0.6 : 1 }}>
                 <div className="rules-card-header">
-                  <Text className="rules-group">Grupo {rule.grupo}</Text>
+                  <Text className="rules-group">Grupo {rule.grupo} {rule.ativo === false && '(Inativo)'}</Text>
                   {isAdmin && (
                     <div className="rules-card-actions">
                       <Button type="text" icon={<EditOutlined style={{ color: '#004A8F' }} />} onClick={() => onEdit(rule)} />

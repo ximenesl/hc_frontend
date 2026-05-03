@@ -12,6 +12,7 @@ const RulesContainer = () => {
   const { isCoordenador, cursoIds } = useAuth();
   const [activeTab, setActiveTab] = useState('Ensino');
   const [dynamicTabs, setDynamicTabs] = useState(['Ensino', 'Pesquisa', 'Extensão']);
+  const [showInactive, setShowInactive] = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalityModalVisible, setIsModalityModalVisible] = useState(false);
@@ -34,7 +35,8 @@ const RulesContainer = () => {
         grupo: r.grupo,
         descricao: r.descricao,
         aproveitamento: r.aproveitamento,
-        requisito: r.requisito
+        requisito: r.requisito,
+        ativo: r.ativo
       }));
       setRules(formattedRules);
 
@@ -62,7 +64,12 @@ const RulesContainer = () => {
   }, [courseId, fetchRules, isCoordenador, cursoIds, navigate]);
 
 
-  const filteredRules = rules.filter(r => r.courseId.toString() === courseId && r.type === activeTab);
+  const filteredRules = rules.filter(r => {
+    if (r.courseId.toString() !== courseId) return false;
+    if (r.type !== activeTab) return false;
+    if (showInactive) return r.ativo === false;
+    return r.ativo !== false;
+  });
 
   const handleAdd = () => {
     setEditingRule(null);
@@ -143,6 +150,8 @@ const RulesContainer = () => {
       tabs={dynamicTabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}
+      showInactive={showInactive}
+      onToggleInactive={setShowInactive}
       rules={filteredRules}
       onAdd={handleAdd}
       onEdit={handleEdit}
