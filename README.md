@@ -61,6 +61,15 @@ Por processar dados pessoais cadastrais (como nome, registro academico/RA, e-mai
 
 ---
 
+## Identidade Visual
+
+O projeto utiliza as cores oficiais do Senac:
+* Azul Senac: #004587 (Fundo principal)
+* Laranja Senac: #F59120 (Botoes de acao)
+* Tipografia: Outfit (Google Fonts) para uma leitura clara e moderna.
+
+---
+
 ## Configuracao e Execucao Local (Desenvolvimento)
 
 Siga os passos abaixo para configurar e executar os ambientes de frontend e backend localmente.

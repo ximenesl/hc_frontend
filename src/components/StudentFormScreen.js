@@ -46,15 +46,6 @@ const StudentFormScreen = ({ cursos, turmas, formData, onChange, onSave, onCance
             />
           </div>
 
-          <div className="student-form-group">
-            <Text strong className="student-form-label">CPF</Text>
-            <Input 
-              placeholder="Insira o CPF" 
-              className="student-custom-input" 
-              value={formData?.cpf}
-              onChange={(e) => onChange('cpf', e.target.value)}
-            />
-          </div>
 
           <div className="student-form-group">
             <Text strong className="student-form-label">Curso</Text>
