@@ -6,9 +6,9 @@
 
 Uma plataforma web para gerenciamento e validacao de horas complementares de alunos de graduacao, conectando discentes, coordenadores e administradores em tempo real. Desenvolvido como Projeto Integrador para o Curso de Tecnologia em Analise e Desenvolvimento de Sistemas do Centro Universitario Senac.
 
-[Licenca](https://img.shields.io/badge/licenca-MIT-green)
-[Instituicao](https://img.shields.io/badge/Instituicao-Senac-blue)
-[Conformidade LGPD](https://img.shields.io/badge/Conformidade-LGPD%20Ready-blueviolet)
+[![Licença](https://img.shields.io/badge/licenca-MIT-green)](LICENSE)
+[![Senac](https://img.shields.io/badge/Instituicao-Senac-blue)](https://www.sp.senac.br/)
+[![Conformidade LGPD](https://img.shields.io/badge/Conformidade-LGPD%20Ready-blueviolet)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm)
 
 ---
 
@@ -170,9 +170,9 @@ O frontend estara acessivel em seu navegador no endereço `http://localhost:3000
 
 A web platform for managing and validating complementary hours for undergraduate students, connecting students, coordinators, and administrators in real-time. Developed as a Capstone Project (Projeto Integrador) for the Systems Analysis and Development Program at Senac College.
 
-[License](https://img.shields.io/badge/license-MIT-green)
-[Institution](https://img.shields.io/badge/Institution-Senac%20College-blue)
-[LGPD Compliance](https://img.shields.io/badge/Compliance-LGPD%20Ready-blueviolet)
+[![Licença](https://img.shields.io/badge/licenca-MIT-green)](LICENSE)
+[![Senac](https://img.shields.io/badge/Instituicao-Senac-blue)](https://www.sp.senac.br/)
+[![Conformidade LGPD](https://img.shields.io/badge/Conformidade-LGPD%20Ready-blueviolet)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm)
 
 ---
 
