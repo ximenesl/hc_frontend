@@ -20,12 +20,12 @@ const HomeContainer = () => {
       try {
         const [usersRes, certsRes, cursosRes] = await Promise.all([
           api.get('/api/users'),
-          api.get('/api/certificates'),
+          api.get('/api/certificates', { params: { size: 1000 } }),
           api.get('/api/cursos')
         ]);
 
         let users = usersRes.data;
-        let certs = certsRes.data;
+        let certs = certsRes.data.content || certsRes.data || [];
         let cursos = cursosRes.data;
 
         // Se for coordenador, filtrar dados para mostrar apenas o que é relevante para os cursos dele

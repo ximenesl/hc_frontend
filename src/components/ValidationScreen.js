@@ -40,8 +40,9 @@ const ValidationScreen = () => {
   const fetchCertificates = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/api/certificates');
-      const pending = response.data.filter(c => c.status === 'PENDENTE');
+      const response = await api.get('/api/certificates', { params: { size: 1000 } });
+      const certsList = response.data.content || response.data || [];
+      const pending = certsList.filter(c => c.status === 'PENDENTE');
       setCertificates(pending);
     } catch (error) {
       console.error('Erro ao buscar certificados', error);

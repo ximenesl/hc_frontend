@@ -45,8 +45,8 @@ const StudentDashboardContainer = () => {
         setRules(courseRules);
       }
 
-      const certsRes = await api.get('/api/certificates');
-      const studentCerts = certsRes.data.filter(c => c.alunoId === currentUser.id);
+      const certsRes = await api.get(`/api/certificates/me/${currentUser.id}`, { params: { size: 1000 } });
+      const studentCerts = certsRes.data.content || certsRes.data || [];
 
       // Agrupar por regra.
       const progress = courseRules.map(rule => {
