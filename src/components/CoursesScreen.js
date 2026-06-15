@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Typography, Card, Button, Divider, FloatButton, Modal } from 'antd';
+import { Layout, Typography, Card, Button, Divider, FloatButton, Modal, List } from 'antd';
 import {
   UserOutlined,
   MailOutlined,
@@ -44,74 +44,81 @@ const CoursesScreen = ({
       <Content className="courses-content">
         <div className="courses-inner-content">
           <Title level={4} className="courses-page-title">Gestão de Curso</Title>
-          {courses.map(course => (
-            <Card className="course-card" key={course.id}>
-              <div className="course-header-row">
-                <Title level={5} className="course-title">{course.name}</Title>
-                {course.sigla && <Text className="course-sigla-tag">{course.sigla}</Text>}
-              </div>
+          <List
+            dataSource={courses}
+            pagination={{
+              pageSize: 5,
+              showSizeChanger: false,
+              hideOnSinglePage: true
+            }}
+            renderItem={(course) => (
+              <Card className="course-card" key={course.id}>
+                <div className="course-header-row">
+                  <Title level={5} className="course-title">{course.name}</Title>
+                  {course.sigla && <Text className="course-sigla-tag">{course.sigla}</Text>}
+                </div>
 
-              <div className="course-info-row">
-                <UserOutlined className="course-icon" />
-                <Text className="course-text">{course.coordinatorName}</Text>
-              </div>
-              <div className="course-info-row">
-                <MailOutlined className="course-icon" />
-                <Text className="course-text">{course.coordinatorEmail}</Text>
-              </div>
-              <div className="course-info-row">
-                <ReadOutlined className="course-icon" />
-                <Text className="course-text" style={{ textTransform: 'capitalize' }}>{course.categoria || '-'}</Text>
-              </div>
+                <div className="course-info-row">
+                  <UserOutlined className="course-icon" />
+                  <Text className="course-text">{course.coordinatorName}</Text>
+                </div>
+                <div className="course-info-row">
+                  <MailOutlined className="course-icon" />
+                  <Text className="course-text">{course.coordinatorEmail}</Text>
+                </div>
+                <div className="course-info-row">
+                  <ReadOutlined className="course-icon" />
+                  <Text className="course-text" style={{ textTransform: 'capitalize' }}>{course.categoria || '-'}</Text>
+                </div>
 
+                <Divider className="course-divider" />
 
-              <Divider className="course-divider" />
-
-              <div className="course-stats-row">
-                <div className="course-stat-item">
-                  <TeamOutlined className="course-stat-icon" />
-                  <div className="course-stat-text-col">
-                    <Text className="course-stat-value">{course.studentsCount}</Text>
-                    <Text className="course-stat-label">alunos</Text>
+                <div className="course-stats-row">
+                  <div className="course-stat-item">
+                    <TeamOutlined className="course-stat-icon" />
+                    <div className="course-stat-text-col">
+                      <Text className="course-stat-value">{course.studentsCount}</Text>
+                      <Text className="course-stat-label">alunos</Text>
+                    </div>
+                  </div>
+                  <div className="course-stat-item">
+                    <CalendarOutlined className="course-stat-icon" />
+                    <div className="course-stat-text-col">
+                      <Text className="course-stat-value">{course.creationDate}</Text>
+                      <Text className="course-stat-label">Data de criação</Text>
+                    </div>
                   </div>
                 </div>
-                <div className="course-stat-item">
-                  <CalendarOutlined className="course-stat-icon" />
-                  <div className="course-stat-text-col">
-                    <Text className="course-stat-value">{course.creationDate}</Text>
-                    <Text className="course-stat-label">Data de criação</Text>
-                  </div>
+
+                <div className="course-actions">
+                  <Button
+                    className="view-turmas-button"
+                    onClick={() => onViewTurmas(course.id)}
+                    style={{ marginRight: '8px' }}
+                  >
+                    Turmas
+                  </Button>
+                  {isAdmin && (
+                    <>
+                      <Button
+                        className="edit-button"
+                        icon={<EditOutlined />}
+                        onClick={() => onEdit(course.id)}
+                      >
+                        Editar
+                      </Button>
+                      <Button
+                        className="delete-button"
+                        icon={<DeleteOutlined />}
+                        onClick={() => onDelete(course.id)}
+                      />
+                    </>
+                  )}
                 </div>
-              </div>
 
-              <div className="course-actions">
-                <Button
-                  className="view-turmas-button"
-                  onClick={() => onViewTurmas(course.id)}
-                  style={{ marginRight: '8px' }}
-                >
-                  Turmas
-                </Button>
-                {isAdmin && (
-                  <>
-                    <Button
-                      className="edit-button"
-                      icon={<EditOutlined />}
-                      onClick={() => onEdit(course.id)}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      className="delete-button"
-                      icon={<DeleteOutlined />}
-                      onClick={() => onDelete(course.id)}
-                    />
-                  </>
-                )}
-              </div>
-
-            </Card>
-          ))}
+              </Card>
+            )}
+          />
         </div>
       </Content>
 

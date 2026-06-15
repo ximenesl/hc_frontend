@@ -91,6 +91,11 @@ const CoordinatorsScreen = ({
 
           <List
             dataSource={coordinators}
+            pagination={{
+              pageSize: 5,
+              showSizeChanger: false,
+              hideOnSinglePage: true
+            }}
             locale={{ emptyText: 'Nenhum coordenador encontrado.' }}
             renderItem={(coord) => (
               <Card className="coordinator-card" key={coord.id} style={{ opacity: coord.ativo === false ? 0.6 : 1 }}>

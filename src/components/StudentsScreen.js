@@ -91,6 +91,11 @@ const StudentsScreen = ({
 
           <List
             className="students-list"
+            pagination={{
+              pageSize: 5,
+              showSizeChanger: false,
+              hideOnSinglePage: true
+            }}
             dataSource={students}
             renderItem={(student) => {
               const progressPercent = Math.round((student.horasCompletas / student.horasTotais) * 100);
