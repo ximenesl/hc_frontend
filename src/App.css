@@ -7,15 +7,16 @@
 }
 
 /* Estilização para corrigir a legibilidade da paginação do Ant Design */
-.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) a {
+.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active),
+.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) a,
+.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) span {
   color: #333333 !important;
 }
 
-.ant-pagination .ant-pagination-item-active a {
+.ant-pagination .ant-pagination-item-active,
+.ant-pagination .ant-pagination-item-active a,
+.ant-pagination .ant-pagination-item-active span {
   color: #ffffff !important;
-}
-
-.ant-pagination .ant-pagination-item-active {
   background-color: #F59120 !important;
   border-color: #F59120 !important;
 }
@@ -25,11 +26,15 @@
 .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
 .ant-pagination .ant-pagination-next .ant-pagination-item-link,
 .ant-pagination .ant-pagination-jump-prev .ant-pagination-item-link,
-.ant-pagination .ant-pagination-jump-next .ant-pagination-item-link {
+.ant-pagination .ant-pagination-jump-next .ant-pagination-item-link,
+.ant-pagination .ant-pagination-item-link,
+.ant-pagination .ant-pagination-item-link * {
   color: #333333 !important;
 }
 
 .ant-pagination .ant-pagination-disabled button,
+.ant-pagination .ant-pagination-disabled a,
+.ant-pagination .ant-pagination-disabled span,
 .ant-pagination .ant-pagination-disabled .ant-pagination-item-link {
   color: rgba(0, 0, 0, 0.25) !important;
 }

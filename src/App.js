@@ -46,6 +46,11 @@ const theme = {
       colorPrimaryHover: '#e68112',
       controlHeight: 48,
       fontWeight: 600,
+    },
+    Pagination: {
+      colorText: '#333333',
+      colorTextDisabled: 'rgba(0, 0, 0, 0.25)',
+      itemActiveBg: '#F59120',
     }
   }
 };
